@@ -53,6 +53,12 @@
     <version>20211205</version>
 </dependency>
 
+<dependency>
+  <groupId>network.casper</groupId>
+  <artifactId>casper-java-sdk</artifactId>
+  <version>0.3.0</version>
+</dependency>
+
     <!-- logging -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>

@@ -1,6 +1,7 @@
 package org.apache.camel.component.casper;
 
 
+import com.casper.sdk.CasperSdk;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.URI;
 import java.net.http.HttpResponse.BodyHandlers;
@@ -28,7 +29,10 @@ public class CasperProducer extends DefaultProducer {
    {
       System.out.println("Producer Casper");
       Message in = exchange.getIn();
-      in.setBody(this.sendRPC());
+
+      CasperSdk casperSdk = new CasperSdk("http://65.21.202.120", 7777);
+
+      in.setBody(casperSdk.getNodePeers());
    }
 
    private String sendRPC() throws Exception
