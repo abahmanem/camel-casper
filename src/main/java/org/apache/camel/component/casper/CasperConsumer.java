@@ -63,7 +63,7 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    {
       // deny stopping on shutdown as we want direct consumers to run in case some other queues
       // depend on this consumer to run, so it can complete its exchanges
-      return(true);
+      return true;
    }
 
    @Override
@@ -71,7 +71,7 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    {
       // return 0 as we do not have an internal memory queue with a variable size
       // of inflight messages.
-      return(0);
+      return 0;
    }
 
    @Override

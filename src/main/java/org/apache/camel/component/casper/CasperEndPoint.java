@@ -10,6 +10,8 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 
+import org.apache.camel.component.casper.CasperProducer;
+
 @UriEndpoint(firstVersion = "1.0.0", scheme = "casper", title = "Casper", syntax = "casper:casperUri", consumerOnly = true)
 public class CasperEndPoint extends DefaultEndpoint {
    @UriParam
@@ -26,13 +28,13 @@ public class CasperEndPoint extends DefaultEndpoint {
       Consumer consumer = new CasperConsumer(this, processor);
 
       configureConsumer(consumer);
-      return(consumer);
+      return consumer;
    }
 
    @Override
    public Producer createProducer() throws Exception
    {
-      throw new UnsupportedOperationException();
+      return new CasperProducer(this);
    }
 
    @Override
@@ -58,7 +60,7 @@ public class CasperEndPoint extends DefaultEndpoint {
     */
    public String getOperation()
    {
-      return(operation);
+      return operation;
    }
 
    /**

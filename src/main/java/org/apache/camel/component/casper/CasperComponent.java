@@ -25,7 +25,7 @@ public class CasperComponent extends DefaultComponent {
 
       setProperties(answer, parameters);
 
-      return(answer);
+      return answer;
    }
 
    @Override
@@ -39,7 +39,7 @@ public class CasperComponent extends DefaultComponent {
     */
    public String getCasperService()
    {
-      return(casperService);
+      return casperService;
    }
 
    /**

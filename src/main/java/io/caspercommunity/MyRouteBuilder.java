@@ -15,7 +15,7 @@ public class MyRouteBuilder extends RouteBuilder {
       // (leaving them in place - see the 'noop' flag)
       // then performs content based routing on the message using XPath
       from("casper:test?operation=block_added")
-      // .to("http://65.21.202.120:8888/status")
+      .to("casper:http://65.21.202.120:8888/status")
       .log("The body was - ${body}");
    }
 }
