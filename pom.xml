@@ -46,6 +46,12 @@
     <artifactId>camel-http</artifactId>
     <!-- use the same version as your Camel core version -->
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20211205</version>
+</dependency>
 
     <!-- logging -->
     <dependency>

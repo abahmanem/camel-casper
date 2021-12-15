@@ -2,6 +2,9 @@ package org.apache.camel.component.casper;
 
 import org.apache.camel.component.casper.sse.EventStreamAdapter;
 import org.apache.camel.component.casper.sse.HttpEventStreamClient;
+import org.apache.camel.component.casper.sse.HttpEventStreamClient.Event;
+import org.json.JSONObject;
+
 import org.apache.camel.Processor;
 import org.apache.camel.ShutdownRunningTask;
 import org.apache.camel.Suspendable;
@@ -12,8 +15,7 @@ import org.apache.camel.Exchange;
 
 import org.apache.camel.component.casper.CasperEndPoint;
 
-import java.net.http.HttpResponse;
-import org.apache.camel.component.casper.sse.HttpEventStreamClient.Event;
+
 
 /**
  * The direct consumer.
@@ -42,7 +44,7 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 
                                                                      if (endpoint.getOperation() != null&& endpoint.getOperation().equals("block_added") && event.getData().contains("BlockAdded"))
                                                                      {
-                                                                        exchange.getMessage().setBody(event.getData());
+                                                                        exchange.getMessage().setBody(new JSONObject(event.getData()));
                                                                      }
                                                                      else
                                                                      {
