@@ -26,7 +26,9 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    private final CasperEndPoint endpoint;
 
    private List <String> supportedPaths = Arrays.asList("/events/main", "/events/deploys", "/events/sigs");
-   private List <String> supportedOperations = Arrays.asList("block_added");
+   private List <String> supportedMainOperations = Arrays.asList("block_added", "api_version", "deploy_processed");
+   private List <String> supportedDeploysOperations = Arrays.asList("deploy_accepted");
+   private List <String> supportedSigsOperations = Arrays.asList("finality_signature");
 
    public CasperConsumer(CasperEndPoint endpoint, Processor processor) throws Exception
    {
@@ -35,8 +37,14 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
       if (endpoint.getNodeAddress().getPath().isEmpty() || (!endpoint.getNodeAddress().getPath().isEmpty() && !supportedPaths.contains(endpoint.getNodeAddress().getPath()))) {
          throw new CamelException("Please provide a valid \"path\" parameter. Get : " + endpoint.getNodeAddress().getPath() + ". Allowed :" + supportedPaths.toString());
       }
-      if (endpoint.getOperation() == null || (endpoint.getOperation() != null&& !supportedOperations.contains(endpoint.getOperation()))) {
-         throw new CamelException("Please provide a valid \"operation\" parameter. Get : " + endpoint.getOperation() + ". Allowed :" + supportedOperations.toString());
+      if (endpoint.getOperation() == null || (endpoint.getOperation() != null&& endpoint.getNodeAddress().getPath().equals("/events/mains") && !supportedMainOperations.contains(endpoint.getOperation()))) {
+         throw new CamelException("Please provide a valid \"operation\" parameterfor \"" + endpoint.getNodeAddress().getPath() + "\". Get : " + endpoint.getOperation() + ". Allowed :" + supportedMainOperations.toString());
+      }
+      if (endpoint.getOperation() == null || (endpoint.getOperation() != null&& endpoint.getNodeAddress().getPath().equals("/events/deploys") && !supportedDeploysOperations.contains(endpoint.getOperation()))) {
+         throw new CamelException("Please provide a valid \"operation\" parameter for \"" + endpoint.getNodeAddress().getPath() + "\". Get : " + endpoint.getOperation() + ". Allowed :" + supportedDeploysOperations.toString());
+      }
+      if (endpoint.getOperation() == null || (endpoint.getOperation() != null&& endpoint.getNodeAddress().getPath().equals("/events/sigs") && !supportedSigsOperations.contains(endpoint.getOperation()))) {
+         throw new CamelException("Please provide a valid \"operation\" parameterfor \"" + endpoint.getNodeAddress().getPath() + "\". Get : " + endpoint.getOperation() + ". Allowed :" + supportedSigsOperations.toString());
       }
 
       this.endpoint = endpoint;

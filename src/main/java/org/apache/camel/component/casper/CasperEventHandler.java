@@ -35,8 +35,27 @@ public class CasperEventHandler implements EventHandler {
    @Override
    public void onMessage(String event, MessageEvent messageEvent) throws Exception
    {
-      if (endpoint.getOperation().equals("block_added") && messageEvent.getData().contains("BlockAdded")) {
-         processMessage(new JSONObject(messageEvent.getData()));
+      JSONObject json = new JSONObject(messageEvent.getData());
+      String firstJsonPropertyKey = "";
+
+      if (json.keys().hasNext()) {
+         firstJsonPropertyKey = json.keys().next();
+      }
+
+      if (endpoint.getOperation().equals("block_added") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("BlockAdded")) {
+         processMessage(json.getJSONObject("BlockAdded"));
+      }
+      if (endpoint.getOperation().equals("api_version") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("ApiVersion")) {
+         processMessage(json);
+      }
+      if (endpoint.getOperation().equals("deploy_processed") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployProcessed")) {
+         processMessage(json.getJSONObject("DeployProcessed"));
+      }
+      if (endpoint.getOperation().equals("deploy_accepted") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployAccepted")) {
+         processMessage(json.getJSONObject("DeployAccepted"));
+      }
+      if (endpoint.getOperation().equals("finality_signature") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("FinalitySignature")) {
+         processMessage(json.getJSONObject("FinalitySignature"));
       }
    }
 
