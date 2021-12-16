@@ -20,7 +20,7 @@ public class CasperProducer extends DefaultProducer {
    private final CasperEndPoint endpoint;
    private final CasperSdk sdk;
 
-   private List <String> supportedOperations = Arrays.asList("get_peers", "get_contract_hash", "get_info_block_by_height", "get_account_main_purse", "get_account_hash", "get_account_info", "get_account_balance", "get_block_info", "rpc_schema", "get_node_status", "get_node_metrics", "get_auction_info", "get_state_root_hash", "get_block_transfers", "get_latest_block_info");
+   private List <String> supportedOperations = Arrays.asList("get_deploy", "get_peers", "get_contract_hash", "get_info_block_by_height", "get_account_main_purse", "get_account_hash", "get_account_info", "get_account_balance", "get_block_info", "rpc_schema", "get_node_status", "get_node_metrics", "get_auction_info", "get_state_root_hash", "get_block_transfers", "get_latest_block_info");
 
    public CasperProducer(CasperEndPoint endpoint) throws Exception
    {
@@ -88,8 +88,14 @@ public class CasperProducer extends DefaultProducer {
          if (in.getHeader("PUBLIC_KEY") == null) {
             throw new CamelException("Pleade provide a header PUBLIC_KEY for the operation \"get_account_info\"");
          }
-
          in.setBody(sdk.getAccountInfo(sdk.createPublicKey(in.getHeader("PUBLIC_KEY").toString())));
+         break;
+
+      case "get_deploy":
+         if (in.getHeader("DEPLOY_HASH") == null) {
+            throw new CamelException("Pleade provide a header DEPLOY_HASH for the operation \"get_deploy\"");
+         }
+         in.setBody(sdk.getDeploy(new Digest(in.getHeader("DEPLOY_HASH").toString())));
          break;
 
       case "get_account_hash":
