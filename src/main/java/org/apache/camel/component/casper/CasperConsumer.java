@@ -1,10 +1,6 @@
 package org.apache.camel.component.casper;
 
 import org.apache.camel.CamelException;
-import org.apache.camel.component.casper.sse.EventStreamAdapter;
-import org.apache.camel.component.casper.sse.HttpEventStreamClient;
-import org.apache.camel.component.casper.sse.HttpEventStreamClient.Event;
-import org.json.JSONObject;
 
 import org.apache.camel.Processor;
 import org.apache.camel.ShutdownRunningTask;
@@ -12,16 +8,13 @@ import org.apache.camel.Suspendable;
 import org.apache.camel.spi.ShutdownAware;
 import org.apache.camel.support.DefaultConsumer;
 
-import org.apache.camel.Exchange;
 
 import org.apache.camel.component.casper.CasperEndPoint;
 
 import java.util.List;
 import java.util.Arrays;
 
-import java.net.URI;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import com.launchdarkly.eventsource.EventHandler;
 import com.launchdarkly.eventsource.EventSource;

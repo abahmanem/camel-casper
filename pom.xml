@@ -42,10 +42,10 @@
     </dependency>
 
     <dependency>
-    <groupId>org.apache.camel</groupId>
-    <artifactId>camel-http</artifactId>
-    <!-- use the same version as your Camel core version -->
-</dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jsonpath</artifactId>
+      <!-- use the same version as your Camel core version -->
+    </dependency>
 <!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
     <groupId>org.json</groupId>
