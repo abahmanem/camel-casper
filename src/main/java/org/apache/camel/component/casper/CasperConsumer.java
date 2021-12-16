@@ -19,6 +19,13 @@ import org.apache.camel.component.casper.CasperEndPoint;
 import java.util.List;
 import java.util.Arrays;
 
+import java.net.URI;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import com.launchdarkly.eventsource.EventHandler;
+import com.launchdarkly.eventsource.EventSource;
+
 /**
  * The direct consumer.
  */
@@ -46,19 +53,9 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    protected void doStart() throws Exception
    {
       super.doStart();
-
-
-      HttpEventStreamClient client = new HttpEventStreamClient(endpoint.getNodeAddress().toString(), new EventStreamAdapter()
-                                                               {
-                                                                  @Override
-                                                                  public void onEvent(HttpEventStreamClient client, Event event)
-                                                                  {
-                                                                     if (endpoint.getOperation().equals("block_added") && event.getData().contains("BlockAdded")) {
-                                                                        processMessage(new JSONObject(event.getData()));
-                                                                     }
-                                                                  }
-                                                               });
-      client.start().join();
+      EventHandler eventHandler = new CasperEventHandler(this);
+      EventSource builder = new EventSource.Builder(eventHandler, endpoint.getNodeAddress()).reconnectTime(Duration.ofMillis(3000)).build();
+      builder.start();
    }
 
    @Override
@@ -81,17 +78,5 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    public void prepareShutdown(boolean suspendOnly, boolean forced)
    {
       // noop
-   }
-
-   public void processMessage(JSONObject data)
-   {
-      final Exchange exchange = createExchange(false);
-
-      exchange.getMessage().setBody(data);
-      try {
-         getProcessor().process(exchange);
-      } catch (Exception e) {
-         exchange.setException(e);
-      }
    }
 }
