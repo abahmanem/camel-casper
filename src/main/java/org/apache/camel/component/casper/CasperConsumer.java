@@ -26,6 +26,7 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    private final CasperEndPoint endpoint;
 
    private List <String> supportedPaths = Arrays.asList("/events/main", "/events/deploys", "/events/sigs");
+   private List <String> supportedOperations = Arrays.asList("block_added");
 
    public CasperConsumer(CasperEndPoint endpoint, Processor processor) throws Exception
    {
@@ -33,6 +34,9 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 
       if (endpoint.getNodeAddress().getPath().isEmpty() || (!endpoint.getNodeAddress().getPath().isEmpty() && !supportedPaths.contains(endpoint.getNodeAddress().getPath()))) {
          throw new CamelException("Please provide a valid \"path\" parameter. Get : " + endpoint.getNodeAddress().getPath() + ". Allowed :" + supportedPaths.toString());
+      }
+      if (endpoint.getOperation() == null || (endpoint.getOperation() != null&& !supportedOperations.contains(endpoint.getOperation()))) {
+         throw new CamelException("Please provide a valid \"operation\" parameter. Get : " + endpoint.getOperation() + ". Allowed :" + supportedOperations.toString());
       }
 
       this.endpoint = endpoint;
@@ -42,24 +46,15 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    protected void doStart() throws Exception
    {
       super.doStart();
-      final Exchange exchange = createExchange(false);
+
 
       HttpEventStreamClient client = new HttpEventStreamClient(endpoint.getNodeAddress().toString(), new EventStreamAdapter()
                                                                {
                                                                   @Override
                                                                   public void onEvent(HttpEventStreamClient client, Event event)
                                                                   {
-                                                                     System.out.println(endpoint.getOperation());
-
-                                                                     if (endpoint.getOperation() != null&& endpoint.getOperation().equals("block_added") && event.getData().contains("BlockAdded")) {
-                                                                        exchange.getMessage().setBody(new JSONObject(event.getData()));
-                                                                     }else{
-                                                                        exchange.getMessage().setBody("No Operation Provided");
-                                                                     }
-                                                                     try {
-                                                                        getProcessor().process(exchange);
-                                                                     } catch (Exception e) {
-                                                                        exchange.setException(e);
+                                                                     if (endpoint.getOperation().equals("block_added") && event.getData().contains("BlockAdded")) {
+                                                                        processMessage(new JSONObject(event.getData()));
                                                                      }
                                                                   }
                                                                });
@@ -86,5 +81,17 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
    public void prepareShutdown(boolean suspendOnly, boolean forced)
    {
       // noop
+   }
+
+   public void processMessage(JSONObject data)
+   {
+      final Exchange exchange = createExchange(false);
+
+      exchange.getMessage().setBody(data);
+      try {
+         getProcessor().process(exchange);
+      } catch (Exception e) {
+         exchange.setException(e);
+      }
    }
 }
