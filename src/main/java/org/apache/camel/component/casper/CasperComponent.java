@@ -21,7 +21,7 @@ public class CasperComponent extends DefaultComponent {
    @Override
    protected Endpoint createEndpoint(String uri, String remaining, Map <String, Object> parameters) throws Exception
    {
-      CasperEndPoint answer = new CasperEndPoint(uri, this);
+      CasperEndPoint answer = new CasperEndPoint(uri, remaining, this);
 
       setProperties(answer, parameters);
 

@@ -54,6 +54,12 @@
 </dependency>
 
 <dependency>
+  <groupId>commons-validator</groupId>
+  <artifactId>commons-validator</artifactId>
+  <version>1.7</version>
+</dependency>
+
+<dependency>
   <groupId>network.casper</groupId>
   <artifactId>casper-java-sdk</artifactId>
   <version>0.3.0</version>

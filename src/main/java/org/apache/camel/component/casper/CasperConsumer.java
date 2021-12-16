@@ -1,5 +1,6 @@
 package org.apache.camel.component.casper;
 
+import org.apache.camel.CamelException;
 import org.apache.camel.component.casper.sse.EventStreamAdapter;
 import org.apache.camel.component.casper.sse.HttpEventStreamClient;
 import org.apache.camel.component.casper.sse.HttpEventStreamClient.Event;
@@ -15,7 +16,8 @@ import org.apache.camel.Exchange;
 
 import org.apache.camel.component.casper.CasperEndPoint;
 
-
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * The direct consumer.
@@ -23,9 +25,16 @@ import org.apache.camel.component.casper.CasperEndPoint;
 public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Suspendable {
    private final CasperEndPoint endpoint;
 
-   public CasperConsumer(CasperEndPoint endpoint, Processor processor)
+   private List <String> supportedPaths = Arrays.asList("/events/main", "/events/deploys", "/events/sigs");
+
+   public CasperConsumer(CasperEndPoint endpoint, Processor processor) throws Exception
    {
       super(endpoint, processor);
+
+      if (endpoint.getNodeAddress().getPath().isEmpty() || (!endpoint.getNodeAddress().getPath().isEmpty() && !supportedPaths.contains(endpoint.getNodeAddress().getPath()))) {
+         throw new CamelException("Please provide a valid \"path\" parameter. Get : " + endpoint.getNodeAddress().getPath() + ". Allowed :" + supportedPaths.toString());
+      }
+
       this.endpoint = endpoint;
    }
 
@@ -35,19 +44,16 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
       super.doStart();
       final Exchange exchange = createExchange(false);
 
-      HttpEventStreamClient client = new HttpEventStreamClient("http://65.21.202.120:9999/events/main", new EventStreamAdapter()
+      HttpEventStreamClient client = new HttpEventStreamClient(endpoint.getNodeAddress().toString(), new EventStreamAdapter()
                                                                {
                                                                   @Override
                                                                   public void onEvent(HttpEventStreamClient client, Event event)
                                                                   {
                                                                      System.out.println(endpoint.getOperation());
 
-                                                                     if (endpoint.getOperation() != null&& endpoint.getOperation().equals("block_added") && event.getData().contains("BlockAdded"))
-                                                                     {
+                                                                     if (endpoint.getOperation() != null&& endpoint.getOperation().equals("block_added") && event.getData().contains("BlockAdded")) {
                                                                         exchange.getMessage().setBody(new JSONObject(event.getData()));
-                                                                     }
-                                                                     else
-                                                                     {
+                                                                     }else{
                                                                         exchange.getMessage().setBody("No Operation Provided");
                                                                      }
                                                                      try {
