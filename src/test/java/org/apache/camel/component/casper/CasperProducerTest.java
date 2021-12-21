@@ -11,7 +11,7 @@ public class CasperProducerTest extends CamelTestSupport {
    {
       getMockEndpoint("mock:result").expectedBodiesReceived("Hello World");
 
-      template.sendBody("direct:start", "Hello World1");
+      template.sendBody("direct:start", "Hello World");
 
       assertMockEndpointsSatisfied();
    }
