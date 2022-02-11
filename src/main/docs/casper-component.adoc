@@ -1,0 +1,37 @@
+= Casper Camel Connector Component
+:doctitle: Casper Camel Connector
+:shortname: casper
+:artifactid: camel-casper
+:description: Interact with Casper nodes using Capser SDK.
+:since: 1.0
+:supportlevel: Preview
+:component-header: Both producer and consumer are supported
+//Manually maintained attributes
+:camel-spring-boot-name: casper
+
+*Since Camel {since}*
+
+*{component-header}*
+
+The CasperLabs blockchain component uses the
+https://github.com/syntifi/casper-sdk and allows you to interact with Casper nodes.
+
+Maven users will need to add the following dependency to their `pom.xml`
+for this component:
+
+[source,xml]
+------------------------------------------------------------
+<dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-casper</artifactId>
+    <version>x.x.x</version>
+    <!-- use the same version as your Camel core version -->
+</dependency>
+------------------------------------------------------------
+
+== URI Format
+
+----
+casper://<local/remote host:port or local IPC path>[?options]
+----
+
