@@ -3,7 +3,7 @@
 :shortname: casper
 :artifactid: camel-casper
 :description: Interact with Casper nodes using Capser SDK.
-:since: 1.0
+:since: 3.14
 :supportlevel: Preview
 :component-header: Both producer and consumer are supported
 //Manually maintained attributes
