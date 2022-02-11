@@ -42,6 +42,7 @@ public class CasperEventHandler implements EventHandler {
          firstJsonPropertyKey = json.keys().next();
       }
 
+      /*
       if (endpoint.getOperation().equals("block_added") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("BlockAdded")) {
          processMessage(json.getJSONObject("BlockAdded"));
       }
@@ -57,6 +58,7 @@ public class CasperEventHandler implements EventHandler {
       if (endpoint.getOperation().equals("finality_signature") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("FinalitySignature")) {
          processMessage(json.getJSONObject("FinalitySignature"));
       }
+      */
    }
 
    @Override

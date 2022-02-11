@@ -1,52 +1,50 @@
 package org.apache.camel.component.casper;
 
-import org.apache.camel.Endpoint;
-import org.apache.camel.spi.annotations.Component;
-import org.apache.camel.spi.Metadata;
-import org.apache.camel.support.DefaultComponent;
-
 import java.util.Map;
+
+import org.apache.camel.Endpoint;
+import org.apache.camel.spi.Metadata;
+import org.apache.camel.spi.annotations.Component;
+import org.apache.camel.support.DefaultComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Component {@link CasperComponent}.
+ */
 
 @Component("casper")
 public class CasperComponent extends DefaultComponent {
-   @Metadata(label = "advanced")
-   private String casperService;
 
+	@Metadata(description = "Default configuration")
+	private CasperConfiguration configuration;
 
+	public static Logger logger = LoggerFactory.getLogger(CasperComponent.class);
 
-   public CasperComponent()
-   {
-   }
+	/**
+	 * 
+	 */
+	@Override
+	protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
 
-   @Override
-   protected Endpoint createEndpoint(String uri, String remaining, Map <String, Object> parameters) throws Exception
-   {
-      CasperEndPoint answer = new CasperEndPoint(uri, remaining, this);
+		CasperConfiguration conf = configuration != null ? configuration.clone() : new CasperConfiguration();
 
-      setProperties(answer, parameters);
+		CasperEndPoint casper = new CasperEndPoint(uri, remaining, this, conf);
+		setProperties(casper, parameters);
+		logger.debug("***** CasperComponent create endpoint ");
+		return casper;
+	}
 
-      return answer;
-   }
+	@Override
+	protected void doInit() throws Exception {
+		super.doInit();
+	}
 
-   @Override
-   protected void doInit() throws Exception
-   {
-      super.doInit();
-   }
+	public CasperConfiguration getConfiguration() {
+		return configuration;
+	}
 
-   /**
-    * @return the casperService
-    */
-   public String getCasperService()
-   {
-      return casperService;
-   }
-
-   /**
-    * @param casperService the casperService to set
-    */
-   public void setCasperService(String casperService)
-   {
-      this.casperService = casperService;
-   }
+	public void setConfiguration(CasperConfiguration configuration) {
+		this.configuration = configuration;
+	}
 }
