@@ -13,10 +13,10 @@
 
 *{component-header}*
 
-The CasperLabs blockchain component uses the
+The Casper blockchain component uses the Casper Java SDK :
 https://github.com/syntifi/casper-sdk and allows you to interact with Casper nodes.
 
-Maven users will need to add the following dependency to their `pom.xml`
+add the folllowing dependency maven  `pom.xml` file.
 for this component:
 
 [source,xml]
@@ -24,9 +24,10 @@ for this component:
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-casper</artifactId>
-    <version>x.x.x</version>
-    <!-- use the same version as your Camel core version -->
-</dependency>
+    <version>${camel.version}</version>
+ </dependency>
+
+camel.version  : version of camel-core   component
 ------------------------------------------------------------
 
 == URI Format
@@ -34,4 +35,3 @@ for this component:
 ----
 casper://<local/remote host:port or local IPC path>[?options]
 ----
-
