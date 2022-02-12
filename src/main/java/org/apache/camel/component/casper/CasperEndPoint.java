@@ -100,7 +100,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 
 	@Override
 	public Producer createProducer() throws Exception {
-		String operation = configuration.getOperation();
+		String operation = configuration.getOperationOrDefault();
 		if (ProducerOperation.findByName(operation) != null)
 			return new CasperProducer(this, configuration);
 		throw new UnsupportedOperationException(
