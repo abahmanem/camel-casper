@@ -22,7 +22,7 @@ URI Format
 ```java
 casper://<local/remote host:port or local IPC path>[?options]
 
-``
+```
 ## Configuring Casper component
 
 The CasperConfiguration class can be used to set initial properties configuration to the component instead of passing it as query parameter. 
