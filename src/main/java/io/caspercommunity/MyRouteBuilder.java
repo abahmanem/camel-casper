@@ -49,6 +49,14 @@ public class MyRouteBuilder extends RouteBuilder {
 
 	   */
 	   
+	   from("casper:http://65.21.202.120:9999/events/main?operation=block_added").log("Block Hash - ${body}");
+	   
+	   
+	   
+	   from("timer://simpleTimer?period=3000")
+	      .to("casper:http://65.21.227.180:7777/?operation=ssss").process(new TestProcessor())
+	      .log("This call gives - ${body}");
+	   
 	   from("timer://simpleTimer?period=3000")
 	      .to("casper:http://65.21.227.180:7777/?operation="+CasperConstants.ACCOUNT_INFO+"&blockHeight=530214&publicKey=017d9aa0b86413d7ff9a9169182c53f0bacaa80d34c211adab007ed4876af17077").process(new TestProcessor())
 	      .log("This call gives - ${body}");

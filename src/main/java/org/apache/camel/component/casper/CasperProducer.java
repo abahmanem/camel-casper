@@ -448,7 +448,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 		StoredValueData value = null;
 		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash,
 				String.class);
-		String itemKey = message.getHeader(CasperConstants.ITEM_KEY, configuration::getItemKey, String.class);
+		String itemKeys = message.getHeader(CasperConstants.ITEM_KEY, configuration::getItemKeys, String.class);
 		String uref = message.getHeader(CasperConstants.UREF, configuration::getUref, String.class);
 
 		if (StringUtils.isEmpty(stateRootHash)) {
@@ -457,7 +457,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			return;
 		}
 
-		if (StringUtils.isEmpty(itemKey)) {
+		if (StringUtils.isEmpty(itemKeys)) {
 
 			handleError(new MissingFormatArgumentException("itemKey parameter should be set"), message);
 			return;
@@ -470,7 +470,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 		}
 
 		try {
-			value = casperService.getStateItem(stateRootHash, itemKey, Arrays.asList(uref));
+			value = casperService.getStateItem(stateRootHash, uref, Arrays.asList(itemKeys.split(",")));
 
 		}
 
@@ -532,14 +532,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 	private void handleError(Throwable e, Message message) {
 
 		message.getExchange().setException(new CamelExchangeException(e.getMessage(), message.getExchange()));
-
-	}
-
-	public static void main(String[] args) throws MalformedURLException {
-
-		CasperService sdk = CasperService.usingPeer("65.21.227.180", 7777);
-
-		System.out.println(sdk.getDeploy(""));
 
 	}
 

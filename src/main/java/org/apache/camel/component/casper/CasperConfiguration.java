@@ -5,6 +5,7 @@ import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.camel.component.casper.CasperConstants;
 
 import com.syntifi.casper.sdk.service.CasperService;
 
@@ -14,87 +15,74 @@ public class CasperConfiguration implements Cloneable {
 	public static Logger logger = LoggerFactory.getLogger(CasperConfiguration.class);
 
 	/**
-	 * casperService : Casper java SDK
+	 * casperService : Casper RPC SDK
 	 */
 
-	@UriParam(label = "common")
+	@UriParam(label = "common", description = "Casper RPC API used to perform RPC queries on Casper Network Blockchain")
 	private CasperService casperService;
 
 	/**
 	 * operation parameter
 	 */
-	@UriParam(label = "producer", defaultValue = "info_get_status")
+	@UriParam(label = "common", defaultValue = CasperConstants.NODE_STATUS, description = "The endpoint operation.", enums = CasperConstants.ENDPOINT_SERVICE)
 	private String operation;
 
 	/**
 	 * deployHash parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "Deploy hash : used to query a Deploy in the network")
 	private String deployHash;
 
 	/**
 	 * blockHeight parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "Block height : used to query a Block in the network ")
 	private long blockHeight;
 
 	/**
 	 * blockHash parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "Deploy Hash : used to query a Block in the network")
 	private String blockHash;
 
 	/**
 	 * publicKey parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "Account publick key  : used to query a account infos")
 	private String publicKey;
 
-	
 	/**
 	 * uref parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "Uref : unforgeable reference, containing an address in the network's global state")
 	private String uref;
 
-	
-	
 	/**
 	 * uref parameter
 	 */
 
-	@UriParam(label = "producer")
-	private String itemKey;
+	@UriParam(label = "producer", description = "Item keys, separated  by comma")
+	private String itemKeys;
 
-	
-	
 	/**
 	 * stateRootHash parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "state_Root_Hash : an identifier of the current network state")
 	private String stateRootHash;
 
-	
-	
 	/**
 	 * purseUref parameter
 	 */
 
-	@UriParam(label = "producer")
+	@UriParam(label = "producer", description = "purseUref : URef of an  account main purse")
 	private String purseUref;
 
-	
-	
-	
-	
-	
-	
 	public String getPurseUref() {
 		return purseUref;
 	}
@@ -119,12 +107,12 @@ public class CasperConfiguration implements Cloneable {
 		this.uref = uref;
 	}
 
-	public String getItemKey() {
-		return itemKey;
+	public String getItemKeys() {
+		return itemKeys;
 	}
 
-	public void setItemKey(String itemKey) {
-		this.itemKey = itemKey;
+	public void setItemKeys(String itemKeys) {
+		this.itemKeys = itemKeys;
 	}
 
 	public String getPublicKey() {
@@ -176,7 +164,7 @@ public class CasperConfiguration implements Cloneable {
 	}
 
 	public String getOperationOrDefault() {
-		return this.operation != null ? operation : CasperConstants.INFO_GET_STATUS;
+		return this.operation != null ? operation : CasperConstants.NODE_STATUS;
 	}
 
 	public CasperConfiguration clone() {

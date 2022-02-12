@@ -35,8 +35,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "exceptionHandler": target.setExceptionHandler(property(camelContext, org.apache.camel.spi.ExceptionHandler.class, value)); return true;
         case "exchangepattern":
         case "exchangePattern": target.setExchangePattern(property(camelContext, org.apache.camel.ExchangePattern.class, value)); return true;
-        case "itemkey":
-        case "itemKey": target.getConfiguration().setItemKey(property(camelContext, java.lang.String.class, value)); return true;
+        case "itemkeys":
+        case "itemKeys": target.getConfiguration().setItemKeys(property(camelContext, java.lang.String.class, value)); return true;
         case "lazystartproducer":
         case "lazyStartProducer": target.setLazyStartProducer(property(camelContext, boolean.class, value)); return true;
         case "operation": target.getConfiguration().setOperation(property(camelContext, java.lang.String.class, value)); return true;
@@ -68,8 +68,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "exceptionHandler": return org.apache.camel.spi.ExceptionHandler.class;
         case "exchangepattern":
         case "exchangePattern": return org.apache.camel.ExchangePattern.class;
-        case "itemkey":
-        case "itemKey": return java.lang.String.class;
+        case "itemkeys":
+        case "itemKeys": return java.lang.String.class;
         case "lazystartproducer":
         case "lazyStartProducer": return boolean.class;
         case "operation": return java.lang.String.class;
@@ -102,8 +102,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "exceptionHandler": return target.getExceptionHandler();
         case "exchangepattern":
         case "exchangePattern": return target.getExchangePattern();
-        case "itemkey":
-        case "itemKey": return target.getConfiguration().getItemKey();
+        case "itemkeys":
+        case "itemKeys": return target.getConfiguration().getItemKeys();
         case "lazystartproducer":
         case "lazyStartProducer": return target.isLazyStartProducer();
         case "operation": return target.getConfiguration().getOperation();

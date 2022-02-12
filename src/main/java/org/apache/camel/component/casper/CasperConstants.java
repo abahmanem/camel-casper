@@ -8,6 +8,10 @@ package org.apache.camel.component.casper;
 public interface CasperConstants {
 
 	
+	 String ENDPOINT_SERVICE = "NETWORK_PEERS, NODE_STATUS,DEPLOY,LAST_BLOCK,BLOCK,LAST_BLOCK_TRANSFERS,BLOCK_TRANSFERS,STATE_ROOT_HASH,ACCOUNT_INFO"
+	 		+ ",AUCTION_INFO,ERA_INFO,STATE_ITEM,ACCOUNT_BALANC,ERPC_SCHEMA";
+	
+	
 	//RPC Calls 
 	String CHAIN_GET_BLOCK ="CHAIN_GET_BLOCK";
 	String	INFO_GET_PEERS ="INFO_GET_PEERS";
@@ -94,6 +98,8 @@ public interface CasperConstants {
 	 String NETWORK_FEES = "NETWORK_FEES";
 	 
 	 
+	//Consumer valid url paths
 	 
+	 String CONSUMER_PATHS = "/events/main,/events/deploys,/events/sigs";
 	
 }

@@ -1,7 +1,11 @@
 package org.apache.camel.component.casper;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.camel.CamelException;
 import org.apache.camel.Consumer;
@@ -12,38 +16,41 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.apache.camel.support.DefaultEndpoint;
+import org.apache.camel.support.PropertyBindingSupport;
+import org.apache.camel.util.PropertiesHelper;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.camel.Category;
+
+import com.jayway.jsonpath.InvalidPathException;
 import com.syntifi.casper.sdk.service.CasperService;
 
 /**
- * Interact with Casper nodes using  Capser SDK.
+ * Interact with Casper nodes using Capser SDK.
  */
 
-@UriEndpoint(firstVersion = "3.14.0", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper",
-category = { Category.BITCOIN, Category.BLOCKCHAIN, Category.API })
+@UriEndpoint(firstVersion = "3.14.0", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper", category = {
+		Category.BITCOIN, Category.BLOCKCHAIN, Category.API })
 public class CasperEndPoint extends DefaultEndpoint {
 
 	public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
 
-	
 	/**
 	 * CasperService bean : Casper java SDK
 	 */
-	
-	private CasperService casperService;
 
+	private CasperService casperService;
 
 	/**
 	 * nodeUrl : node address
 	 */
-	@UriPath
+
+	@UriPath(description = "Node URL,  e.g. http://localhost:7777/ for producer, http://localhost:9999/events/main for consumer")
 	@Metadata(required = true)
 	private String nodeUrl;
 
-	@UriParam
+	@UriParam(description = "Casper component configuration")
 	private CasperConfiguration configuration;
 
 	/**
@@ -59,8 +66,8 @@ public class CasperEndPoint extends DefaultEndpoint {
 			CasperConfiguration configuration) throws Exception {
 		super(uri, casperComponent);
 		this.configuration = configuration;
-		this.nodeUrl=remaining;
-		//validateAndSetURL(remaining);
+		this.nodeUrl = remaining;
+		validateAndSetURL(remaining);
 	}
 
 	/**
@@ -69,14 +76,36 @@ public class CasperEndPoint extends DefaultEndpoint {
 	@Override
 	public Consumer createConsumer(Processor processor) throws Exception {
 
-		CasperConsumer consumer = new CasperConsumer(this, processor,configuration);
-		configureConsumer(consumer);
-		return consumer;
+		URI uri = new URI(nodeUrl);
+		String operation = configuration.getOperation();
+
+		
+		if (!Arrays.asList(CasperConstants.CONSUMER_PATHS.split(",")).stream().anyMatch(s -> s.equals(uri.getPath()))) 
+			
+			throw new InvalidPathException(String.format(
+					"Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ", uri.getPath()));
+		
+
+		if (ConsumerOperation.findByName(operation) != null) {
+
+			CasperConsumer consumer = new CasperConsumer(this, processor, configuration);
+			configureConsumer(consumer);
+			return consumer;
+		}
+
+		throw new UnsupportedOperationException(
+				String.format("Operation '%s' not supported by casper cosumner", operation));
+
 	}
 
 	@Override
 	public Producer createProducer() throws Exception {
-		return new CasperProducer(this, configuration);
+		String operation = configuration.getOperation();
+		if (ProducerOperation.findByName(operation) != null)
+			return new CasperProducer(this, configuration);
+		throw new UnsupportedOperationException(
+				String.format("Operation '%s' not supported by casper producer", operation));
+
 	}
 
 	@Override
@@ -90,7 +119,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 			this.casperService = configuration.getCasperService();
 		} else {
 			URI uri = new URI(nodeUrl);
-			this.casperService = CasperService.usingPeer(uri.getHost(),uri.getPort());
+			this.casperService = CasperService.usingPeer(uri.getHost(), uri.getPort());
 		}
 		super.doStart();
 	}
@@ -100,9 +129,9 @@ public class CasperEndPoint extends DefaultEndpoint {
 		super.doShutdown();
 	}
 
-
 	/**
 	 * validate node adress
+	 * 
 	 * @param url
 	 * @throws Exception
 	 */
@@ -115,8 +144,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 		setNodeUrl(new URL(url).toString());
 	}
 
-	
-	
 	public CasperService getCasperService() {
 		return casperService;
 	}
@@ -140,9 +167,5 @@ public class CasperEndPoint extends DefaultEndpoint {
 	public void setConfiguration(CasperConfiguration configuration) {
 		this.configuration = configuration;
 	}
-	
-	
-	
-	
-	
+
 }
