@@ -54,7 +54,7 @@ public class MyRouteBuilder extends RouteBuilder {
 	   
 	   
 	   from("timer://simpleTimer?period=3000")
-	      .to("casper:http://65.21.227.180:7777/?operation=ssss").process(new TestProcessor())
+	      .to("casper:http://65.21.227.180:7777/?operation="+CasperConstants.ACCOUNT_INFO).process(new TestProcessor())
 	      .log("This call gives - ${body}");
 	   
 	   from("timer://simpleTimer?period=3000")

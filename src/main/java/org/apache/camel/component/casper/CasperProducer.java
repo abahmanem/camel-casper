@@ -2,13 +2,12 @@ package org.apache.camel.component.casper;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
-import java.util.MissingFormatArgumentException;
 
 import org.apache.camel.CamelExchangeException;
 import org.apache.camel.Message;
 import org.apache.camel.spi.InvokeOnHeader;
 import org.apache.camel.support.HeaderSelectorProducer;
+import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +47,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 	public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
 
-
 	public CasperProducer(CasperEndPoint endpoint, final CasperConfiguration configuration) throws Exception {
 		super(endpoint, CasperConstants.OPERATION, () -> configuration.getOperationOrDefault(), false);
 		this.endpoint = endpoint;
@@ -86,8 +84,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 		try {
 			peerData = casperService.getPeerData();
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
 
@@ -136,7 +133,10 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(deployHash)) {
 
-			handleError(new MissingFormatArgumentException("deployHash parameter should be set with endpoint operation "+CasperConstants.DEPLOY), message);
+			handleError(
+					new MissingArgumentException(
+							"deployHash parameter is required with endpoint operation " + CasperConstants.DEPLOY),
+					message);
 			return;
 		}
 
@@ -198,7 +198,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 				block = casperService.getBlock(new HeightBlockIdentifier(blockHeight)).getBlock();
 
 			else
-				//get last block
+				// get last block
 				block = casperService.getBlock().getBlock();
 
 		}
@@ -259,7 +259,10 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(publicKey)) {
 
-			handleError(new MissingFormatArgumentException("publicKey parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_INFO), message);
+			handleError(
+					new MissingArgumentException(
+							"publicKey parameter is required  with endpoint operation " + CasperConstants.ACCOUNT_INFO),
+					message);
 			return;
 		}
 
@@ -274,8 +277,9 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 			else
 
-				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_INFO),
+				handleError(new MissingArgumentException(
+						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
+								+ CasperConstants.ACCOUNT_INFO),
 						message);
 		}
 
@@ -337,8 +341,9 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 			else
 
-				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.BLOCK_TRANSFERS),
+				handleError(new MissingArgumentException(
+						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
+								+ CasperConstants.ACCOUNT_INFO),
 						message);
 
 		}
@@ -376,8 +381,9 @@ public class CasperProducer extends HeaderSelectorProducer {
 				auction = casperService.getStateAuctionInfo(new HeightBlockIdentifier(blockHeight));
 
 			else
-				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.AUCTION_INFO),
+				handleError(new MissingArgumentException(
+						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
+								+ CasperConstants.ACCOUNT_INFO),
 						message);
 		}
 
@@ -415,8 +421,9 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 			else
 
-				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.ERA_INFO),
+				handleError(new MissingArgumentException(
+						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
+								+ CasperConstants.ACCOUNT_INFO),
 						message);
 
 		}
@@ -446,28 +453,34 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(stateRootHash)) {
 
-			handleError(new MissingFormatArgumentException("stateRootHash parameter should be set with endpoint operation "+CasperConstants.STATE_ITEM), message);
+			handleError(new MissingArgumentException(
+					"stateRootHash parameter is required  with endpoint operation " + CasperConstants.STATE_ITEM),
+					message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(itemKeys)) {
 
-			handleError(new MissingFormatArgumentException("itemKey parameter should be set with endpoint operation "+CasperConstants.STATE_ITEM), message);
+			handleError(
+					new MissingArgumentException(
+							"itemKey parameter is required with endpoint operation " + CasperConstants.STATE_ITEM),
+					message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(uref)) {
 
-			handleError(new MissingFormatArgumentException("uref parameter should be set  with endpoint operation "+CasperConstants.STATE_ITEM), message);
+			handleError(
+					new MissingArgumentException(
+							"uref parameter is required   with endpoint operation " + CasperConstants.STATE_ITEM),
+					message);
 			return;
 		}
 
 		try {
 			value = casperService.getStateItem(stateRootHash, uref, Arrays.asList(itemKeys.split(",")));
 
-		}
-
-		catch (Exception e) {
+		} catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
 
@@ -492,13 +505,15 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(stateRootHash)) {
 
-			handleError(new MissingFormatArgumentException("stateRootHash parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_BALANCE.toLowerCase()), message);
+			handleError(new MissingArgumentException("stateRootHash parameter is required   with endpoint operation "
+					+ CasperConstants.ACCOUNT_BALANCE.toLowerCase()), message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(purseUref)) {
 
-			handleError(new MissingFormatArgumentException("itemKey parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_BALANCE.toLowerCase()), message);
+			handleError(new MissingArgumentException("itemKey parameter is required   with endpoint operation "
+					+ CasperConstants.ACCOUNT_BALANCE.toLowerCase()), message);
 			return;
 		}
 
