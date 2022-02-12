@@ -36,7 +36,7 @@ public void configure() {
       .to("casper?operation=last_block");
 }
 
-``
+```
 
 ## Producer Example
 Producer performs RPC calls to Casper blockchaine like querying blocks, deploys, accounts.
