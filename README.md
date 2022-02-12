@@ -22,7 +22,7 @@ URI Format
 ```java
 casper://<local/remote host:port or local IPC path>[?options]
 
-```
+``
 ## Configuring Casper component
 
 The CasperConfiguration class can be used to set initial properties configuration to the component instead of passing it as query parameter. 
@@ -46,6 +46,34 @@ public void configure() {
 ```
 
 * Spring configuration
+
+```java
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring 
+       http://camel.apache.org/schema/spring/camel-spring.xsd" >
+
+  <camelContext id="casper-test"   xmlns="http://camel.apache.org/schema/spring">
+    <route>
+     
+     //consume BLOCK_ADDED events from SSE
+     
+      <from uri="casper:http//localhost:9999/events/main?operation=BLOCK_ADDED"/>
+        <setHeader name="BLOCK_HASH">
+          <simple>body</simple>
+        </setHeader>
+     
+      //query the network for block transfers 
+       <to uri="casper:http//localhost:7777?operation=BLOCK_TRANSFERTS"/>
+    </route>
+  </camelContext>
+
+</beans>
+
+``
 
 
 ## Producer Example
