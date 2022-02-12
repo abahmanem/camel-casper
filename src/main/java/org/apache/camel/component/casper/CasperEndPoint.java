@@ -1,13 +1,11 @@
 package org.apache.camel.component.casper;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.camel.CamelException;
+import org.apache.camel.Category;
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
@@ -16,12 +14,9 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.apache.camel.support.DefaultEndpoint;
-import org.apache.camel.support.PropertyBindingSupport;
-import org.apache.camel.util.PropertiesHelper;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.camel.Category;
 
 import com.jayway.jsonpath.InvalidPathException;
 import com.syntifi.casper.sdk.service.CasperService;
@@ -75,14 +70,14 @@ public class CasperEndPoint extends DefaultEndpoint {
 	*/
 	@Override
 	public Consumer createConsumer(Processor processor) throws Exception {
-
 		URI uri = new URI(nodeUrl);
 		String operation = configuration.getOperation();
-		
-		if (!Arrays.asList(CasperConstants.CONSUMER_PATHS.split(",")).stream().anyMatch(s -> s.equals(uri.getPath()))) 
-			
+
+		if (!Arrays.asList(CasperConstants.CONSUMER_PATHS.split(",")).stream().anyMatch(s -> s.equals(uri.getPath())))
+
 			throw new InvalidPathException(String.format(
-					"Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ", uri.getPath()));
+					"Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ",
+					uri.getPath()));
 
 		if (ConsumerOperation.findByName(operation) != null) {
 
@@ -91,7 +86,8 @@ public class CasperEndPoint extends DefaultEndpoint {
 			return consumer;
 		}
 
-		throw new UnsupportedOperationException(String.format("Operation '%s' not supported by casper cosumner", operation));
+		throw new UnsupportedOperationException(
+				String.format("Operation '%s' not supported by casper cosumner", operation));
 	}
 
 	@Override

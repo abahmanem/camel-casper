@@ -198,6 +198,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 				block = casperService.getBlock(new HeightBlockIdentifier(blockHeight)).getBlock();
 
 			else
+				//get last block
 				block = casperService.getBlock().getBlock();
 
 		}
@@ -258,7 +259,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(publicKey)) {
 
-			handleError(new MissingFormatArgumentException("publicKey parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("publicKey parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_INFO), message);
 			return;
 		}
 
