@@ -70,7 +70,7 @@ public void configure() {
 
 </beans>
 
-``
+```
 
 
 ## Producer Example
