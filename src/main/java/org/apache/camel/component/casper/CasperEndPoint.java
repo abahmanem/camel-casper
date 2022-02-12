@@ -78,13 +78,11 @@ public class CasperEndPoint extends DefaultEndpoint {
 
 		URI uri = new URI(nodeUrl);
 		String operation = configuration.getOperation();
-
 		
 		if (!Arrays.asList(CasperConstants.CONSUMER_PATHS.split(",")).stream().anyMatch(s -> s.equals(uri.getPath()))) 
 			
 			throw new InvalidPathException(String.format(
 					"Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ", uri.getPath()));
-		
 
 		if (ConsumerOperation.findByName(operation) != null) {
 
@@ -93,9 +91,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 			return consumer;
 		}
 
-		throw new UnsupportedOperationException(
-				String.format("Operation '%s' not supported by casper cosumner", operation));
-
+		throw new UnsupportedOperationException(String.format("Operation '%s' not supported by casper cosumner", operation));
 	}
 
 	@Override
