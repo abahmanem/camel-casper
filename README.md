@@ -1,11 +1,11 @@
 # Casper Camel Connector
 Since Camel 3.14
 
-Both producer and consumer are supported
-
 The Casper blockchain component uses the Casper Java SDK : https://github.com/syntifi/casper-sdk and allows you to interact with Casper nodes.
 
-add the folllowing dependency maven pom.xml file. for this component:
+Both producer and consumer are supported.
+
+To use casper Camel component ,add the following dependency maven pom.xml file. for this component:
 
 ```java
 <dependency>
