@@ -18,8 +18,11 @@ To use casper Camel component ,add the following dependency maven pom.xml file. 
 camel.version  : version of camel-core   component
 
 URI Format
+
+```java
 casper://<local/remote host:port or local IPC path>[?options]
 
+```
 ## Configuring Casper component
 
 The CasperConfiguration class can be used to set initial properties configuration to the component instead of passing it as query parameter. 
