@@ -1,7 +1,6 @@
 package org.apache.camel.component.casper;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.MissingFormatArgumentException;
@@ -49,16 +48,10 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 	public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
 
-	private List<String> supportedOperations = Arrays.asList("get_deploy", "get_peers", "get_contract_hash",
-			"get_info_block_by_height", "get_account_main_purse", "get_account_hash", "get_account_info",
-			"get_account_balance", "get_block_info", "rpc_schema", "get_node_status", "get_node_metrics",
-			"get_auction_info", "get_state_root_hash", "get_block_transfers", "get_latest_block_info");
 
 	public CasperProducer(CasperEndPoint endpoint, final CasperConfiguration configuration) throws Exception {
 		super(endpoint, CasperConstants.OPERATION, () -> configuration.getOperationOrDefault(), false);
-
 		this.endpoint = endpoint;
-
 		this.configuration = configuration;
 		this.casperService = endpoint.getCasperService();
 
@@ -94,7 +87,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 			peerData = casperService.getPeerData();
 
 		}
-
 		catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
@@ -144,7 +136,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(deployHash)) {
 
-			handleError(new MissingFormatArgumentException("deployHash parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("deployHash parameter should be set with endpoint operation "+CasperConstants.DEPLOY), message);
 			return;
 		}
 
@@ -282,7 +274,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else
 
 				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set"),
+						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_INFO),
 						message);
 		}
 
@@ -345,7 +337,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else
 
 				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set"),
+						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.BLOCK_TRANSFERS),
 						message);
 
 		}
@@ -384,7 +376,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 			else
 				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set"),
+						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.AUCTION_INFO),
 						message);
 		}
 
@@ -423,7 +415,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else
 
 				handleError(
-						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set"),
+						new MissingFormatArgumentException("Either blockHeight or BlockHash parameter should be set with endpoint operation "+CasperConstants.ERA_INFO),
 						message);
 
 		}
@@ -453,19 +445,19 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(stateRootHash)) {
 
-			handleError(new MissingFormatArgumentException("stateRootHash parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("stateRootHash parameter should be set with endpoint operation "+CasperConstants.STATE_ITEM), message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(itemKeys)) {
 
-			handleError(new MissingFormatArgumentException("itemKey parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("itemKey parameter should be set with endpoint operation "+CasperConstants.STATE_ITEM), message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(uref)) {
 
-			handleError(new MissingFormatArgumentException("uref parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("uref parameter should be set  with endpoint operation "+CasperConstants.STATE_ITEM), message);
 			return;
 		}
 
@@ -499,13 +491,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 		if (StringUtils.isEmpty(stateRootHash)) {
 
-			handleError(new MissingFormatArgumentException("stateRootHash parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("stateRootHash parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_BALANCE.toLowerCase()), message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(purseUref)) {
 
-			handleError(new MissingFormatArgumentException("itemKey parameter should be set"), message);
+			handleError(new MissingFormatArgumentException("itemKey parameter should be set with endpoint operation "+CasperConstants.ACCOUNT_BALANCE.toLowerCase()), message);
 			return;
 		}
 
