@@ -22,7 +22,11 @@ casper://<local/remote host:port or local IPC path>[?options]
 
 ## Configuring Casper component
 
-The CasperConfiguration class can be used to set initial properties configuration to the component instead of passing it as query parameter. The following listing shows how to set the component to be used in your routes.
+The CasperConfiguration class can be used to set initial properties configuration to the component instead of passing it as query parameter. 
+
+The following listings shows how to set the component to be used in your routes.
+
+* Java
 
 ```java
 public void configure() {
@@ -37,6 +41,9 @@ public void configure() {
 }
 
 ```
+
+* Spring configuration
+
 
 ## Producer Example
 Producer performs RPC calls to Casper blockchaine like querying blocks, deploys, accounts.
