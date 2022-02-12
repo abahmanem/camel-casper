@@ -22,7 +22,7 @@ import com.syntifi.casper.sdk.service.CasperService;
  * Interact with Casper nodes using  Capser SDK.
  */
 
-@UriEndpoint(firstVersion = "1.0.0", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper",
+@UriEndpoint(firstVersion = "3.14.0", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper",
 category = { Category.BITCOIN, Category.BLOCKCHAIN, Category.API })
 public class CasperEndPoint extends DefaultEndpoint {
 
