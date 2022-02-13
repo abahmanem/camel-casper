@@ -19,7 +19,7 @@ public enum ProducerOperation {
 	AUCTION_INFO,
 	ERA_INFO,
 	STATE_ITEM,
-	ACCOUNT_BALANC,
+	ACCOUNT_BALANCE,
 	ERPC_SCHEMA;
 	
 	

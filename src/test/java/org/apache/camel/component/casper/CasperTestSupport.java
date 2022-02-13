@@ -24,7 +24,7 @@ public class CasperTestSupport extends CamelTestSupport {
 	}
 
 	protected String getUrl() {
-		return "casper:http://65.21.227.180:7777/rpc";
+		return CasperConstants.TESTNET_ENDPOINT_TEST;
 
 	}
 

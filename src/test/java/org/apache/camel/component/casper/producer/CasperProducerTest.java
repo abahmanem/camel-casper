@@ -7,7 +7,9 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.casper.CasperConstants;
 import org.apache.camel.component.casper.CasperTestSupport;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CasperProducerTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;

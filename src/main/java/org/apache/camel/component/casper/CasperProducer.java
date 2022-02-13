@@ -149,7 +149,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			handleError(e.getCause(), message);
 		}
 		if (deploy != null)
-			message.setBody(deploy);
+			message.setBody(deploy.getDeploy());
 	}
 
 	/**
@@ -538,7 +538,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @param message
 	 */
 	private void handleError(Throwable e, Message message) {
-
+		message.setHeader(CasperConstants.ERROR_CAUSE, e);
 		message.getExchange().setException(new CamelExchangeException(e.getMessage(), message.getExchange()));
 
 	}

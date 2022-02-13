@@ -101,5 +101,12 @@ public interface CasperConstants {
 	//Consumer valid url paths
 	 
 	 String CONSUMER_PATHS = "/events/main,/events/deploys,/events/sigs";
+	 
+	 //Testnet nodeUrl 
+	 String TESTNET_NODE_URL = "http://65.108.1.10:7777";
+	 String TESTNET_ENDPOINT_TEST = "casper:"+TESTNET_NODE_URL;
+
+
+	String ERROR_CAUSE = "ERROR_CAUSE";
 	
 }
