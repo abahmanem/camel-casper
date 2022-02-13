@@ -59,15 +59,15 @@ public class CasperConfiguration implements Cloneable {
 	 * uref parameter
 	 */
 
-	@UriParam(label = "producer", description = "Uref : unforgeable reference, containing an address in the network's global state")
-	private String uref;
+	@UriParam(label = "producer", description = "casper_types::Key as formatted string")
+	private String key;
 
 	/**
 	 * uref parameter
 	 */
 
-	@UriParam(label = "producer", description = "Item keys, separated  by comma")
-	private String itemKeys;
+	@UriParam(label = "producer", description = "The path components starting from the key as base")
+	private String path;
 
 	/**
 	 * stateRootHash parameter
@@ -99,20 +99,23 @@ public class CasperConfiguration implements Cloneable {
 		this.stateRootHash = stateRootHash;
 	}
 
-	public String getUref() {
-		return uref;
+
+	
+
+	public String getKey() {
+		return key;
 	}
 
-	public void setUref(String uref) {
-		this.uref = uref;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
-	public String getItemKeys() {
-		return itemKeys;
+	public String getPath() {
+		return path;
 	}
 
-	public void setItemKeys(String itemKeys) {
-		this.itemKeys = itemKeys;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	public String getPublicKey() {

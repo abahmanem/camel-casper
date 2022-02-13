@@ -35,18 +35,17 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "exceptionHandler": target.setExceptionHandler(property(camelContext, org.apache.camel.spi.ExceptionHandler.class, value)); return true;
         case "exchangepattern":
         case "exchangePattern": target.setExchangePattern(property(camelContext, org.apache.camel.ExchangePattern.class, value)); return true;
-        case "itemkeys":
-        case "itemKeys": target.getConfiguration().setItemKeys(property(camelContext, java.lang.String.class, value)); return true;
+        case "key": target.getConfiguration().setKey(property(camelContext, java.lang.String.class, value)); return true;
         case "lazystartproducer":
         case "lazyStartProducer": target.setLazyStartProducer(property(camelContext, boolean.class, value)); return true;
         case "operation": target.getConfiguration().setOperation(property(camelContext, java.lang.String.class, value)); return true;
+        case "path": target.getConfiguration().setPath(property(camelContext, java.lang.String.class, value)); return true;
         case "publickey":
         case "publicKey": target.getConfiguration().setPublicKey(property(camelContext, java.lang.String.class, value)); return true;
         case "purseuref":
         case "purseUref": target.getConfiguration().setPurseUref(property(camelContext, java.lang.String.class, value)); return true;
         case "stateroothash":
         case "stateRootHash": target.getConfiguration().setStateRootHash(property(camelContext, java.lang.String.class, value)); return true;
-        case "uref": target.getConfiguration().setUref(property(camelContext, java.lang.String.class, value)); return true;
         default: return false;
         }
     }
@@ -68,18 +67,17 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "exceptionHandler": return org.apache.camel.spi.ExceptionHandler.class;
         case "exchangepattern":
         case "exchangePattern": return org.apache.camel.ExchangePattern.class;
-        case "itemkeys":
-        case "itemKeys": return java.lang.String.class;
+        case "key": return java.lang.String.class;
         case "lazystartproducer":
         case "lazyStartProducer": return boolean.class;
         case "operation": return java.lang.String.class;
+        case "path": return java.lang.String.class;
         case "publickey":
         case "publicKey": return java.lang.String.class;
         case "purseuref":
         case "purseUref": return java.lang.String.class;
         case "stateroothash":
         case "stateRootHash": return java.lang.String.class;
-        case "uref": return java.lang.String.class;
         default: return null;
         }
     }
@@ -102,18 +100,17 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "exceptionHandler": return target.getExceptionHandler();
         case "exchangepattern":
         case "exchangePattern": return target.getExchangePattern();
-        case "itemkeys":
-        case "itemKeys": return target.getConfiguration().getItemKeys();
+        case "key": return target.getConfiguration().getKey();
         case "lazystartproducer":
         case "lazyStartProducer": return target.isLazyStartProducer();
         case "operation": return target.getConfiguration().getOperation();
+        case "path": return target.getConfiguration().getPath();
         case "publickey":
         case "publicKey": return target.getConfiguration().getPublicKey();
         case "purseuref":
         case "purseUref": return target.getConfiguration().getPurseUref();
         case "stateroothash":
         case "stateRootHash": return target.getConfiguration().getStateRootHash();
-        case "uref": return target.getConfiguration().getUref();
         default: return null;
         }
     }

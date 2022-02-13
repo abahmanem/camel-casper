@@ -54,7 +54,7 @@ public class CasperProducerWith_BLOCK_Operation extends CasperTestSupport {
 
 
 	@Test
-	public void testCallWith_BLOCKD_LENGTH_Parameter() throws Exception {
+	public void testCallWith_BLOCK_HEIGHT_Parameter() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK);
 		exchange.getIn().setHeader(CasperConstants.BLOCK_HEIGHT,534910);

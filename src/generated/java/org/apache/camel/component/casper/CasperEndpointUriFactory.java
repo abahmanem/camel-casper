@@ -24,11 +24,10 @@ public class CasperEndpointUriFactory extends org.apache.camel.support.component
         props.add("blockHash");
         props.add("exchangePattern");
         props.add("purseUref");
-        props.add("uref");
         props.add("nodeUrl");
         props.add("publicKey");
-        props.add("itemKeys");
         props.add("stateRootHash");
+        props.add("path");
         props.add("lazyStartProducer");
         props.add("bridgeErrorHandler");
         props.add("blockHeight");
@@ -36,6 +35,7 @@ public class CasperEndpointUriFactory extends org.apache.camel.support.component
         props.add("deployHash");
         props.add("operation");
         props.add("exceptionHandler");
+        props.add("key");
         PROPERTY_NAMES = Collections.unmodifiableSet(props);
         SECRET_PROPERTY_NAMES = Collections.emptySet();
     }

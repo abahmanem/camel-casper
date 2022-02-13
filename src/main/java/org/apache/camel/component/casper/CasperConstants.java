@@ -78,7 +78,7 @@ public interface CasperConstants {
 	 //Query stored value :  params===>STATE_ROOT_HASH
 	 
 	 String STATE_ITEM = "STATE_ITEM";
-	 String UREF = "UREF";
+	 String PATH = "PATH";
 	 String ITEM_KEY = "ITEM_KEY";
 	 
 	

@@ -41,18 +41,17 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": target.setConfiguration(property(camelContext, org.apache.camel.component.casper.CasperConfiguration.class, value)); return true;
         case "deployhash":
         case "deployHash": getOrCreateConfiguration(target).setDeployHash(property(camelContext, java.lang.String.class, value)); return true;
-        case "itemkeys":
-        case "itemKeys": getOrCreateConfiguration(target).setItemKeys(property(camelContext, java.lang.String.class, value)); return true;
+        case "key": getOrCreateConfiguration(target).setKey(property(camelContext, java.lang.String.class, value)); return true;
         case "lazystartproducer":
         case "lazyStartProducer": target.setLazyStartProducer(property(camelContext, boolean.class, value)); return true;
         case "operation": getOrCreateConfiguration(target).setOperation(property(camelContext, java.lang.String.class, value)); return true;
+        case "path": getOrCreateConfiguration(target).setPath(property(camelContext, java.lang.String.class, value)); return true;
         case "publickey":
         case "publicKey": getOrCreateConfiguration(target).setPublicKey(property(camelContext, java.lang.String.class, value)); return true;
         case "purseuref":
         case "purseUref": getOrCreateConfiguration(target).setPurseUref(property(camelContext, java.lang.String.class, value)); return true;
         case "stateroothash":
         case "stateRootHash": getOrCreateConfiguration(target).setStateRootHash(property(camelContext, java.lang.String.class, value)); return true;
-        case "uref": getOrCreateConfiguration(target).setUref(property(camelContext, java.lang.String.class, value)); return true;
         default: return false;
         }
     }
@@ -73,18 +72,17 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": return org.apache.camel.component.casper.CasperConfiguration.class;
         case "deployhash":
         case "deployHash": return java.lang.String.class;
-        case "itemkeys":
-        case "itemKeys": return java.lang.String.class;
+        case "key": return java.lang.String.class;
         case "lazystartproducer":
         case "lazyStartProducer": return boolean.class;
         case "operation": return java.lang.String.class;
+        case "path": return java.lang.String.class;
         case "publickey":
         case "publicKey": return java.lang.String.class;
         case "purseuref":
         case "purseUref": return java.lang.String.class;
         case "stateroothash":
         case "stateRootHash": return java.lang.String.class;
-        case "uref": return java.lang.String.class;
         default: return null;
         }
     }
@@ -106,18 +104,17 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": return target.getConfiguration();
         case "deployhash":
         case "deployHash": return getOrCreateConfiguration(target).getDeployHash();
-        case "itemkeys":
-        case "itemKeys": return getOrCreateConfiguration(target).getItemKeys();
+        case "key": return getOrCreateConfiguration(target).getKey();
         case "lazystartproducer":
         case "lazyStartProducer": return target.isLazyStartProducer();
         case "operation": return getOrCreateConfiguration(target).getOperation();
+        case "path": return getOrCreateConfiguration(target).getPath();
         case "publickey":
         case "publicKey": return getOrCreateConfiguration(target).getPublicKey();
         case "purseuref":
         case "purseUref": return getOrCreateConfiguration(target).getPurseUref();
         case "stateroothash":
         case "stateRootHash": return getOrCreateConfiguration(target).getStateRootHash();
-        case "uref": return getOrCreateConfiguration(target).getUref();
         default: return null;
         }
     }

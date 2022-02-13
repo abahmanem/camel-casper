@@ -2,7 +2,7 @@ package org.apache.camel.component.casper.producer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.net.URI;
+
 
 import org.apache.camel.CamelExchangeException;
 import org.apache.camel.Exchange;
@@ -12,21 +12,14 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.casper.CasperConstants;
 import org.apache.camel.component.casper.CasperTestSupport;
 import org.apache.commons.cli.MissingArgumentException;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
 import com.syntifi.casper.sdk.model.account.AccountData;
-import com.syntifi.casper.sdk.model.block.JsonBlock;
-import com.syntifi.casper.sdk.service.CasperService;
 
 public class CasperProducerWith_ACCOUNT_INFO_Operation extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
-
-	
-	
-	private CasperService casperService;
-
 	
 	@Override
 	public boolean isUseAdviceWith() {
