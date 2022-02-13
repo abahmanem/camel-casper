@@ -33,7 +33,6 @@ public class CasperProducerWith_NETWORK_PEERS_Operation extends CasperTestSuppor
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
-		System.out.println(body.getClass());
 		assertTrue(body instanceof List);
 
 		List<PeerEntry> peers = (List<PeerEntry>) (body);

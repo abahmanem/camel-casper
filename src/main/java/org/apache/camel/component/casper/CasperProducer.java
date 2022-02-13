@@ -329,16 +329,14 @@ public class CasperProducer extends HeaderSelectorProducer {
 		TransferData transferData = null;
 
 		try {
-
 			transferData = casperService.getBlockTransfers();
-
 		}
 
 		catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
 		if (transferData != null)
-			message.setBody(transferData);
+			message.setBody(transferData.getTransfers());
 
 	}
 
@@ -366,11 +364,8 @@ public class CasperProducer extends HeaderSelectorProducer {
 				transferData = casperService.getBlockTransfers(new HeightBlockIdentifier(blockHeight));
 
 			else
-
-				handleError(new MissingArgumentException(
-						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
-								+ CasperConstants.ACCOUNT_INFO),
-						message);
+           //get latest ones
+				transferData = casperService.getBlockTransfers();
 
 		}
 
@@ -379,7 +374,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 		}
 
 		if (transferData != null)
-			message.setBody(transferData);
+			message.setBody(transferData.getTransfers());
 
 	}
 
