@@ -41,7 +41,6 @@ public class CasperProducerWith_NETWORK_PEERS_OperationTest extends CasperTestSu
 		URI ourTestNode = new URI(CasperConstants.TESTNET_NODE_URL);
 		// assertTrue(peers.stream().anyMatch(s ->
 		// s.getAddress().substring(s.getAddress().indexOf(":")).equals(ourTestnode.getHost())));
-
 	}
 
 	@Override

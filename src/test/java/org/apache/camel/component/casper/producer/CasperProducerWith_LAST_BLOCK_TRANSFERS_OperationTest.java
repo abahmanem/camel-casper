@@ -30,7 +30,6 @@ public class CasperProducerWith_LAST_BLOCK_TRANSFERS_OperationTest extends Caspe
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
 		assertTrue(body instanceof List);
-
 	}
 
 	@Override

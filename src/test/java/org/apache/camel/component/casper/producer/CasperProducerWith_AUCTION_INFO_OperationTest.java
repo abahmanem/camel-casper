@@ -45,7 +45,6 @@ public class CasperProducerWith_AUCTION_INFO_OperationTest extends CasperTestSup
 		assertTrue(auctionState.getHeight() == 535075L);
 		assertTrue(auctionState.getStateRootHash().toLowerCase()
 				.equals("2aedb1538305c183d1a1b645516762dceec1e762eed0625980a4fe58c4397b97"));
-
 	}
 
 	@Test
@@ -63,7 +62,6 @@ public class CasperProducerWith_AUCTION_INFO_OperationTest extends CasperTestSup
 		assertTrue(auctionState.getHeight() == 534868L);
 		assertTrue(auctionState.getStateRootHash().toLowerCase()
 				.equals("49f4b72f71202eb0fbf17d89da038e0b342984b56feccaf6157e2291c69bcd9b"));
-
 	}
 
 	@Test
@@ -80,7 +78,6 @@ public class CasperProducerWith_AUCTION_INFO_OperationTest extends CasperTestSup
 		assertTrue(auctionState != null);
 		// this is the lastest one
 		assertTrue(casperService.getStateRootHash().getStateRootHash().equals(auctionState.getStateRootHash()));
-
 	}
 
 	@Override

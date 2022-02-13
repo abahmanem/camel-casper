@@ -44,7 +44,6 @@ public class CasperProducerWith_STATE_ITEM_OperationTest extends CasperTestSuppo
 		assertTrue(value != null);
 		//it s a contract
 		assertTrue(value.getValue().getClass().getName().equals("com.syntifi.casper.sdk.model.contract.Contract"));
-
 	}
 
 
@@ -66,8 +65,7 @@ public class CasperProducerWith_STATE_ITEM_OperationTest extends CasperTestSuppo
 		// assert Exception message
 		assertTrue(actualMessage.contains(expectedMessage));
 
-		// Cause
-
+		//Cause
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
 	}

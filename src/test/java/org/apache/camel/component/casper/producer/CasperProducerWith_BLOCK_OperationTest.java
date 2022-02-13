@@ -19,9 +19,6 @@ import com.syntifi.casper.sdk.service.CasperService;
 public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
-
-
-
 	private CasperService casperService;
 
 
@@ -45,8 +42,6 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 		JsonBlock block = (JsonBlock) body;
 		assertTrue(block != null);
 		assertTrue(block.getHash().toLowerCase().equals("30c1263cbcc95066f5c20e96cb8ba11356295515f414961b646e831c17992d26"));
-
-
 	}
 
 
@@ -62,7 +57,6 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 		JsonBlock block = (JsonBlock) body;
 		assertTrue(block != null);
 		assertTrue(block.getHash().toLowerCase().equals("f990a7079e3ebb1972d1388c0efd97cd7d7e2be9e442bd80f0ddb8134625a8f2"));
-
 	}
 
 	@Test
@@ -77,7 +71,6 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 		assertTrue(body instanceof JsonBlock);
 		// Assert the call returns the last block
 		assertTrue(casperService.getBlock().getBlock().getHash().toLowerCase().equals(((JsonBlock) body).getHash()));
-
 	}
 
 

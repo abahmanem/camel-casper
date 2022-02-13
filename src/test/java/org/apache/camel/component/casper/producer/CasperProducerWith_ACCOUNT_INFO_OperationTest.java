@@ -43,8 +43,6 @@ public class CasperProducerWith_ACCOUNT_INFO_OperationTest extends CasperTestSup
 		AccountData account = (AccountData) body;
 		assertTrue(account != null);
 		assertTrue(account.getAccount().getMainPurse().toLowerCase().equals("uref-e18e33382032c835e9ccf367baa20e043229c6d45d135b60aa7301ff1eeb317b-007"));
-		
-
 	}
 
 
@@ -65,8 +63,6 @@ public class CasperProducerWith_ACCOUNT_INFO_OperationTest extends CasperTestSup
 		AccountData account = (AccountData) body;
 		assertTrue(account != null);
 		assertTrue(account.getAccount().getHash().toLowerCase().equals("account-hash-a8261377ef9cf8e741dd6858801c71e38c9322e66355586549b75ab24bdd73f2"));
-		
-		
 	}
 	
 	@Test
@@ -88,7 +84,6 @@ public class CasperProducerWith_ACCOUNT_INFO_OperationTest extends CasperTestSup
 
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
-	
 	}
 	
 	
@@ -112,7 +107,6 @@ public class CasperProducerWith_ACCOUNT_INFO_OperationTest extends CasperTestSup
 
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
-	
 	}
 	
 	

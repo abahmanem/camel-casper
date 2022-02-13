@@ -39,7 +39,6 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 		assertTrue(deploy != null);
 		assertTrue(deploy.getHash().toLowerCase()
 				.equals("5ff526617848b4416f818009dc90dd35485b4270a54d52f33652995472ef1fa9"));
-
 	}
 
 	@Test
@@ -59,7 +58,6 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
-
 	}
 
 	@Override

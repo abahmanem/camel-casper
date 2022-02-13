@@ -38,7 +38,6 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 		List<Transfer> transferts = (List<Transfer>) (body);
 		// often lastest block has no transfers in testnet
 		assertTrue(transferts.isEmpty());
-
 	}
 
 	@Test
@@ -76,7 +75,6 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 
 		List<Transfer> transferts = (List<Transfer>) (body);
 		assertTrue(!transferts.isEmpty());
-
 	}
 
 	@Override

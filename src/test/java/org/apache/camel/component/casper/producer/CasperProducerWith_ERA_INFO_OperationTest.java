@@ -43,7 +43,6 @@ public class CasperProducerWith_ERA_INFO_OperationTest extends CasperTestSupport
 		assertTrue(eraSummary.getEraId() == 2974);
 		assertTrue(eraSummary.getStateRootHash().toLowerCase()
 				.equals("c1A62d5DeB74d3fEAfeCd1EEa526941edd0264895EB8E516474108D4EA4D7D21".toLowerCase()));
-
 	}
 
 	@Test
@@ -71,7 +70,6 @@ public class CasperProducerWith_ERA_INFO_OperationTest extends CasperTestSupport
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		assertNull(body);
-
 	}
 
 	@Test
@@ -90,7 +88,6 @@ public class CasperProducerWith_ERA_INFO_OperationTest extends CasperTestSupport
 		assertTrue(actualMessage.contains(expectedMessage));
 
 		// Cause
-
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
 	}

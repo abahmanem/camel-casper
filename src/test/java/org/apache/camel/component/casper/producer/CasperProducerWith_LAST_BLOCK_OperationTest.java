@@ -33,7 +33,6 @@ public class CasperProducerWith_LAST_BLOCK_OperationTest extends CasperTestSuppo
 		JsonBlock block = (JsonBlock) body;
 		assertTrue(block != null);
 		assertTrue(block.getHash().length() == 64);
-
 	}
 
 	@Override

@@ -45,7 +45,6 @@ public class CasperProducerWith_ACCOUNT_BALANCE_OperationTest extends CasperTest
 
 		//assert balance value
 		assertTrue(balance.getValue().compareTo(new BigInteger("869077209920"))==0);
-
 	}
 
 
