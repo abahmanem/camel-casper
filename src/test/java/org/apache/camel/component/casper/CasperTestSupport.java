@@ -1,5 +1,7 @@
 package org.apache.camel.component.casper;
 
+import java.net.URI;
+
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -10,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.MockitoAnnotations;
 
+import com.syntifi.casper.sdk.service.CasperService;
+
 public class CasperTestSupport extends CamelTestSupport {
 
 	@EndpointInject("mock:result")
@@ -17,6 +21,7 @@ public class CasperTestSupport extends CamelTestSupport {
 
 	@EndpointInject("mock:error")
 	protected MockEndpoint mockError;
+	
 
 	@Override
 	public boolean isUseAdviceWith() {
@@ -47,7 +52,7 @@ public class CasperTestSupport extends CamelTestSupport {
 	@BeforeEach
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		super.setUp();
+	    super.setUp();
 	}
 
 }

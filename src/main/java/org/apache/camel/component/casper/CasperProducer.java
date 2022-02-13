@@ -126,12 +126,14 @@ public class CasperProducer extends HeaderSelectorProducer {
 	@InvokeOnHeader(CasperConstants.DEPLOY)
 	void deploy(Message message) throws Exception {
 		System.err.println("RPC method deploy was Called through casper producer");
-
-		String deployHash = message.getHeader(CasperConstants.DEPLOY_HASH, configuration::getDeployHash, String.class);
-
+		String deployHash=null;
 		DeployData deploy = null;
+		
+		Object deployHashHeader = message.getHeader(CasperConstants.DEPLOY_HASH);
+		if (deployHashHeader != null)
+		 deployHash = message.getHeader(CasperConstants.DEPLOY_HASH, configuration::getDeployHash, String.class);
 
-		if (StringUtils.isEmpty(deployHash)) {
+		if (deployHashHeader==null || StringUtils.isEmpty(deployHash)) {
 
 			handleError(
 					new MissingArgumentException(
@@ -186,15 +188,21 @@ public class CasperProducer extends HeaderSelectorProducer {
 		System.err.println("RPC method blockAtHeight was Called through casper producer");
 
 		JsonBlock block = null;
-		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+		String blockHash = null;
+		Long blockHeight = null;
+		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
+		if (blockHashHeader != null)
+			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
+		if (blockHeightheader != null)
+			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
 
 		try {
 
 			if (!StringUtils.isEmpty(blockHash))
 				block = casperService.getBlock(new HashBlockIdentifier(blockHash)).getBlock();
 
-			else if (blockHeight != null)
+			else if (blockHeight != null && blockHeight >= 0)
 				block = casperService.getBlock(new HeightBlockIdentifier(blockHeight)).getBlock();
 
 			else
@@ -220,15 +228,23 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void stateRootHash(Message message) throws Exception {
 		System.err.println("RPC method stateRootHash was Called through casper producer");
 		StateRootHashData stateRootHashData = null;
-		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+		String blockHash = null;
+		Long blockHeight = null;
+		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
+		if (blockHashHeader != null)
+			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
+		if (blockHeightheader != null)
+			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+
+				
 
 		try {
 
 			if (!StringUtils.isEmpty(blockHash))
 				stateRootHashData = casperService.getStateRootHash(new HashBlockIdentifier(blockHash));
 
-			else if (blockHeight != null)
+			else if (blockHeight != null && blockHeight>=0)
 				stateRootHashData = casperService.getStateRootHash(new HeightBlockIdentifier(blockHeight));
 
 			else
@@ -253,10 +269,20 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void accountInfo(Message message) throws Exception {
 		System.err.println("RPC method accountInfo was Called through casper producer");
 		AccountData accountData = null;
-		String publicKey = message.getHeader(CasperConstants.PUBLIC_KEY, configuration::getPublicKey, String.class);
-		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+		String blockHash = null;
+		Long blockHeight = null;
+		String publicKey = null;
+		Object publickeyHeader = message.getHeader(CasperConstants.PUBLIC_KEY);
+		if (publickeyHeader != null)
+			publicKey = message.getHeader(CasperConstants.PUBLIC_KEY, configuration::getPublicKey, String.class);
+		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
+		if (blockHashHeader != null)
+			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
+		if (blockHeightheader != null)
+			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
 
+		
 		if (StringUtils.isEmpty(publicKey)) {
 
 			handleError(
