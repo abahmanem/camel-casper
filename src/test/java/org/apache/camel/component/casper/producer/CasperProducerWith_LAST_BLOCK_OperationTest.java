@@ -2,9 +2,6 @@ package org.apache.camel.component.casper.producer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.net.URI;
-import java.util.List;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
@@ -13,10 +10,9 @@ import org.apache.camel.component.casper.CasperConstants;
 import org.apache.camel.component.casper.CasperTestSupport;
 import org.junit.jupiter.api.Test;
 
-import com.syntifi.casper.sdk.model.peer.PeerEntry;
+import com.syntifi.casper.sdk.model.block.JsonBlock;
 
-@SuppressWarnings("unchecked")
-public class CasperProducerWith_NETWORK_PEERS_Operation extends CasperTestSupport {
+public class CasperProducerWith_LAST_BLOCK_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -26,21 +22,17 @@ public class CasperProducerWith_NETWORK_PEERS_Operation extends CasperTestSuppor
 	}
 
 	@Test
-	public void testCall() throws Exception {
+	public void testCallWith_DEPLOY_HASH_Parameter() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.NETWORK_PEERS);
+				CasperConstants.LAST_BLOCK);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
-		// assert Object is a List
-		assertTrue(body instanceof List);
-
-		List<PeerEntry> peers = (List<PeerEntry>) (body);
-		assertTrue(!peers.isEmpty());
-		// assert our List contains our node
-		URI ourTestNode = new URI(CasperConstants.TESTNET_NODE_URL);
-		// assertTrue(peers.stream().anyMatch(s ->
-		// s.getAddress().substring(s.getAddress().indexOf(":")).equals(ourTestnode.getHost())));
+		// assert Object is a JsonBlock
+		assertTrue(body instanceof JsonBlock);
+		JsonBlock block = (JsonBlock) body;
+		assertTrue(block != null);
+		assertTrue(block.getHash().length() == 64);
 
 	}
 

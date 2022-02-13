@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import com.syntifi.casper.sdk.model.deploy.executabledeploy.Transfer;
 
 @SuppressWarnings("unchecked")
-public class CasperProducerWith_BLOCK_TRANSFERS_Operation extends CasperTestSupport {
+public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 

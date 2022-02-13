@@ -2,20 +2,21 @@ package org.apache.camel.component.casper.producer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.apache.camel.CamelExchangeException;
+import java.net.URI;
+import java.util.List;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.casper.CasperConstants;
 import org.apache.camel.component.casper.CasperTestSupport;
-import org.apache.commons.cli.MissingArgumentException;
 import org.junit.jupiter.api.Test;
 
-import com.syntifi.casper.sdk.model.block.JsonBlock;
-import com.syntifi.casper.sdk.model.deploy.Deploy;
+import com.syntifi.casper.sdk.model.peer.PeerEntry;
 
-public class CasperProducerWith_LAST_BLOCK_Operation extends CasperTestSupport {
+@SuppressWarnings("unchecked")
+public class CasperProducerWith_NETWORK_PEERS_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -25,22 +26,23 @@ public class CasperProducerWith_LAST_BLOCK_Operation extends CasperTestSupport {
 	}
 
 	@Test
-	public void testCallWith_DEPLOY_HASH_Parameter() throws Exception {
+	public void testCall() throws Exception {
 
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.LAST_BLOCK);
-
-
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
+				CasperConstants.NETWORK_PEERS);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
-		// assert Object is a JsonBlock
-		assertTrue(body instanceof JsonBlock);
-		JsonBlock block = (JsonBlock) body;
-		assertTrue(block != null);
-		assertTrue(block.getHash().length()== 64);
-				
+		// assert Object is a List
+		assertTrue(body instanceof List);
+
+		List<PeerEntry> peers = (List<PeerEntry>) (body);
+		assertTrue(!peers.isEmpty());
+		// assert our List contains our node
+		URI ourTestNode = new URI(CasperConstants.TESTNET_NODE_URL);
+		// assertTrue(peers.stream().anyMatch(s ->
+		// s.getAddress().substring(s.getAddress().indexOf(":")).equals(ourTestnode.getHost())));
 
 	}
-
 
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {

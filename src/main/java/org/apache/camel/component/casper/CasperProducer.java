@@ -71,15 +71,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * peers count
+	 * Call to  getPeers
 	 * 
 	 * @param message
 	 * @throws IOException
 	 */
 	@InvokeOnHeader(CasperConstants.NETWORK_PEERS)
 	void listPeers(Message message) throws Exception {
-
-		System.err.println("RPC method listpeers was Called through casper producer");
 
 		PeerData peerData = null;
 
@@ -96,14 +94,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to getStatus
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.NODE_STATUS)
 	void nodeStatus(Message message) throws Exception {
-		System.err.println("RPC method nodestatus was Called through casper producer");
-
+	
 		StatusData statusData = null;
 
 		try {
@@ -121,13 +118,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 *  Call to  getDeploy
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.DEPLOY)
 	void deploy(Message message) throws Exception {
-		System.err.println("RPC method deploy was Called through casper producer");
+		
 		String deployHash=null;
 		DeployData deploy = null;
 		
@@ -157,13 +154,12 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 *  Call to  getBlock without parameters --> Last Block
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.LAST_BLOCK)
 	void lastBlock(Message message) throws Exception {
-		System.err.println("RPC method lastBlock was Called through casper producer");
 
 		JsonBlock block = null;
 
@@ -181,14 +177,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to  getBlock without with a block hash or a block height
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.BLOCK)
 	void block(Message message) throws Exception {
-		System.err.println("RPC method blockAtHeight was Called through casper producer");
-
+		
 		JsonBlock block = null;
 		String blockHash = null;
 		Long blockHeight = null;
@@ -222,13 +217,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to getStateRootHash
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.STATE_ROOT_HASH)
 	void stateRootHash(Message message) throws Exception {
-		System.err.println("RPC method stateRootHash was Called through casper producer");
+		
 		StateRootHashData stateRootHashData = null;
 		String blockHash = null;
 		Long blockHeight = null;
@@ -263,13 +258,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 *  Call to getStateAccountInfo
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.ACCOUNT_INFO)
 	void accountInfo(Message message) throws Exception {
-		System.err.println("RPC method accountInfo was Called through casper producer");
+		
 		AccountData accountData = null;
 		String blockHash = null;
 		Long blockHeight = null;
@@ -320,13 +315,12 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to getBlockTransfers without parameters---> gives latest block transfers
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.LAST_BLOCK_TRANSFERS)
 	void lastBlockTransfers(Message message) throws Exception {
-		System.err.println("RPC method lastBlockTransfers was Called through casper producer");
 
 		TransferData transferData = null;
 
@@ -343,14 +337,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to getBlockTransfers with a block hash or a block height
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.BLOCK_TRANSFERS)
 	void blockTransfers(Message message) throws Exception {
-		System.err.println("RPC method blockTransfers was Called through casper producer");
-
+	
 		String blockHash = null;
 		Long blockHeight = null;
 		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
@@ -375,7 +368,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else
            //get latest ones
 				transferData = casperService.getBlockTransfers();
-
 		}
 
 		catch (Exception e) {
@@ -388,14 +380,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to  getStateAuctionInfo
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.AUCTION_INFO)
 	void auctionInfo(Message message) throws Exception {
-		System.err.println("RPC method auctionInfo was Called through casper producer");
-
+		
 		AuctionData auction = null;
 		String blockHash = null;
 		Long blockHeight = null;
@@ -419,8 +410,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else
 				//get latest one
 				auction = casperService.getStateAuctionInfo(null);
-				
-				
 		}
 
 		catch (Exception e) {
@@ -433,14 +422,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to  getEraInfoBySwitchBlock
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.ERA_INFO)
 	void eraInfo(Message message) throws Exception {
-		System.err.println("RPC method eraInfo was Called through casper producer");
-		EraInfoData eraInfoData = null;
+				EraInfoData eraInfoData = null;
 		String blockHash = null;
 		Long blockHeight = null;
 		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
@@ -455,18 +443,12 @@ public class CasperProducer extends HeaderSelectorProducer {
 			if (!StringUtils.isEmpty(blockHash))
 
 				eraInfoData = casperService.getEraInfoBySwitchBlock(new HashBlockIdentifier(blockHash));
-
 			else if (blockHeight != null &&  blockHeight>=0)
-
 				eraInfoData = casperService.getEraInfoBySwitchBlock(new HeightBlockIdentifier(blockHeight));
-
 			else
-
 				handleError(new MissingArgumentException(
 						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
-								+ CasperConstants.ACCOUNT_INFO),
-						message);
-
+								+ CasperConstants.ACCOUNT_INFO),message);
 		}
 
 		catch (Exception e) {
@@ -479,16 +461,14 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 *  Call to getStateItem
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.STATE_ITEM)
 	void storedValue(Message message) throws Exception {
-		System.err.println("RPC method storedValue was Called through casper producer");
+	
 		StoredValueData value = null;
-		
-		
 		String stateRootHash = null;
 		String path = null;
 		String key = null;
@@ -536,13 +516,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	}
 
 	/**
-	 * 
+	 * Call to getBalance
 	 * @param message
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.ACCOUNT_BALANCE)
 	void accountBalance(Message message) throws Exception {
-		System.err.println("RPC method storedValue was Called through casper producer");
+	
 		BalanceData balance = null;
 		String stateRootHash= null;
 		String purseUref=null;

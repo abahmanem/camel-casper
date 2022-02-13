@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import com.syntifi.casper.sdk.model.auction.AuctionState;
 import com.syntifi.casper.sdk.service.CasperService;
 
-public class CasperProducerWith_AUCTION_INFO_Operation extends CasperTestSupport {
+public class CasperProducerWith_AUCTION_INFO_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 

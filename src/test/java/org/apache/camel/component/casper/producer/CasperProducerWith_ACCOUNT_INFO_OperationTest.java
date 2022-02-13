@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import com.syntifi.casper.sdk.model.account.AccountData;
 
-public class CasperProducerWith_ACCOUNT_INFO_Operation extends CasperTestSupport {
+public class CasperProducerWith_ACCOUNT_INFO_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 	

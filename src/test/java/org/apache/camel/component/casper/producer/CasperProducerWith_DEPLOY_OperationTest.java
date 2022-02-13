@@ -13,7 +13,7 @@ import org.apache.commons.cli.MissingArgumentException;
 import org.junit.jupiter.api.Test;
 import com.syntifi.casper.sdk.model.deploy.Deploy;
 
-public class CasperProducerWith_DEPLOY_Operation extends CasperTestSupport {
+public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import com.syntifi.casper.sdk.model.era.EraSummary;
 
-public class CasperProducerWith_ERA_INFO_Operation extends CasperTestSupport {
+public class CasperProducerWith_ERA_INFO_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
