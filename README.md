@@ -58,12 +58,12 @@ public void configure() {
 
   <camelContext id="casper-test"   xmlns="http://camel.apache.org/schema/spring">
     <route>
-     <!--consume BLOCK_ADDED events from SSE-->
+     <!--- consume BLOCK_ADDED events from SSE --->
       <from uri="casper:http//localhost:9999/events/main?operation=BLOCK_ADDED"/>
         <setHeader name="BLOCK_HASH">
-          <simple>body</simple>
+          <jsonpath headerName="block_hash" resultType="String">$blockAdded.block_hash</jsonpath>
         </setHeader>
-        <!--query the network for block transfers -->
+        <!--- query the network for block transfers --->
       <to uri="casper:http//localhost:7777?operation=BLOCK_TRANSFERTS"/>
     </route>
   </camelContext>
