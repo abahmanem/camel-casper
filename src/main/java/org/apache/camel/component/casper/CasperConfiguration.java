@@ -11,13 +11,14 @@ import com.syntifi.casper.sdk.service.CasperService;
 
 @UriParams
 public class CasperConfiguration implements Cloneable {
-
+	/**
+	 * Logger
+	 */
 	public static Logger logger = LoggerFactory.getLogger(CasperConfiguration.class);
 
 	/**
 	 * casperService : Casper RPC SDK
 	 */
-
 	@UriParam(label = "common", description = "Casper RPC API used to perform RPC queries on Casper Network Blockchain")
 	private CasperService casperService;
 
@@ -30,56 +31,48 @@ public class CasperConfiguration implements Cloneable {
 	/**
 	 * deployHash parameter
 	 */
-
 	@UriParam(label = "producer", description = "Deploy hash : used to query a Deploy in the network")
 	private String deployHash;
 
 	/**
 	 * blockHeight parameter
 	 */
-
 	@UriParam(label = "producer", description = "Block height : used to query a Block in the network ")
-	private Long blockHeight=null;
+	private Long blockHeight = null;
 
 	/**
 	 * blockHash parameter
 	 */
-
 	@UriParam(label = "producer", description = "Deploy Hash : used to query a Block in the network")
 	private String blockHash;
 
 	/**
 	 * publicKey parameter
 	 */
-
 	@UriParam(label = "producer", description = "Account publick key  : used to query a account infos")
 	private String publicKey;
 
 	/**
 	 * uref parameter
 	 */
-
 	@UriParam(label = "producer", description = "casper_types::Key as formatted string")
 	private String key;
 
 	/**
 	 * uref parameter
 	 */
-
 	@UriParam(label = "producer", description = "The path components starting from the key as base")
 	private String path;
 
 	/**
 	 * stateRootHash parameter
 	 */
-
 	@UriParam(label = "producer", description = "state_Root_Hash : an identifier of the current network state")
 	private String stateRootHash;
 
 	/**
 	 * purseUref parameter
 	 */
-
 	@UriParam(label = "producer", description = "purseUref : URef of an  account main purse")
 	private String purseUref;
 
@@ -98,9 +91,6 @@ public class CasperConfiguration implements Cloneable {
 	public void setStateRootHash(String stateRootHash) {
 		this.stateRootHash = stateRootHash;
 	}
-
-
-	
 
 	public String getKey() {
 		return key;
@@ -177,5 +167,4 @@ public class CasperConfiguration implements Cloneable {
 			throw new RuntimeCamelException(e);
 		}
 	}
-
 }

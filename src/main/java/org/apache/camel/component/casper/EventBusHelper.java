@@ -8,36 +8,26 @@ import java.util.function.Consumer;
  * this component can consume from.
  */
 public class EventBusHelper {
-
     // TODO: Delete me when you implemented your custom component
-
     private static EventBusHelper INSTANCE;
-
     private final Set<Consumer> subscribers = ConcurrentHashMap.newKeySet();
-
     private EventBusHelper() {
     }
-
     public static EventBusHelper getInstance(){
         if (INSTANCE == null) {
             INSTANCE = new EventBusHelper();
         }
-
         return INSTANCE;
     }
-
     public <T> void subscribe(final Consumer<T> subscriber) {
         subscribers.add(subscriber);
     }
-
     @SuppressWarnings("unchecked")
     public <T> void publish(final T event){
         // Notify all subscribers
         subscribers.forEach(consumer -> publishSingleEvent(event, consumer));
     }
-
     private <T> void publishSingleEvent(final T event, final Consumer<T> subscriber){
         subscriber.accept(event);
     }
-
 }

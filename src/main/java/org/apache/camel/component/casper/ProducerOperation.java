@@ -6,7 +6,6 @@ package org.apache.camel.component.casper;
  *
  */
 public enum ProducerOperation {
-
 	NETWORK_PEERS,
 	NODE_STATUS,
 	DEPLOY,
@@ -20,10 +19,10 @@ public enum ProducerOperation {
 	ERA_INFO,
 	STATE_ITEM,
 	ACCOUNT_BALANCE,
-	ERPC_SCHEMA;
-	
+	RPC_SCHEMA;
+
 	/**
-	 * 
+	 * findByName
 	 * @param name : name to search
 	 * @return: ProducerOperation
 	 */
@@ -37,5 +36,4 @@ public enum ProducerOperation {
 	    }
 	    return result;
 	}
-	
 }

@@ -1,17 +1,13 @@
 package org.apache.camel.component.casper;
 
 public enum ConsumerOperation {
-	
-	
 	DEPLOY_PROCESSED,
 	DEPLOY_ACCEPTED,
 	BLOCK_ADDED,
 	FINALITY_SIGNATURE,
 	STEP;
-	
-	
 	/**
-	 * 
+	 *  findByName
 	 * @param name : name to search
 	 * @return: ProducerOperation
 	 */
@@ -25,5 +21,4 @@ public enum ConsumerOperation {
 	    }
 	    return result;
 	}
-
 }

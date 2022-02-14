@@ -14,7 +14,6 @@ public class CasperEventHandler implements EventHandler {
    private final CasperConsumer consumer;
    private final CasperEndPoint endpoint;
 
-
    public CasperEventHandler(CasperConsumer consumer)
    {
       super();
@@ -74,7 +73,6 @@ public class CasperEventHandler implements EventHandler {
    private void processMessage(JSONObject data)
    {
       final Exchange exchange = consumer.createExchange(false);
-
       exchange.getMessage().setBody(data);
       try {
          consumer.getProcessor().process(exchange);
