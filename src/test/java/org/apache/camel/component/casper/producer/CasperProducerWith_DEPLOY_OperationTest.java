@@ -52,7 +52,6 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 		assertTrue(exception instanceof CamelExchangeException);
 		String expectedMessage = "deployHash parameter is required with endpoint operation DEPLOY.";
 		String actualMessage = exception.getMessage();
-
 		// assert Exception message
 		assertTrue(actualMessage.contains(expectedMessage));
 		// Cause

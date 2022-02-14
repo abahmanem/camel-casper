@@ -37,7 +37,6 @@ public class CasperProducerWith_NODE_STATUS_OperationTest extends CasperTestSupp
 		PublicKey key = PublicKey
 				.fromTaggedHexString("017d9aa0b86413d7ff9a9169182c53f0bacaa80d34c211adab007ed4876af17077");
 		assertTrue(Arrays.equals(status.getPublicKey().getKey(), key.getKey()));
-
 	}
 
 	@Override

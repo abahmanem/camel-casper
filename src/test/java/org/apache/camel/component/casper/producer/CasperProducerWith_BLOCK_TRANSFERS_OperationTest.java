@@ -32,9 +32,7 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
-		System.out.println(body.getClass());
 		assertTrue(body instanceof List);
-
 		List<Transfer> transferts = (List<Transfer>) (body);
 		// often lastest block has no transfers in testnet
 		assertTrue(transferts.isEmpty());
@@ -50,11 +48,8 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 				"d162d54f93364bb9cafd923cfde35a195e6a76d2f67515ddb2dce12443dc8aa5");
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
-		// assert Object is a AccountData
 		// assert Object is a List
-		System.out.println(body.getClass());
 		assertTrue(body instanceof List);
-
 		List<Transfer> transferts = (List<Transfer>) (body);
 		assertTrue(transferts.isEmpty());
 	}
@@ -66,13 +61,10 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 				CasperConstants.BLOCK_TRANSFERS);
 
 		exchange.getIn().setHeader(CasperConstants.BLOCK_HEIGHT, 534838);
-
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
-		System.out.println(body.getClass());
 		assertTrue(body instanceof List);
-
 		List<Transfer> transferts = (List<Transfer>) (body);
 		assertTrue(!transferts.isEmpty());
 	}

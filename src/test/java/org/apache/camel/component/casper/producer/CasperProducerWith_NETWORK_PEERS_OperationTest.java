@@ -34,7 +34,6 @@ public class CasperProducerWith_NETWORK_PEERS_OperationTest extends CasperTestSu
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
 		assertTrue(body instanceof List);
-
 		List<PeerEntry> peers = (List<PeerEntry>) (body);
 		assertTrue(!peers.isEmpty());
 		// assert our List contains our node

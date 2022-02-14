@@ -35,7 +35,6 @@ public class CasperProducerWith_STATE_ITEM_OperationTest extends CasperTestSuppo
 		exchange.getIn().setHeader(CasperConstants.PATH,"");
 		exchange.getIn().setHeader(CasperConstants.ITEM_KEY,
 				"hash-4dd10a0b2a7672e8ec964144634ddabb91504fe50b8461bac23584423318887d");
-		
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a StoredValue
@@ -51,20 +50,16 @@ public class CasperProducerWith_STATE_ITEM_OperationTest extends CasperTestSuppo
 	public void testCallWithout_KEY_Parameter() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.STATE_ITEM);
-
 		exchange.getIn().setHeader(CasperConstants.STATE_ROOT_HASH,
 				"30cE5146268305AeeFdCC05a5f7bE7aa6dAF187937Eed9BB55Af90e1D49B7956");
 		exchange.getIn().setHeader(CasperConstants.PATH,"");
-	
 		template.send(exchange);
 		Exception exception = exchange.getException();
 		assertTrue(exception instanceof CamelExchangeException);
 		String expectedMessage = "key parameter is required   with endpoint operation " + CasperConstants.STATE_ITEM;
 		String actualMessage = exception.getMessage();
-
 		// assert Exception message
 		assertTrue(actualMessage.contains(expectedMessage));
-
 		//Cause
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
@@ -74,27 +69,21 @@ public class CasperProducerWith_STATE_ITEM_OperationTest extends CasperTestSuppo
 	@Test
 	public void testCallWithout_STATE_ROOT_HASH_Parameter() throws Exception {
 
-
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.STATE_ITEM);
-
 		exchange.getIn().setHeader(CasperConstants.ITEM_KEY,
 				"hash-4dd10a0b2a7672e8ec964144634ddabb91504fe50b8461bac23584423318887d");
 		exchange.getIn().setHeader(CasperConstants.PATH,"item1,item2");
-			
 		template.send(exchange);
 		Exception exception = exchange.getException();
 		assertTrue(exception instanceof CamelExchangeException);
 		String expectedMessage = "stateRootHash parameter is required  with endpoint operation " + CasperConstants.STATE_ITEM;
 		String actualMessage = exception.getMessage();
-
 		// assert Exception message
 		assertTrue(actualMessage.contains(expectedMessage));
 		// Cause
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
 	}
-	
-	
 	
 	
 	@Override

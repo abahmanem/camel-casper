@@ -31,10 +31,8 @@ public class CasperProducerWith_STATE_ROOT_HASH_OperationTest extends CasperTest
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
 				CasperConstants.STATE_ROOT_HASH);
-
 		exchange.getIn().setHeader(CasperConstants.BLOCK_HASH,
 				"30c1263cbcc95066f5c20e96cb8ba11356295515f414961b646e831c17992d26");
-
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a StateRootHashData
@@ -67,7 +65,6 @@ public class CasperProducerWith_STATE_ROOT_HASH_OperationTest extends CasperTest
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
 				CasperConstants.STATE_ROOT_HASH);
 		template.send(exchange);
-
 		Object body = exchange.getIn().getBody();
 		// assert Object is a StateRootHashData
 		assertTrue(body instanceof StateRootHashData);
