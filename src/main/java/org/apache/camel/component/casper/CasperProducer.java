@@ -319,9 +319,7 @@ public class CasperProducer extends HeaderSelectorProducer {
             else if (blockHeight != null && blockHeight >= 0)
                 eraInfoData = casperService.getEraInfoBySwitchBlock(new HeightBlockIdentifier(blockHeight));
             else
-                handleError(new MissingArgumentException(
-                        "Either blockHeight or BlockHash parameter is required  with endpoint operation "
-                                + CasperConstants.ACCOUNT_INFO), message);
+                handleError(new MissingArgumentException("Either blockHeight or BlockHash parameter is required  with endpoint operation "+ CasperConstants.ACCOUNT_INFO), message);
         } catch (Exception e) {
             handleError(e.getCause(), message);
         }
@@ -397,7 +395,5 @@ public class CasperProducer extends HeaderSelectorProducer {
     private void handleError(Throwable e, Message message) {
         message.setHeader(CasperConstants.ERROR_CAUSE, e);
         message.getExchange().setException(new CamelExchangeException(e.getMessage(), message.getExchange()));
-
     }
-
 }
