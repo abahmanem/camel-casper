@@ -12,7 +12,7 @@
 	<groupId>io.caspercommunity</groupId>
 	<artifactId>camel-casper</artifactId>
 	<packaging>jar</packaging>
-	<version>3.14.1</version>
+	<version>3.14.1-SNAPSHOT</version>
     <name>Camel Casper blockchaine Component</name>
     <description>Camel Casper Connector</description>
     <url>https://casperlabs.io/</url>
