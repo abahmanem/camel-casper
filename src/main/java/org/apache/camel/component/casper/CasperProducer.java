@@ -574,12 +574,4 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 	}
 
-	public static void main(String[] args) throws Exception {
-		URI uri = new URI(CasperConstants.TESTNET_NODE_URL);
-		CasperService casperService = CasperService.usingPeer(uri.getHost(), uri.getPort());
-		System.err.println(casperService.getEraInfoBySwitchBlock(null));
-		
-	}
-	
-	
 }

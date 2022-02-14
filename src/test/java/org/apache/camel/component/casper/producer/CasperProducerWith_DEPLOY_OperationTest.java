@@ -2,6 +2,9 @@ package org.apache.camel.component.casper.producer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+
 import org.apache.camel.CamelExchangeException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -12,6 +15,7 @@ import org.apache.camel.component.casper.CasperTestSupport;
 import org.apache.commons.cli.MissingArgumentException;
 import org.junit.jupiter.api.Test;
 import com.syntifi.casper.sdk.model.deploy.Deploy;
+import com.syntifi.casper.sdk.service.CasperService;
 
 public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
@@ -32,9 +36,7 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a Deploy
-		System.out.println(body.getClass());
 		assertTrue(body instanceof Deploy);
-
 		Deploy deploy = (Deploy) body;
 		assertTrue(deploy != null);
 		assertTrue(deploy.getHash().toLowerCase()
@@ -53,9 +55,7 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 
 		// assert Exception message
 		assertTrue(actualMessage.contains(expectedMessage));
-
 		// Cause
-
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
 	}
@@ -69,5 +69,4 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 			}
 		};
 	}
-
 }
