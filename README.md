@@ -116,3 +116,75 @@ from("jms:queue:new_blocks")
 # SPRING BOOT AUTO-CONFIGURATION
 TODO
 
+
+
+# How to install
+
+In your maven pom file add :
+
+```java
+<dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-casper</artifactId>
+    <version>3.14.0</version>
+</dependency>
+```
+
+# Running unit tests
+
+## Requirements:
+
+#### JAVA
+
+Make sure you have the Java 8 JDK (also known as 1.8).
+If you don’t have version 1.8 or higher, install the JDK
+
+#### Maven 
+
+Install maven (version 3.3.9 or higher).
+Guide : https://maven.apache.org/install.html.
+
+#### Clone the project
+
+```java
+git clone https://github.com/caspercommunityio/camel-casper
+```
+
+####  Run the unit tests :
+
+```java
+cd camel-casper
+mvn test
+```
+
+## Usage examples
+
+### Producer 
+
+````java
+
+
+/**
+ * A Camel Java DSL Router
+ */
+public class MyRouteBuilder extends RouteBuilder {
+/**
+ * Let's configure the Camel routing rules using Java code...
+ */
+   public void configure()
+   {
+	   //this route  queries the node for latest block every 10 seconds and print the block object (using to string method)
+	   from("timer://simpleTimer?period=10000")
+	      .to("casper:http://65.21.227.180:7777/?operation="+CasperConstants.LAST_BLOCK)
+	      .log("This call gives - ${body}");
+
+	  
+	  //this route reads a uref_purse from a file, use it to query an account balance and send the result via email
+	  from("file://temp/input.txt")
+                .convertBodyTo(String.class)
+                .setHeader(PURSE_UREF, body())
+                .to("casper:http://65.21.227.180:7777/?operation="+CasperConstants.ACCOUNT_BALANCE&stateRootHash=30cE5146268305AeeFdCC05a5f7bE7aa6dAF187937Eed9BB55Af90e1D49B7956)
+                .to("smtp://user@mailserver?password=&to=tim@devxdao.com")
+}
+
+````

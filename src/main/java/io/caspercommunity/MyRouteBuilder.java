@@ -1,9 +1,5 @@
 package io.caspercommunity;
 
-import org.json.JSONObject;
-import org.apache.camel.util.json.JsonObject;
-import org.apache.camel.Processor;
-import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.casper.CasperConstants;
 
