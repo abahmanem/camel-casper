@@ -15,7 +15,7 @@ Maven users will need to add the following dependency to their pom.xml for this 
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-casper</artifactId>
-    <version>x.x.x</version>
+    	<version>3.14.1-SNAPSHOT</version>
     <!-- use the same version as your Camel core version -->
 </dependency>
 ```
@@ -133,7 +133,7 @@ In your maven pom file add :
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-casper</artifactId>
-    <version>3.14.1</version>
+   	<version>3.14.1-SNAPSHOT</version>
 </dependency>
 ```
 
