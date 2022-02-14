@@ -84,7 +84,7 @@ with the following path and query parameters:
 | `nodeUrl (common)` | `Required, sets the node url.` |  | String |
 
 
-### QUERY PARAMETERS (10 PARAMETERS)
+### QUERY PARAMETERS (11 PARAMETERS)
 
 | Name | Description | Default | Type |
 |---|---|---|---|
