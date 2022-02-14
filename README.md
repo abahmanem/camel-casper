@@ -4,6 +4,7 @@ Since Camel 3.14.1
 Both producer and consumer are supported.
 
 Producer performs RPC calls to Casper blockchaine like querying blocks, deploys, accounts.
+
 Consumer polls Casper Event Stream Server (port 9999).
 
 The Casper blockchain component uses the Casper SDK API and allows you to interact with Casper Network nodes
