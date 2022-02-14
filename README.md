@@ -1,5 +1,5 @@
 # Casper BLOCKCHAIN component
-Since Camel 3.14
+Since Camel 3.14.1
 
 Both producer and consumer are supported.
 
@@ -125,7 +125,7 @@ In your maven pom file add :
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-casper</artifactId>
-    <version>3.14.0</version>
+    <version>3.14.1</version>
 </dependency>
 ```
 

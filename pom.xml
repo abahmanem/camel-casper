@@ -13,7 +13,7 @@
 	<groupId>io.caspercommunity</groupId>
 	<artifactId>camel-casper</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0</version>
+	<version>3.14.1</version>
 
 	<name>Camel Casper Connector</name>
 
