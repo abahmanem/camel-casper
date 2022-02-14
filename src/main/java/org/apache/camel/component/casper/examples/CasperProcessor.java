@@ -1,11 +1,11 @@
-package io.caspercommunity;
+package org.apache.camel.component.casper.examples;
 
 import java.util.Map;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
-public class TestProcessor implements Processor {
+public class CasperProcessor implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {

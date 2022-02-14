@@ -1,4 +1,4 @@
-package io.caspercommunity;
+package org.apache.camel.component.casper.examples;
 
 import org.apache.camel.main.Main;
 
@@ -10,7 +10,7 @@ public class MainApp {
 	/**
 	 * 
 	 * @param args : main rags
-	 * @throws Exception : excpetion
+	 * @throws Exception : exception
 	 */
    public static void main(String...args) throws Exception
    {

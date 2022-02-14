@@ -24,7 +24,7 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "blockhash":
         case "blockHash": target.getConfiguration().setBlockHash(property(camelContext, java.lang.String.class, value)); return true;
         case "blockheight":
-        case "blockHeight": target.getConfiguration().setBlockHeight(property(camelContext, long.class, value)); return true;
+        case "blockHeight": target.getConfiguration().setBlockHeight(property(camelContext, java.lang.Long.class, value)); return true;
         case "bridgeerrorhandler":
         case "bridgeErrorHandler": target.setBridgeErrorHandler(property(camelContext, boolean.class, value)); return true;
         case "casperservice":
@@ -56,7 +56,7 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "blockhash":
         case "blockHash": return java.lang.String.class;
         case "blockheight":
-        case "blockHeight": return long.class;
+        case "blockHeight": return java.lang.Long.class;
         case "bridgeerrorhandler":
         case "bridgeErrorHandler": return boolean.class;
         case "casperservice":

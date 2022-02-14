@@ -39,7 +39,7 @@ public class CasperConfiguration implements Cloneable {
 	 */
 
 	@UriParam(label = "producer", description = "Block height : used to query a Block in the network ")
-	private long blockHeight;
+	private Long blockHeight=null;
 
 	/**
 	 * blockHash parameter
@@ -126,11 +126,11 @@ public class CasperConfiguration implements Cloneable {
 		this.publicKey = publicKey;
 	}
 
-	public long getBlockHeight() {
+	public Long getBlockHeight() {
 		return blockHeight;
 	}
 
-	public void setBlockHeight(long blockHeight) {
+	public void setBlockHeight(Long blockHeight) {
 		this.blockHeight = blockHeight;
 	}
 

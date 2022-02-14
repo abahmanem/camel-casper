@@ -1,8 +1,6 @@
 package org.apache.camel.component.casper;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
 import org.apache.camel.CamelExchangeException;
@@ -125,15 +123,10 @@ public class CasperProducer extends HeaderSelectorProducer {
 	@InvokeOnHeader(CasperConstants.DEPLOY)
 	void deploy(Message message) throws Exception {
 		
-		String deployHash=null;
 		DeployData deploy = null;
-		
-		Object deployHashHeader = message.getHeader(CasperConstants.DEPLOY_HASH);
-		if (deployHashHeader != null)
-		 deployHash = message.getHeader(CasperConstants.DEPLOY_HASH, configuration::getDeployHash, String.class);
-
-		if (deployHashHeader==null || StringUtils.isEmpty(deployHash)) {
-
+		String	deployHash = message.getHeader(CasperConstants.DEPLOY_HASH, configuration::getDeployHash, String.class);
+	
+		if (StringUtils.isEmpty(deployHash)) {
 			handleError(
 					new MissingArgumentException(
 							"deployHash parameter is required with endpoint operation " + CasperConstants.DEPLOY),
@@ -167,7 +160,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 			block = casperService.getBlock().getBlock();
 
 		}
-
 		catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
@@ -185,17 +177,10 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void block(Message message) throws Exception {
 		
 		JsonBlock block = null;
-		String blockHash = null;
-		Long blockHeight = null;
-		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
-		if (blockHashHeader != null)
-			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
-		if (blockHeightheader != null)
-			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+		String	blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Long	blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
 
 		try {
-
 			if (!StringUtils.isEmpty(blockHash))
 				block = casperService.getBlock(new HashBlockIdentifier(blockHash)).getBlock();
 
@@ -205,7 +190,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else
 				// get last block
 				block = casperService.getBlock().getBlock();
-
 		}
 
 		catch (Exception e) {
@@ -213,7 +197,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 		}
 		if (block != null)
 			message.setBody(block);
-
 	}
 
 	/**
@@ -225,19 +208,10 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void stateRootHash(Message message) throws Exception {
 		
 		StateRootHashData stateRootHashData = null;
-		String blockHash = null;
-		Long blockHeight = null;
-		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
-		if (blockHashHeader != null)
-			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
-		if (blockHeightheader != null)
-			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
-
-				
-
+		String	blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Long	blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+		
 		try {
-
 			if (!StringUtils.isEmpty(blockHash))
 				stateRootHashData = casperService.getStateRootHash(new HashBlockIdentifier(blockHash));
 
@@ -246,7 +220,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 			else
 				stateRootHashData = casperService.getStateRootHash();
-
 		}
 
 		catch (Exception e) {
@@ -266,22 +239,11 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void accountInfo(Message message) throws Exception {
 		
 		AccountData accountData = null;
-		String blockHash = null;
-		Long blockHeight = null;
-		String publicKey = null;
-		Object publickeyHeader = message.getHeader(CasperConstants.PUBLIC_KEY);
-		if (publickeyHeader != null)
-			publicKey = message.getHeader(CasperConstants.PUBLIC_KEY, configuration::getPublicKey, String.class);
-		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
-		if (blockHashHeader != null)
-			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
-		if (blockHeightheader != null)
-			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
-
-		
+		String	blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Long	blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+		String publicKey = message.getHeader(CasperConstants.PUBLIC_KEY, configuration::getPublicKey, String.class);
+	
 		if (StringUtils.isEmpty(publicKey)) {
-
 			handleError(
 					new MissingArgumentException(
 							"publicKey parameter is required  with endpoint operation " + CasperConstants.ACCOUNT_INFO),
@@ -305,13 +267,12 @@ public class CasperProducer extends HeaderSelectorProducer {
 								+ CasperConstants.ACCOUNT_INFO),
 						message);
 		}
-
 		catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
+
 		if (accountData != null)
 			message.setBody(accountData);
-
 	}
 
 	/**
@@ -343,28 +304,15 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 */
 	@InvokeOnHeader(CasperConstants.BLOCK_TRANSFERS)
 	void blockTransfers(Message message) throws Exception {
-	
-		String blockHash = null;
-		Long blockHeight = null;
-		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
-		if (blockHashHeader != null)
-			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
-		if (blockHeightheader != null)
-			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
 		TransferData transferData = null;
-
-
+		String	blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Long	blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+	
 		try {
-
 			if (!StringUtils.isEmpty(blockHash))
-
 				transferData = casperService.getBlockTransfers(new HashBlockIdentifier(blockHash));
-
 			else if (blockHeight != null && blockHeight>=0 )
-
 				transferData = casperService.getBlockTransfers(new HeightBlockIdentifier(blockHeight));
-
 			else
            //get latest ones
 				transferData = casperService.getBlockTransfers();
@@ -388,25 +336,14 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void auctionInfo(Message message) throws Exception {
 		
 		AuctionData auction = null;
-		String blockHash = null;
-		Long blockHeight = null;
-		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
-		if (blockHashHeader != null)
-			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
-		if (blockHeightheader != null)
-			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
-
+		String	blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Long	blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+	
 		try {
-
 			if (!StringUtils.isEmpty(blockHash))
-
 				auction = casperService.getStateAuctionInfo(new HashBlockIdentifier(blockHash));
-
 			else if (blockHeight != null && blockHeight >=0)
-
 				auction = casperService.getStateAuctionInfo(new HeightBlockIdentifier(blockHeight));
-
 			else
 				//get latest one
 				auction = casperService.getStateAuctionInfo(null);
@@ -428,20 +365,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 */
 	@InvokeOnHeader(CasperConstants.ERA_INFO)
 	void eraInfo(Message message) throws Exception {
-				EraInfoData eraInfoData = null;
-		String blockHash = null;
-		Long blockHeight = null;
-		Object blockHashHeader = message.getHeader(CasperConstants.BLOCK_HASH);
-		if (blockHashHeader != null)
-			blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
-		Object blockHeightheader = message.getHeader(CasperConstants.BLOCK_HEIGHT);
-		if (blockHeightheader != null)
-			blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
 		
+		EraInfoData eraInfoData = null;
+		String	blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
+		Long	blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
+
 		try {
-
 			if (!StringUtils.isEmpty(blockHash))
-
 				eraInfoData = casperService.getEraInfoBySwitchBlock(new HashBlockIdentifier(blockHash));
 			else if (blockHeight != null &&  blockHeight>=0)
 				eraInfoData = casperService.getEraInfoBySwitchBlock(new HeightBlockIdentifier(blockHeight));
@@ -469,33 +399,18 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void storedValue(Message message) throws Exception {
 	
 		StoredValueData value = null;
-		String stateRootHash = null;
-		String path = null;
-		String key = null;
-		Object stateRootHashhHeader = message.getHeader(CasperConstants.STATE_ROOT_HASH);
-		if (stateRootHashhHeader != null)
-			stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getBlockHash, String.class);
-		Object keyHeader = message.getHeader(CasperConstants.ITEM_KEY);
-		if (keyHeader != null)
-			key = message.getHeader(CasperConstants.ITEM_KEY, configuration::getBlockHeight, String.class);
+		String	stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash, String.class);
+		String	path = message.getHeader(CasperConstants.PATH, configuration::getPath, String.class);
+		String	key = message.getHeader(CasperConstants.ITEM_KEY, configuration::getKey, String.class);
 		
-		Object pathHeader = message.getHeader(CasperConstants.PATH);
-		if (pathHeader != null)
-			path = message.getHeader(CasperConstants.PATH, configuration::getBlockHeight, String.class);
-		
-	
 		if (StringUtils.isEmpty(stateRootHash)) {
-
 			handleError(new MissingArgumentException(
 					"stateRootHash parameter is required  with endpoint operation " + CasperConstants.STATE_ITEM),
 					message);
 			return;
 		}
-
-	
 		if (StringUtils.isEmpty(key)) {
-
-			handleError(
+    		handleError(
 					new MissingArgumentException(
 							"key parameter is required   with endpoint operation " + CasperConstants.STATE_ITEM),
 					message);
@@ -503,8 +418,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 		}
 
 		try {
-			
-			value = casperService.getStateItem(stateRootHash, key, StringUtils.isEmpty(path)?  Arrays.asList():Arrays.asList(path.split(",")  ));
+		    	value = casperService.getStateItem(stateRootHash, key, StringUtils.isEmpty(path)?  Arrays.asList():Arrays.asList(path.split(",")));
 
 		} catch (Exception e) {
 			handleError(e.getCause(), message);
@@ -524,16 +438,9 @@ public class CasperProducer extends HeaderSelectorProducer {
 	void accountBalance(Message message) throws Exception {
 	
 		BalanceData balance = null;
-		String stateRootHash= null;
-		String purseUref=null;
-		Object stateRootHashhHeader = message.getHeader(CasperConstants.STATE_ROOT_HASH);
-		if (stateRootHashhHeader != null)
-			stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getBlockHash, String.class);
-		
-		Object purseUrefHeader = message.getHeader(CasperConstants.STATE_ROOT_HASH);
-		if (purseUrefHeader != null)
-			purseUref = message.getHeader(CasperConstants.PURSE_UREF, configuration::getBlockHash, String.class);
-		
+		String	stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash, String.class);
+		String	purseUref = message.getHeader(CasperConstants.PURSE_UREF, configuration::getPurseUref, String.class);
+			
 		if (StringUtils.isEmpty(stateRootHash)) {
 
 			handleError(new MissingArgumentException("stateRootHash parameter is required   with endpoint operation "
