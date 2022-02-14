@@ -15,36 +15,31 @@ import org.slf4j.LoggerFactory;
 
 @Component("casper")
 public class CasperComponent extends DefaultComponent {
+    @Metadata(description = "Default configuration")
+    private CasperConfiguration configuration;
+    public static Logger logger = LoggerFactory.getLogger(CasperComponent.class);
 
-	@Metadata(description = "Default configuration")
-	private CasperConfiguration configuration;
+    /**
+     *
+     */
+    @Override
+    protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
+        CasperConfiguration conf = configuration != null ? configuration.clone() : new CasperConfiguration();
+        CasperEndPoint casper = new CasperEndPoint(uri, remaining, this, conf);
+        setProperties(casper, parameters);
+        logger.debug("***** CasperComponent create endpoint ");
+        return casper;
+    }
 
-	public static Logger logger = LoggerFactory.getLogger(CasperComponent.class);
+    @Override
+    protected void doInit() throws Exception {
+        super.doInit();
+    }
 
-	/**
-	 * 
-	 */
-	@Override
-	protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-
-		CasperConfiguration conf = configuration != null ? configuration.clone() : new CasperConfiguration();
-
-		CasperEndPoint casper = new CasperEndPoint(uri, remaining, this, conf);
-		setProperties(casper, parameters);
-		logger.debug("***** CasperComponent create endpoint ");
-		return casper;
-	}
-
-	@Override
-	protected void doInit() throws Exception {
-		super.doInit();
-	}
-
-	public CasperConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(CasperConfiguration configuration) {
-		this.configuration = configuration;
-	}
+    public CasperConfiguration getConfiguration() {
+        return configuration;
+    }
+    public void setConfiguration(CasperConfiguration configuration) {
+        this.configuration = configuration;
+    }
 }
