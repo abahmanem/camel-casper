@@ -66,14 +66,6 @@ public class CasperProducer extends HeaderSelectorProducer {
 		return (CasperEndPoint) super.getEndpoint();
 	}
 
-	public CasperConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(CasperConfiguration configuration) {
-		this.configuration = configuration;
-	}
-
 	/**
 	 * Call to  getPeers
 	 *
@@ -395,5 +387,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	private void handleError(Throwable e, Message message) {
 		message.setHeader(CasperConstants.ERROR_CAUSE, e);
 		message.getExchange().setException(new CamelExchangeException(e.getMessage(), message.getExchange()));
+	}
+
+	public CasperConfiguration getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(CasperConfiguration configuration) {
+		this.configuration = configuration;
 	}
 }
