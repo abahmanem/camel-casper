@@ -22,9 +22,10 @@ public enum ProducerOperation {
 	ACCOUNT_BALANCE,
 	ERPC_SCHEMA;
 	
-	
 	/**
 	 * 
+	 * @param name : name to search
+	 * @return: ProducerOperation
 	 */
 	public static ProducerOperation findByName(String name) {
 		ProducerOperation result = null;

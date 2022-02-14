@@ -50,11 +50,11 @@ public class CasperEndPoint extends DefaultEndpoint {
 
 	/**
 	 * 
-	 * @param uri
-	 * @param remaining
-	 * @param casperComponent
-	 * @param casperConfiguration
-	 * @throws Exception
+	 * @param uri : Uri
+	 * @param remaining :  remaining
+	 * @param casperComponent : casperComponent
+	 * @param configuration : casperConfiguration
+	 * @throws Exception : Exception
 	 */
 
 	public CasperEndPoint(String uri, String remaining, CasperComponent casperComponent,
@@ -65,9 +65,10 @@ public class CasperEndPoint extends DefaultEndpoint {
 		validateAndSetURL(remaining);
 	}
 
+	
 	/**
-	* 
-	*/
+	 * 
+	 */
 	@Override
 	public Consumer createConsumer(Processor processor) throws Exception {
 		URI uri = new URI(nodeUrl);
@@ -124,8 +125,8 @@ public class CasperEndPoint extends DefaultEndpoint {
 	/**
 	 * validate node adress
 	 * 
-	 * @param url
-	 * @throws Exception
+	 * @param url  : url
+	 * @throws Exception : excpetion thrown
 	 */
 	public void validateAndSetURL(String url) throws Exception {
 		UrlValidator validator = new UrlValidator();

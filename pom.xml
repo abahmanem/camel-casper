@@ -10,12 +10,17 @@
 	<!-- </parent> -->
 
 
+
+
 	<groupId>io.caspercommunity</groupId>
 	<artifactId>camel-casper</artifactId>
 	<packaging>jar</packaging>
 	<version>3.14.1</version>
+    <name>Camel Casper blockchaine Component</name>
+    <description>Camel Casper Connector</description>
+    <url>https://casperlabs.io/</url>
 
-	<name>Camel Casper Connector</name>
+	
 
 
 	<properties>

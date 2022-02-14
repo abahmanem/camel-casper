@@ -12,6 +12,8 @@ public enum ConsumerOperation {
 	
 	/**
 	 * 
+	 * @param name : name to search
+	 * @return: ProducerOperation
 	 */
 	public static ConsumerOperation findByName(String name) {
 		ConsumerOperation result = null;
