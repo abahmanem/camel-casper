@@ -9,9 +9,6 @@
 	<!-- <version>3.14.1</version> -->
 	<!-- </parent> -->
 
-
-
-
 	<groupId>io.caspercommunity</groupId>
 	<artifactId>camel-casper</artifactId>
 	<packaging>jar</packaging>
@@ -28,7 +25,6 @@
 		<compiler.target>1.8</compiler.target>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<log4j2.version>2.13.3</log4j2.version>
@@ -36,8 +32,6 @@
 		<casper-java-sdk.version>0.3.0</casper-java-sdk.version>
 		<junit.version>4.13.2</junit.version>
 		<launchdarkly.version>2.3.2</launchdarkly.version>
-
-
 	</properties>
 
 	<licenses>

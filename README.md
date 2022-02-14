@@ -1,4 +1,4 @@
-## Casper BLOCKCHAIN component
+###  Casper BLOCKCHAIN component
 Since Camel 3.14.1
 
 Both producer and consumer are supported.
@@ -20,19 +20,19 @@ Maven users will need to add the following dependency to their pom.xml for this 
 </dependency>
 ```
 
-##  URI FORMAT
+###   URI FORMAT
 ```java
 casper://<local/remote host:port or local IPC path>[?options]
 ```
 
-##  CONFIGURING OPTIONS
+###  CONFIGURING OPTIONS
 
 Camel components are configured on two separate levels:
 
 - component level
 - endpoint level
 
-##  CONFIGURING COMPONENT OPTIONS
+###  CONFIGURING COMPONENT OPTIONS
 
 The component level is the highest level which holds general and common configurations that are inherited by the endpoints. For example a component may have security settings, credentials for authentication, urls for network connection and so forth.
 
@@ -40,7 +40,7 @@ Some components only have a few options, and others may have many. Because compo
 
 Configuring components can be done with [the Component DSL](https://camel.apache.org/manual/component-dsl.html), in a configuration file (application.properties|yaml), or directly with Java code.
 
-## CONFIGURING ENDPOINT OPTIONS
+### CONFIGURING ENDPOINT OPTIONS
 
 Where you find yourself configuring the most is on endpoints, as endpoints often have many options, which allows you to configure what you need the endpoint to do. The options are also categorized into whether the endpoint is used as consumer (from) or as a producer (to), or used for both.
 
@@ -50,15 +50,17 @@ A good practice when configuring options is to use [Property Placeholders](https
 
 The following two sections lists all the options, firstly for the component followed by the endpoint.
 
-## COMPONENT OPTIONS
-The Casper Blockchain component supports 10 options, which are listed below.
+
+### COMPONENT OPTIONS
+The Casper Blockchain component supports 11 options, which are listed below.
 
 | Name | Description | Default | Type |
 |---|---|---|---|
 | `configuration (producer)` | `Default configuration.` |  | CasperConfiguration |
 | `operation (common)` | `Operation to use.` |  |  |
 | `casperService (common)` | `Casper RPC API ` |  |  CasperService|
-| `deployHash (producer)` | `Hash of a block in the blockchain ` |  |  String|
+| `deployHash (producer)` | `Hash of a deploy in the blockchain ` |  |  String|
+| `blockHash (producer)` | `Hash of a block in the blockchain ` |  |  String|
 | `blockHeight (producer)` | `Height of a block in the blockchain ` |  |  String|
 | `publicKey (producer)` | `Account publick key  ` |  |  String|
 | `key (producer)` | `casper_types::Key as formatted string ` |  |  String|
@@ -67,7 +69,7 @@ The Casper Blockchain component supports 10 options, which are listed below.
 | `purseUref (producer)` | `purseUref : URef of an  account main purse` |  |  String|
 
 
-##  ENDPOINT OPTIONS
+### ENDPOINT OPTIONS
 
 The Casper Blockchain endpoint is configured using URI syntax:
 
@@ -82,14 +84,15 @@ with the following path and query parameters:
 | `nodeUrl (common)` | `Required, sets the node url.` |  | String |
 
 
-##  QUERY PARAMETERS (10 PARAMETERS)
+### QUERY PARAMETERS (10 PARAMETERS)
 
 | Name | Description | Default | Type |
 |---|---|---|---|
 | `configuration (producer)` | `Default configuration.` |  | CasperConfiguration |
 | `operation (common)` | `Operation to use.` |  |  |
 | `casperService (common)` | `Casper RPC API ` |  |  CasperService|
-| `deployHash (producer)` | `Hash of a block in the blockchain ` |  |  String|
+| `deployHash (producer)` | `Hash of a deploy in the blockchain ` |  |  String|
+| `blockHash (producer)` | `Hash of a block in the blockchain ` |  |  String|
 | `blockHeight (producer)` | `Height of a block in the blockchain ` |  |  String|
 | `publicKey (producer)` | `Account publick key  ` |  |  String|
 | `key (producer)` | `casper_types::Key as formatted string ` |  |  String|
@@ -98,7 +101,8 @@ with the following path and query parameters:
 | `purseUref (producer)` | `purseUref : URef of an  account main purse` |  |  String|
 
 
-##  SAMPLES
+
+### SAMPLES
 
 Consume BLOCK_ADDED events from Casper SSE and send block hashes to a jms queue :
 
@@ -116,12 +120,12 @@ from("jms:queue:new_blocks")
 .to("casper://127.0.0.1:7777?operation=BLOCK_TRANSFERS");
 ```
 
-##  SPRING BOOT AUTO-CONFIGURATION
+### SPRING BOOT AUTO-CONFIGURATION
 TODO
 
 
 
-##  How to install
+### How to install
 
 In your maven pom file add :
 
@@ -133,7 +137,7 @@ In your maven pom file add :
 </dependency>
 ```
 
-##  Running unit tests
+###  Running unit tests
 
 ### Requirements:
 
@@ -160,7 +164,7 @@ cd camel-casper
 mvn test
 ```
 
-## Usage examples
+###  Usage examples
 
 - configure routes using RouteBuilder
 
@@ -194,7 +198,7 @@ public class ARouteBuilder extends RouteBuilder {
 
 ````
 
-- run the routes :
+- Run the routes :
 
 ````java
 import org.apache.camel.main.Main;
