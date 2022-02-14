@@ -159,15 +159,17 @@ mvn test
 
 ## Usage examples
 
-### Producer 
+- configure routes using RouteBuilder
 
 ````java
 
 
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.casper.CasperConstants;
 /**
  * A Camel Java DSL Router
  */
-public class MyRouteBuilder extends RouteBuilder {
+public class ARouteBuilder extends RouteBuilder {
 /**
  * Let's configure the Camel routing rules using Java code...
  */
@@ -187,4 +189,25 @@ public class MyRouteBuilder extends RouteBuilder {
                 .to("smtp://user@mailserver?password=&to=tim@devxdao.com")
 }
 
+````
+
+- run the routes :
+
+````java
+import org.apache.camel.main.Main;
+
+/**
+* A Camel Application
+  */
+  public class MainApp {
+  /**
+    * A main() so we can easily run these routing rules in our IDE
+      */
+      public static void main(String...args) throws Exception
+      {
+        Main main = new Main();
+        main.configure().addRoutesBuilder(new ARouteBuilder());
+         main.run(args);
+      }
+  }
 ````
