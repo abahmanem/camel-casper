@@ -96,21 +96,20 @@ with the following path and query parameters:
 
 # SAMPLES
 
-consume BLOCK_ADDED events from Casper SSE and send block hashes to a jms queue :
-```java
+Consume BLOCK_ADDED events from Casper SSE and send block hashes to a jms queue :
 
-from("casper://127.0.0.1:9999events/main?operation=BLOCK_ADDED")
+```java
+from("casper://127.0.0.1:9999/events/main?operation=BLOCK_ADDED")
 .jsonpath("$blockAdded.block_hash", false, String.class, "block")
 .to("jms:queue:new_blocks");
 
 ```
-Use the block hash to retrieve the block transfers:
+Use the block hashes to retrieve the block transfers:
 
 ```java
 from("jms:queue:new_blocks")
 .setHeader(BLOCK_HASH, body())
 .to("casper://127.0.0.1:7777?operation=BLOCK_TRANSFERS");
-
 ```
 
 # SPRING BOOT AUTO-CONFIGURATION
