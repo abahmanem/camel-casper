@@ -19,6 +19,7 @@ public enum ProducerOperation {
 	ERA_INFO,
 	STATE_ITEM,
 	ACCOUNT_BALANCE,
+	PUT_DEPLOY,
 	RPC_SCHEMA;
 
 	/**

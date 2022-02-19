@@ -38,6 +38,8 @@ public class CasperProducerInvokeOnHeaderFactory implements InvokeOnHeaderStrate
         case "NETWORK_PEERS": target.listPeers(exchange.getMessage()); return null;
         case "node_status":
         case "NODE_STATUS": target.nodeStatus(exchange.getMessage()); return null;
+        case "put_deploy":
+        case "PUT_DEPLOY": target.putDeploy(exchange.getMessage()); return null;
         case "state_item":
         case "STATE_ITEM": target.storedValue(exchange.getMessage()); return null;
         case "state_root_hash":

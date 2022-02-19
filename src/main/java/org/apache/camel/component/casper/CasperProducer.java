@@ -18,7 +18,9 @@ import com.syntifi.casper.sdk.model.account.AccountData;
 import com.syntifi.casper.sdk.model.auction.AuctionData;
 import com.syntifi.casper.sdk.model.balance.BalanceData;
 import com.syntifi.casper.sdk.model.block.JsonBlock;
+import com.syntifi.casper.sdk.model.deploy.Deploy;
 import com.syntifi.casper.sdk.model.deploy.DeployData;
+import com.syntifi.casper.sdk.model.deploy.DeployResult;
 import com.syntifi.casper.sdk.model.era.EraInfoData;
 import com.syntifi.casper.sdk.model.peer.PeerData;
 import com.syntifi.casper.sdk.model.stateroothash.StateRootHashData;
@@ -292,6 +294,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 		}
 		if (auction != null)
 			message.setBody(auction.getAuctionState());
+		
 	}
 
 	/**
@@ -378,6 +381,38 @@ public class CasperProducer extends HeaderSelectorProducer {
 
 	}
 
+	
+	/**
+	 * Call to put_Deploy
+	 *
+	 * @param message
+	 * @throws Exception
+	 */
+	@InvokeOnHeader(CasperConstants.PUT_DEPLOY)
+	void putDeploy(Message message) throws Exception {
+		DeployResult result = null;
+		//Deploy Object must be in the header
+		Deploy deloy = message.getHeader(CasperConstants.DEPLOY, Deploy.class);
+		
+		if (deloy!=null) {
+			handleError(new MissingArgumentException("deloy parameter is required   with endpoint operation " + CasperConstants.PUT_DEPLOY), message);
+			return;
+		}
+		
+		try {
+			result = casperService.putDeploy(deloy) ;
+		} catch (Exception e) {
+			handleError(e.getCause(), message);
+		}
+		if (result != null)
+			message.setBody(result);
+
+	}
+
+	
+	
+	
+	
 	/**
 	 * handle errors
 	 *

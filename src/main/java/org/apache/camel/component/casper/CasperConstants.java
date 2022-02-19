@@ -51,6 +51,9 @@ public interface CasperConstants {
     //Account Balance
     String ACCOUNT_BALANCE = "ACCOUNT_BALANCE";
     String PURSE_UREF = "PURSE_UREF";
+    //Put_Depoy
+    String PUT_DEPLOY = "PUT_DEPLOY";
+    
     //RPC Schema
     String RPC_SCHEMA = "RPC_SCHEMA";
     //TODO
