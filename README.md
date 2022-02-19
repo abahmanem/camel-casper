@@ -218,3 +218,21 @@ import org.apache.camel.main.Main;
       }
   }
 ````
+
+### Demo Project
+
+You can find a demo project here : https://github.com/caspercommunityio/camel-example-casper
+
+To build and run the project :
+```
+git clone https://github.com/caspercommunityio/camel-example-casper
+cd camel-example-casper
+mvn compile
+mvn exec:java
+```
+
+The project contains 4 routes :
+* Make a RPC request to get the state root hash
+* Read a block hash stored in a file and make a RPC Request to get the block info from that hash
+* Read a block height stored in a file and make a RPC Request to get the auction info from that specific block height
+* Make a RPC request to get the state root hash then query an account using the state root hash and an account
