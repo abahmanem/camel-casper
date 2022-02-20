@@ -33,10 +33,7 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
 		assertTrue(body instanceof List);
-		List<Transfer> transferts = (List<Transfer>) (body);
-		// often lastest block has no transfers in testnet
-		assertTrue(transferts.isEmpty());
-	}
+		}
 
 	@Test
 	public void testCallWith_BLOCK_HASH_Parameter() throws Exception {
