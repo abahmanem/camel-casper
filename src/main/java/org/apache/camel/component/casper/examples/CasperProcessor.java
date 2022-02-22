@@ -11,7 +11,6 @@ public class CasperProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 
 	Map<String,Object> map = 	exchange.getMessage().getHeaders();
-	
 
 	for (String key : map.keySet()) {
         System.out.println(key + ":" + map.get(key));
