@@ -39,25 +39,26 @@ public class CasperEventHandler implements EventHandler {
 
       if (json.keys().hasNext()) {
          firstJsonPropertyKey = json.keys().next();
+         System.err.println("ddddd "+firstJsonPropertyKey);
       }
 
-      /*
-      if (endpoint.getOperation().equals("block_added") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("BlockAdded")) {
+      
+      if (endpoint.getConfiguration() .getOperation().equals("block_added") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("BlockAdded")) {
          processMessage(json.getJSONObject("BlockAdded"));
       }
-      if (endpoint.getOperation().equals("api_version") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("ApiVersion")) {
+      if (endpoint.getConfiguration() .getOperation().equals("api_version") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("ApiVersion")) {
          processMessage(json);
       }
-      if (endpoint.getOperation().equals("deploy_processed") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployProcessed")) {
+      if (endpoint.getConfiguration() .getOperation().equals("deploy_processed") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployProcessed")) {
          processMessage(json.getJSONObject("DeployProcessed"));
       }
-      if (endpoint.getOperation().equals("deploy_accepted") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployAccepted")) {
+      if (endpoint.getConfiguration() .getOperation().equals("deploy_accepted") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployAccepted")) {
          processMessage(json.getJSONObject("DeployAccepted"));
       }
-      if (endpoint.getOperation().equals("finality_signature") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("FinalitySignature")) {
+      if (endpoint.getConfiguration() .getOperation().equals("finality_signature") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("FinalitySignature")) {
          processMessage(json.getJSONObject("FinalitySignature"));
       }
-      */
+      
    }
 
    @Override

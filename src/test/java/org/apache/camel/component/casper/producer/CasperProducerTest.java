@@ -21,25 +21,7 @@ public class CasperProducerTest extends CasperTestSupport {
 		return false;
 	}
 
-	@Test
-	public void listPeers() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.NETWORK_PEERS);
-		template.send(exchange);
-		String body = exchange.getIn().getBody(String.class);
-		// assertEquals("bar", body);
-	}
-
-	@Test
-	public void nodeStatus() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, "nodeStatus");
-		template.send(exchange);
-		String body = exchange.getIn().getBody(String.class);
-		// assertEquals("boo", body);
-	}
-
+	
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
 		return new RouteBuilder() {

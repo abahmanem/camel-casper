@@ -61,7 +61,7 @@ public class CasperEndPoint extends DefaultEndpoint {
         super(uri, casperComponent);
         this.configuration = configuration;
         this.nodeUrl = remaining;
-        validateAndSetURL(remaining);
+       // validateAndSetURL(remaining);
     }
     /**
      * Create a consumer component
@@ -127,14 +127,17 @@ public class CasperEndPoint extends DefaultEndpoint {
      * @param url : url
      * @throws Exception : excpetion thrown
      */
+    /*
     public void validateAndSetURL(String url) throws Exception {
-        UrlValidator validator = new UrlValidator();
+        
+    	
+    	UrlValidator validator = new UrlValidator();
         if (!validator.isValid(url)) {
             throw new CamelException("Please provide a valid \"URL\" parameter. Get : " + url);
         }
         setNodeUrl(new URL(url).toString());
     }
-
+*/
     public CasperService getCasperService() {
         return casperService;
     }
