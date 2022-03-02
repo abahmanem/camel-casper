@@ -157,13 +157,13 @@ Guide : https://maven.apache.org/install.html.
 
 #### Clone the project
 
-``` Java
+``` console
 git clone https://github.com/caspercommunityio/camel-casper
 ```
 
 ####  Run the unit tests :
 
-``` Java
+``` console
 cd camel-casper
 mvn test
 ```
