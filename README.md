@@ -116,13 +116,15 @@ from("casper://127.0.0.1:9999/events/main?operation=BLOCK_ADDED")
 .to("jms:queue:new_blocks");
 
 ````
+
 Use the block hashes to retrieve the block transfers:
 
 ````java
 from("jms:queue:new_blocks")
 .setHeader(BLOCK_HASH, body())
 .to("casper://127.0.0.1:7777?operation=BLOCK_TRANSFERS");
-```
+````
+
 
 ### SPRING BOOT AUTO-CONFIGURATION
 TODO
