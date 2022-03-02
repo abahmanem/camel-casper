@@ -11,7 +11,7 @@ The Casper blockchain component uses the Casper SDK API and allows you to intera
 
 Maven users will need to add the following dependency to their pom.xml for this component:
 
-```java
+``` xml
 <dependency>
     <groupId>io.caspercommunity</groupId>
     <artifactId>camel-casper</artifactId>
@@ -22,7 +22,7 @@ Maven users will need to add the following dependency to their pom.xml for this 
 ```
 
 ###   URI FORMAT
-```java
+```Java
 casper://<local/remote host:port or local IPC path>[?options]
 
 ```
@@ -110,7 +110,7 @@ with the following path and query parameters:
 
 Consume BLOCK_ADDED events from Casper SSE and send block hashes to a jms queue :
 
-```java
+```Java
 from("casper://127.0.0.1:9999/events/main?operation=BLOCK_ADDED")
 .jsonpath("$blockAdded.block_hash", false, String.class, "block")
 .to("jms:queue:new_blocks");
@@ -118,7 +118,7 @@ from("casper://127.0.0.1:9999/events/main?operation=BLOCK_ADDED")
 ```
 Use the block hashes to retrieve the block transfers:
 
-```java
+```Java
 from("jms:queue:new_blocks")
 .setHeader(BLOCK_HASH, body())
 .to("casper://127.0.0.1:7777?operation=BLOCK_TRANSFERS");
@@ -133,7 +133,7 @@ TODO
 
 In your maven pom file add :
 
-```java
+``` xml
 <dependency>
     <groupId>io.caspercommunity</groupId>
     <artifactId>camel-casper</artifactId>
@@ -157,13 +157,13 @@ Guide : https://maven.apache.org/install.html.
 
 #### Clone the project
 
-```java
+``` Java
 git clone https://github.com/caspercommunityio/camel-casper
 ```
 
 ####  Run the unit tests :
 
-```java
+``` Java
 cd camel-casper
 mvn test
 ```
