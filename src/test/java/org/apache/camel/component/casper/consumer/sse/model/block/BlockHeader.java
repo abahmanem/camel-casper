@@ -3,7 +3,7 @@ package org.apache.camel.component.casper.consumer.sse.model.block;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SSE BlockAdded event BlockHeader POJO
+ * SSE BlockAdded Event BlockHeader POJO
  * @author p35862
  *
  */
