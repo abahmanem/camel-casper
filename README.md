@@ -76,9 +76,10 @@ The Casper Blockchain component supports 11 options, which are listed below.
 
 The Casper Blockchain endpoint is configured using URI syntax:
 
-```java
+````Java
 casper:nodeUrl
-```
+````
+
 
 with the following path and query parameters:
 
@@ -111,7 +112,7 @@ with the following path and query parameters:
 Consume BLOCK_ADDED events from Casper SSE and send block hashes to a jms queue :
 
 ````java
-from("casper://127.0.0.1:9999/events/main?operation=BLOCK_ADDED")
+from("casper://127.0.0.1:9999/events/main?event=BLOCK_ADDED")
 .jsonpath("$blockAdded.block_hash", false, String.class, "block")
 .to("jms:queue:new_blocks");
 
