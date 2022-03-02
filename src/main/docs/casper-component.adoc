@@ -2,7 +2,7 @@
 :doctitle: Casper Camel Connector
 :shortname: casper
 :artifactid: camel-casper
-:description: Interact with Casper nodes using Capser SDK.
+:description: Camel casper endpoint : to interract with Casper nodes
 :since: 3.14.1
 :supportlevel: Preview
 :component-header: Both producer and consumer are supported

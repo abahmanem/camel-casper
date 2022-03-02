@@ -3,7 +3,7 @@
     "kind": "component",
     "name": "casper",
     "title": "Casper Camel Connector",
-    "description": "Interact with Casper nodes using Capser SDK.",
+    "description": "Camel casper endpoint : to interract with Casper nodes",
     "deprecated": false,
     "firstVersion": "3.14.1",
     "label": "bitcoin,blockchain,api",

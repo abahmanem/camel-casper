@@ -68,8 +68,8 @@ public class CasperEndPoint extends DefaultEndpoint {
 	 * Create a consumer component
 	 *
 	 * @param processor : Camel Processor
-	 * @return CasperConsumer
-	 * @throws Exception
+	 * @return CasperConsumer : consumer component
+	 * @throws Exception : exception
 	 */
 	@Override
 	public Consumer createConsumer(Processor processor) throws Exception {
@@ -90,7 +90,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 	/**
 	 * Create Producer
 	 *
-	 * @return CasperProducer
+	 * @return CasperProducer 
 	 * @throws Exception
 	 */
 	@Override
@@ -124,12 +124,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 		super.doShutdown();
 	}
 
-	/**
-	 * validate node adress
-	 *
-	 * @param url : url
-	 * @throws Exception : excpetion thrown
-	 */
+	
 	/*
 	 * public void validateAndSetURL(String url) throws Exception {
 	 * 
