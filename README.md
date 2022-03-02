@@ -228,7 +228,8 @@ import org.apache.camel.main.Main;
 You can find a demo project here : https://github.com/caspercommunityio/camel-example-casper
 
 To build and run the project :
-```
+
+```console
 git clone https://github.com/caspercommunityio/camel-example-casper
 cd camel-example-casper
 mvn compile
