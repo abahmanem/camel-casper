@@ -23,6 +23,7 @@ Maven users will need to add the following dependency to their pom.xml for this 
 ###   URI FORMAT
 ```java
 casper://<local/remote host:port or local IPC path>[?options]
+
 ```
 
 ###  CONFIGURING OPTIONS
