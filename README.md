@@ -58,7 +58,8 @@ The Casper Blockchain component supports 11 options, which are listed below.
 | Name | Description | Default | Type |
 |---|---|---|---|
 | `configuration (producer)` | `Default configuration.` |  | CasperConfiguration |
-| `operation (common)` | `Operation to use.` |  |  |
+| `operation (producer)` | `RPC operation to use.` |  |  |
+| `event (consumer)` | `sse event to track.` |  |  |
 | `casperService (common)` | `Casper RPC API ` |  |  CasperService|
 | `deployHash (producer)` | `Hash of a deploy in the blockchain ` |  |  String|
 | `blockHash (producer)` | `Hash of a block in the blockchain ` |  |  String|
@@ -90,7 +91,8 @@ with the following path and query parameters:
 | Name | Description | Default | Type |
 |---|---|---|---|
 | `configuration (producer)` | `Default configuration.` |  | CasperConfiguration |
-| `operation (common)` | `Operation to use.` |  |  |
+| `operation (producer)` | `Rpc operation to use.` |  |  |
+| `event (consumer)` | `sse event to track.` |  |  |
 | `casperService (common)` | `Casper RPC API ` |  |  CasperService|
 | `deployHash (producer)` | `Hash of a deploy in the blockchain ` |  |  String|
 | `blockHash (producer)` | `Hash of a block in the blockchain ` |  |  String|
