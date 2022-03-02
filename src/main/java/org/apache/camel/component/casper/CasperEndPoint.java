@@ -17,8 +17,10 @@ import org.slf4j.LoggerFactory;
 
 import com.jayway.jsonpath.InvalidPathException;
 import com.syntifi.casper.sdk.service.CasperService;
+
 /**
  * Camel casper endpoint : to interract with Casper nodes
+ * 
  * @author p35862
  *
  */
@@ -60,7 +62,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 		super(uri, casperComponent);
 		this.configuration = configuration;
 		this.nodeUrl = remaining;
-		// validateAndSetURL(remaining);
 	}
 
 	/**
