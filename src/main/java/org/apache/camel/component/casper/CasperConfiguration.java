@@ -8,6 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import com.syntifi.casper.sdk.service.CasperService;
 
+/**
+ * Camel Casper endpoint configuration
+ * @author p35862
+ *
+ */
 @UriParams
 public class CasperConfiguration implements Cloneable {
 	/**

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 
 /**
- * 
+ * Camel CasperComponent
  * @author p35862
  *
  */

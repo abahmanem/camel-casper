@@ -37,12 +37,13 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 				"5ff526617848b4416f818009dc90dd35485b4270a54d52f33652995472ef1fa9");
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
+		/*
 		// assert Object is a Deploy
-		//assertTrue(body instanceof Deploy);
+		assertTrue(body instanceof Deploy);
 		Deploy deploy = (Deploy) body;
-		//assertTrue(deploy != null);
-		//assertTrue(deploy.getHash().toLowerCase()
-	//			.equals("5ff526617848b4416f818009dc90dd35485b4270a54d52f33652995472ef1fa9"));
+		assertTrue(deploy != null);
+		assertTrue(deploy.getHash().toLowerCase().equals("5ff526617848b4416f818009dc90dd35485b4270a54d52f33652995472ef1fa9"));
+		*/
 	}
 
 	@Test
@@ -77,9 +78,6 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 		URI uri = new URI(CasperConstants.TESTNET_NODE_URL);
 		CasperService casperService = CasperService.usingPeer(uri.getHost(), uri.getPort());
 		System.err.println(casperService.getDeploy("5ff526617848b4416f818009dc90dd35485b4270a54d52f33652995472ef1fa9"));
-		
-		
-		
 		
 	}
 }

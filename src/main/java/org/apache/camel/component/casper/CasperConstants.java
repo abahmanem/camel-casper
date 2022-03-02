@@ -1,6 +1,7 @@
 package org.apache.camel.component.casper;
 
 /**
+ * Constants
  * @author mabahma
  */
 public interface CasperConstants {
