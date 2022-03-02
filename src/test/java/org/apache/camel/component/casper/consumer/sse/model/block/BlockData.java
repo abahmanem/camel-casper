@@ -1,34 +1,28 @@
 package org.apache.camel.component.casper.consumer.sse.model.block;
 
-import java.util.ArrayList;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * SSE BlockData POJO
+ * 
+ * @author mabahma
+ *
+ */
 public class BlockData {
 
-	@JsonProperty("BlockAdded")
-	BlockAdded BlockAddedObject;
+	private BlockAdded blockAdded;
 
-
-	 // Getter Methods 
-
-	 public BlockData(BlockAdded blockAddedObject) {
+	public BlockData(BlockAdded blockAdded) {
 		super();
-		BlockAddedObject = blockAddedObject;
+		this.blockAdded = blockAdded;
 	}
-	 @JsonProperty("BlockAdded")
+
+	@JsonProperty("BlockAdded")
 	public BlockAdded getBlockAdded() {
-	  return BlockAddedObject;
-	 }
-
-	 // Setter Methods 
-
-	 public void setBlockAdded(BlockAdded BlockAddedObject) {
-	  this.BlockAddedObject = BlockAddedObject;
-	 }
+		return blockAdded;
 	}
 
-	
-	
-	
-	
+	public void setBlockAdded(BlockAdded BlockAdded) {
+		this.blockAdded = BlockAdded;
+	}
+}

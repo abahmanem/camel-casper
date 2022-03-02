@@ -1,19 +1,28 @@
 package org.apache.camel.component.casper;
 
-public enum ConsumerOperation {
+/**
+ * Consumer events
+ * @author mabahma
+ *
+ */
+public enum ConsumerEvent {
+	
+	
 	DEPLOY_PROCESSED,
 	DEPLOY_ACCEPTED,
+	DEPLOY_EXPIRED,
 	BLOCK_ADDED,
 	FINALITY_SIGNATURE,
+	FAULT,
 	STEP;
 	/**
 	 *  findByName
 	 * @param name : name to search
 	 * @return: ProducerOperation
 	 */
-	public static ConsumerOperation findByName(String name) {
-		ConsumerOperation result = null;
-	    for (ConsumerOperation operation : values()) {
+	public static ConsumerEvent findByName(String name) {
+		ConsumerEvent result = null;
+	    for (ConsumerEvent operation : values()) {
 	        if (operation.name().equalsIgnoreCase(name)) {
 	            result = operation;
 	            break;

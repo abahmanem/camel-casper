@@ -13,14 +13,20 @@ import org.slf4j.LoggerFactory;
  * Component {@link CasperComponent}.
  */
 
+/**
+ * 
+ * @author p35862
+ *
+ */
 @Component("casper")
 public class CasperComponent extends DefaultComponent {
     @Metadata(description = "Default configuration")
     private CasperConfiguration configuration;
     public static Logger logger = LoggerFactory.getLogger(CasperComponent.class);
 
+   
     /**
-     *
+     * 
      */
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {

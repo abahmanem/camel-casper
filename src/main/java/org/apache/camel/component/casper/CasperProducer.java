@@ -30,7 +30,9 @@ import com.syntifi.casper.sdk.model.transfer.TransferData;
 import com.syntifi.casper.sdk.service.CasperService;
 
 /**
- * The direct consumer.
+ * Camel CasperProducer component 
+ * @author p35862
+ *
  */
 
 public class CasperProducer extends HeaderSelectorProducer {

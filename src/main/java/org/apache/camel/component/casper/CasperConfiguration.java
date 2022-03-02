@@ -5,7 +5,6 @@ import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.camel.component.casper.CasperConstants;
 
 import com.syntifi.casper.sdk.service.CasperService;
 
@@ -25,9 +24,17 @@ public class CasperConfiguration implements Cloneable {
 	/**
 	 * operation parameter
 	 */
-	@UriParam(label = "common", defaultValue = CasperConstants.NODE_STATUS, description = "The endpoint operation.", enums = CasperConstants.ENDPOINT_SERVICE)
+	@UriParam(label = "producer", defaultValue = CasperConstants.NODE_STATUS, description = "The endpoint operation.", enums = CasperConstants.ENDPOINT_SERVICE)
 	private String operation;
 
+	
+	/**
+	 * sse event parameter
+	 */
+	@UriParam(label = "consumer", defaultValue = CasperConstants.BLOCK_ADDED, description = "The endpoint event.", enums = CasperConstants.ENDPOINT_EVENTS)
+	private String event;
+
+	
 	/**
 	 * deployHash parameter
 	 */
@@ -160,6 +167,15 @@ public class CasperConfiguration implements Cloneable {
 		return this.operation != null ? operation : CasperConstants.NODE_STATUS;
 	}
 
+
+	public String getEvent() {
+		return event;
+	}
+
+	public void setEvent(String event) {
+		this.event = event;
+	}
+	
 	public CasperConfiguration clone() {
 		try {
 			return (CasperConfiguration) super.clone();

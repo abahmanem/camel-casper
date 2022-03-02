@@ -2,6 +2,7 @@ package org.apache.camel.component.casper.producer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.net.MalformedURLException;
 import java.net.URI;
 
 import org.apache.camel.Exchange;
@@ -13,6 +14,8 @@ import org.apache.camel.component.casper.CasperTestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.syntifi.casper.sdk.identifier.block.BlockIdentifier;
+import com.syntifi.casper.sdk.identifier.block.HashBlockIdentifier;
 import com.syntifi.casper.sdk.model.block.JsonBlock;
 import com.syntifi.casper.sdk.service.CasperService;
 
@@ -92,4 +95,7 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 		casperService = CasperService.usingPeer(uri.getHost(), uri.getPort());
 		super.setUp();
 	}
+	
+
+	
 }

@@ -7,10 +7,12 @@ import java.util.function.Consumer;
  * Used for demonstrations purpose to simulate some external system event bus/broker, where messages are sent to, and
  * this component can consume from.
  */
+@SuppressWarnings("rawtypes")
 public class EventBusHelper {
-    // TODO: Delete me when you implemented your custom component
+   
     private static EventBusHelper INSTANCE;
-    private final Set<Consumer> subscribers = ConcurrentHashMap.newKeySet();
+  
+	private final Set<Consumer> subscribers = ConcurrentHashMap.newKeySet();
     private EventBusHelper() {
     }
     public static EventBusHelper getInstance(){

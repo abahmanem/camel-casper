@@ -14,6 +14,8 @@ import org.apache.camel.component.casper.CasperConstants;
 import org.apache.camel.component.casper.CasperTestSupport;
 import org.apache.commons.cli.MissingArgumentException;
 import org.junit.jupiter.api.Test;
+
+import com.syntifi.casper.sdk.identifier.block.HashBlockIdentifier;
 import com.syntifi.casper.sdk.model.deploy.Deploy;
 import com.syntifi.casper.sdk.service.CasperService;
 
@@ -67,5 +69,17 @@ public class CasperProducerWith_DEPLOY_OperationTest extends CasperTestSupport {
 
 			}
 		};
+	}
+	
+	
+	
+	public static void main(String[] args) throws Exception {
+		URI uri = new URI(CasperConstants.TESTNET_NODE_URL);
+		CasperService casperService = CasperService.usingPeer(uri.getHost(), uri.getPort());
+		System.err.println(casperService.getDeploy("5ff526617848b4416f818009dc90dd35485b4270a54d52f33652995472ef1fa9"));
+		
+		
+		
+		
 	}
 }

@@ -1,84 +1,134 @@
 package org.apache.camel.component.casper;
 
+import org.apache.camel.Exchange;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.launchdarkly.eventsource.EventHandler;
 import com.launchdarkly.eventsource.MessageEvent;
 
-import org.json.JSONObject;
-
-
-import org.apache.camel.Exchange;
-
-import org.apache.camel.component.casper.CasperEndPoint;
-
+/**
+ * Event handler for the consumer
+ * 
+ * @author mabahma
+ *
+ */
 public class CasperEventHandler implements EventHandler {
-   private final CasperConsumer consumer;
-   private final CasperEndPoint endpoint;
 
-   public CasperEventHandler(CasperConsumer consumer)
-   {
-      super();
-      this.consumer = consumer;
-      this.endpoint = (CasperEndPoint) this.consumer.getEndpoint();
-   }
+	public static Logger logger = LoggerFactory.getLogger(CasperEventHandler.class);
+	private final CasperConsumer consumer;
+	private final CasperEndPoint endpoint;
 
-   @Override
-   public void onOpen() throws Exception
-   {
-   }
+	public CasperEventHandler(CasperConsumer consumer) {
+		super();
+		this.consumer = consumer;
+		this.endpoint = (CasperEndPoint) this.consumer.getEndpoint();
+	}
 
-   @Override
-   public void onClosed() throws Exception
-   {
-   }
+	@Override
+	public void onOpen() throws Exception {
+	}
 
-   @Override
-   public void onMessage(String event, MessageEvent messageEvent) throws Exception
-   {
-      JSONObject json = new JSONObject(messageEvent.getData());
-      String firstJsonPropertyKey = "";
+	@Override
+	public void onClosed() throws Exception {
+	}
 
-      if (json.keys().hasNext()) {
-         firstJsonPropertyKey = json.keys().next();
-         System.err.println("ddddd "+firstJsonPropertyKey);
-      }
+	/**
+	 * 
+	 */
+	@Override
+	public void onMessage(String evt, MessageEvent messageEvent) throws Exception {
+		JSONObject json = new JSONObject(messageEvent.getData());
+		String firstJsonPropertyKey = "";
 
-      
-      if (endpoint.getConfiguration() .getOperation().equals("block_added") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("BlockAdded")) {
-         processMessage(json.getJSONObject("BlockAdded"));
-      }
-      if (endpoint.getConfiguration() .getOperation().equals("api_version") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("ApiVersion")) {
-         processMessage(json);
-      }
-      if (endpoint.getConfiguration() .getOperation().equals("deploy_processed") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployProcessed")) {
-         processMessage(json.getJSONObject("DeployProcessed"));
-      }
-      if (endpoint.getConfiguration() .getOperation().equals("deploy_accepted") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("DeployAccepted")) {
-         processMessage(json.getJSONObject("DeployAccepted"));
-      }
-      if (endpoint.getConfiguration() .getOperation().equals("finality_signature") && !firstJsonPropertyKey.isEmpty() && firstJsonPropertyKey.equals("FinalitySignature")) {
-         processMessage(json.getJSONObject("FinalitySignature"));
-      }
-      
-   }
+		if (json.keys().hasNext())
+			firstJsonPropertyKey = json.keys().next();
 
-   @Override
-   public void onComment(String comment) throws Exception
-   {
-   }
+		String event = endpoint.getConfiguration().getEvent().toUpperCase();
 
-   @Override
-   public void onError(Throwable t)
-   {
-   }
+		switch (ConsumerEvent.valueOf(event)) {
+		case BLOCK_ADDED:
+			if (firstJsonPropertyKey.equals("BlockAdded")) {
+				logger.debug("received event of type :  BlockAdded");
+				processMessage(ConsumerEvent.BLOCK_ADDED, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
 
-   private void processMessage(JSONObject data)
-   {
-      final Exchange exchange = consumer.createExchange(false);
-      exchange.getMessage().setBody(data);
-      try {
-         consumer.getProcessor().process(exchange);
-      } catch (Exception e) {
-         exchange.setException(e);
-      }
-   }
+		case DEPLOY_PROCESSED:
+			if (firstJsonPropertyKey.equals("DeployProcessed")) {
+				logger.debug("received event of type :  DeployProcessed");
+				processMessage(ConsumerEvent.DEPLOY_PROCESSED, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
+
+		case DEPLOY_ACCEPTED:
+			if (firstJsonPropertyKey.equals("DeployAccepted")) {
+				logger.debug("received event of type :  DeployAccepted");
+				processMessage(ConsumerEvent.DEPLOY_ACCEPTED, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
+
+		case FINALITY_SIGNATURE:
+			if (firstJsonPropertyKey.equals("FinalitySignature")) {
+				logger.debug("received event of type :  FinalitySignature");
+				processMessage(ConsumerEvent.FINALITY_SIGNATURE, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
+
+		case STEP:
+			if (firstJsonPropertyKey.equals("Step")) {
+				logger.debug("received event of type :  Step");
+				processMessage(ConsumerEvent.STEP, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
+
+		case FAULT:
+			if (firstJsonPropertyKey.equals("Fault")) {
+				logger.debug("received event of type :  Fault");
+				processMessage(ConsumerEvent.FAULT, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
+
+		case DEPLOY_EXPIRED:
+			if (firstJsonPropertyKey.equals("DeployExpired")) {
+				logger.debug("received event of type :  DeployExpired");
+				processMessage(ConsumerEvent.DEPLOY_EXPIRED, json.getJSONObject(firstJsonPropertyKey));
+			}
+			break;
+
+		}
+
+	}
+
+	@Override
+	public void onComment(String comment) throws Exception {
+	}
+
+	@Override
+	public void onError(Throwable t) {
+	}
+
+	/**
+	 * process the message
+	 * 
+	 * @param operation
+	 * @param json      data to process
+	 */
+
+	private void processMessage(ConsumerEvent event, JSONObject data) {
+		logger.debug("processing message for event: {}", event);
+
+		try {
+			Exchange exchange = endpoint.createExchange();
+			exchange.getMessage().setBody(data);
+			exchange.getIn().setHeader("status", "done");
+			exchange.getIn().setHeader("event", event);
+			consumer.getProcessor().process(exchange);
+
+		} catch (Exception e) {
+			logger.error("Error processing message ", e);
+		}
+	}
+
 }

@@ -20,7 +20,7 @@ public class CasperEndpointUriFactory extends org.apache.camel.support.component
     private static final Set<String> PROPERTY_NAMES;
     private static final Set<String> SECRET_PROPERTY_NAMES;
     static {
-        Set<String> props = new HashSet<>(15);
+        Set<String> props = new HashSet<>(16);
         props.add("blockHash");
         props.add("exchangePattern");
         props.add("purseUref");
@@ -32,9 +32,10 @@ public class CasperEndpointUriFactory extends org.apache.camel.support.component
         props.add("bridgeErrorHandler");
         props.add("blockHeight");
         props.add("casperService");
+        props.add("event");
         props.add("deployHash");
-        props.add("operation");
         props.add("exceptionHandler");
+        props.add("operation");
         props.add("key");
         PROPERTY_NAMES = Collections.unmodifiableSet(props);
         SECRET_PROPERTY_NAMES = Collections.emptySet();

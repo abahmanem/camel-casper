@@ -1,12 +1,14 @@
 package org.apache.camel.component.casper.consumer.sse.model.deploy.processed;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DeployProcessedData {
 
 	DeployProcessed DeployProcessedObject;
 
 
 	 // Getter Methods 
-
+	 @JsonProperty("DeployProcessed")
 	 public DeployProcessed getDeployProcessed() {
 	  return DeployProcessedObject;
 	 }

@@ -1,12 +1,17 @@
-package org.apache.camel.component.casper.consumer.sse.model.deploy;
+package org.apache.camel.component.casper.consumer.sse.model.deploy.accepted;
 
 import java.util.ArrayList;
 
+/**
+ * SSE DeployAccepted event Transfer POJO
+ * 
+ * @author p35862
+ *
+ */
 public class Transfer {
-	 ArrayList < String > args = new ArrayList < String > ();
+	ArrayList<String> args = new ArrayList<String>();
 
 	public Transfer(ArrayList<String> args) {
-		super();
 		this.args = args;
 	}
 
@@ -17,13 +22,4 @@ public class Transfer {
 	public void setArgs(ArrayList<String> args) {
 		this.args = args;
 	}
-
-
-	 // Getter Methods 
-
-
-
-	 // Setter Methods 
-
-
-	}
+}

@@ -2,28 +2,51 @@ package org.apache.camel.component.casper.consumer.sse.model.deploy.processed;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * SSE DeployProcessed Event Failure POJO
+ * 
+ * @author p35862
+ *
+ */
 public class Failure {
-	 Effect EffectObject;
-	 
-		public Failure(Effect effectObject, String cost, String error_message, ArrayList<String> transfers) {
-		super();
-		EffectObject = effectObject;
+	private Effect effect;
+	private String cost;
+	private String errorMessage;
+	private ArrayList<String> transfers;
+
+	public Failure(Effect effect, String cost, String errorMessage, ArrayList<String> transfers) {
+
+		this.effect = effect;
 		this.cost = cost;
-		this.error_message = error_message;
+		this.errorMessage = errorMessage;
 		this.transfers = transfers;
 	}
 
-		private String cost;
-		 private String error_message;
-
-
-	 ArrayList < String > transfers = new ArrayList < String > ();
-	 public Effect getEffectObject() {
-		return EffectObject;
+	public Effect getEffect() {
+		return effect;
 	}
 
-	public void setEffectObject(Effect effectObject) {
-		EffectObject = effectObject;
+	public void setEffect(Effect effect) {
+		this.effect = effect;
+	}
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+
+	@JsonProperty("error_message")
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
 	public ArrayList<String> getTransfers() {
@@ -34,32 +57,4 @@ public class Failure {
 		this.transfers = transfers;
 	}
 
-
-	 // Getter Methods 
-
-	 public Effect getEffect() {
-	  return EffectObject;
-	 }
-
-	 public String getCost() {
-	  return cost;
-	 }
-
-	 public String getError_message() {
-	  return error_message;
-	 }
-
-	 // Setter Methods 
-
-	 public void setEffect(Effect effectObject) {
-	  this.EffectObject = effectObject;
-	 }
-
-	 public void setCost(String cost) {
-	  this.cost = cost;
-	 }
-
-	 public void setError_message(String error_message) {
-	  this.error_message = error_message;
-	 }
-	}
+}

@@ -15,12 +15,19 @@ import com.launchdarkly.eventsource.EventHandler;
 import com.launchdarkly.eventsource.EventSource;
 
 /**
- * The direct consumer.
+ * Camel  CasperComsumer Component
+ * @author p35862
+ *
  */
+
 public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Suspendable {
 
     public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
-    private final CasperEndPoint endpoint;
+    public CasperConfiguration getConfiguration() {
+		return configuration;
+	}
+
+	private final CasperEndPoint endpoint;
     private final CasperConfiguration configuration;
     /**
      * Create consumer

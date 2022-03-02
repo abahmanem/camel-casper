@@ -2,80 +2,91 @@ package org.apache.camel.component.casper.consumer.sse.model.deploy.processed;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * SSE DeployProcessed Event POJO
+ * 
+ * @author p35862
+ *
+ */
 public class DeployProcessed {
-	 private String deploy_hash;
-	 private String account;
-	 private String timestamp;
-	 private String ttl;
-	 ArrayList < String > dependencies = new ArrayList < String > ();
-	 private String block_hash;
-	 Execution_result Execution_resultObject;
+	private String deployHash;
+	private String account;
+	private String timestamp;
+	private String ttl;
+	private ArrayList<String> dependencies;
+	private String blockHash;
+	private ExecutionResult executionResult;
 
+	public DeployProcessed(String deployHash, String account, String timestamp, String ttl,
+			ArrayList<String> dependencies, String blockHash, ExecutionResult executionResult) {
 
-	 
-	 
-	 
-	 public DeployProcessed(String deploy_hash, String account, String timestamp, String ttl,
-			ArrayList<String> dependencies, String block_hash, Execution_result execution_resultObject) {
-		super();
-		this.deploy_hash = deploy_hash;
+		this.deployHash = deployHash;
 		this.account = account;
 		this.timestamp = timestamp;
 		this.ttl = ttl;
 		this.dependencies = dependencies;
-		this.block_hash = block_hash;
-		Execution_resultObject = execution_resultObject;
+		this.blockHash = blockHash;
+		this.executionResult = executionResult;
 	}
 
-	// Getter Methods 
-
-	 public String getDeploy_hash() {
-	  return deploy_hash;
-	 }
-
-	 public String getAccount() {
-	  return account;
-	 }
-
-	 public String getTimestamp() {
-	  return timestamp;
-	 }
-
-	 public String getTtl() {
-	  return ttl;
-	 }
-
-	 public String getBlock_hash() {
-	  return block_hash;
-	 }
-
-	 public Execution_result getExecution_result() {
-	  return Execution_resultObject;
-	 }
-
-	 // Setter Methods 
-
-	 public void setDeploy_hash(String deploy_hash) {
-	  this.deploy_hash = deploy_hash;
-	 }
-
-	 public void setAccount(String account) {
-	  this.account = account;
-	 }
-
-	 public void setTimestamp(String timestamp) {
-	  this.timestamp = timestamp;
-	 }
-
-	 public void setTtl(String ttl) {
-	  this.ttl = ttl;
-	 }
-
-	 public void setBlock_hash(String block_hash) {
-	  this.block_hash = block_hash;
-	 }
-
-	 public void setExecution_result(Execution_result execution_resultObject) {
-	  this.Execution_resultObject = execution_resultObject;
-	 }
+	@JsonProperty("deploy_hash")
+	public String getDeployHash() {
+		return deployHash;
 	}
+
+	public void setDeployHash(String deployHash) {
+		this.deployHash = deployHash;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getTtl() {
+		return ttl;
+	}
+
+	public void setTtl(String ttl) {
+		this.ttl = ttl;
+	}
+
+	public ArrayList<String> getDependencies() {
+		return dependencies;
+	}
+
+	public void setDependencies(ArrayList<String> dependencies) {
+		this.dependencies = dependencies;
+	}
+
+	@JsonProperty("block_hash")
+	public String getBlockHash() {
+		return blockHash;
+	}
+
+	public void setBlockHash(String blockHash) {
+		this.blockHash = blockHash;
+	}
+
+	public ExecutionResult getExecutionResult() {
+		return executionResult;
+	}
+
+	public void setExecutionResult(ExecutionResult executionResult) {
+		this.executionResult = executionResult;
+	}
+
+}

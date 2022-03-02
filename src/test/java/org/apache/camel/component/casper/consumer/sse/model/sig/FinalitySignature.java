@@ -1,53 +1,60 @@
 package org.apache.camel.component.casper.consumer.sse.model.sig;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * SSE FinalitySignature Event POJO
+ * 
+ * @author p35862
+ *
+ */
 public class FinalitySignature {
-	 private String block_hash;
-	 private float era_id;
-	 private String signature;
-	 private String public_key;
+	private String blockHash;
+	private int eraId;
+	private String signature;
+	private String publicKey;
 
+	@JsonProperty("block_hash")
+	public String getBlockHash() {
+		return blockHash;
+	}
 
-	 // Getter Methods 
+	public void setBlockHash(String blockHash) {
+		this.blockHash = blockHash;
+	}
 
-	 public String getBlock_hash() {
-	  return block_hash;
-	 }
+	@JsonProperty("era_id")
+	public int getEraId() {
+		return eraId;
+	}
 
-	 public float getEra_id() {
-	  return era_id;
-	 }
+	public void setEraId(int eraId) {
+		this.eraId = eraId;
+	}
 
-	 public String getSignature() {
-	  return signature;
-	 }
+	@JsonProperty("")
+	public String getSignature() {
+		return signature;
+	}
 
-	 public String getPublic_key() {
-	  return public_key;
-	 }
-
-	 // Setter Methods 
-
-	 public void setBlock_hash(String block_hash) {
-	  this.block_hash = block_hash;
-	 }
-
-	 public void setEra_id(float era_id) {
-	  this.era_id = era_id;
-	 }
-
-	 public void setSignature(String signature) {
-	  this.signature = signature;
-	 }
-
-	 public void setPublic_key(String public_key) {
-	  this.public_key = public_key;
-	 }
-
-	public FinalitySignature(String block_hash, float era_id, String signature, String public_key) {
-		super();
-		this.block_hash = block_hash;
-		this.era_id = era_id;
+	public void setSignature(String signature) {
 		this.signature = signature;
-		this.public_key = public_key;
+	}
+
+	@JsonProperty("public_key")
+	public String getPublicKey() {
+		return publicKey;
+	}
+
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
+	}
+
+	public FinalitySignature(String blockHash, int eraId, String signature, String publicKey) {
+		super();
+		this.blockHash = blockHash;
+		this.eraId = eraId;
+		this.signature = signature;
+		this.publicKey = publicKey;
 	}
 }

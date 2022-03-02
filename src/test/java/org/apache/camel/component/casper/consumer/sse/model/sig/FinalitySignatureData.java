@@ -1,27 +1,28 @@
 package org.apache.camel.component.casper.consumer.sse.model.sig;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * SSE FinalitySignature Event Data POJO
+ * 
+ * @author p35862
+ *
+ */
 public class FinalitySignatureData {
-	FinalitySignature FinalitySignatureObject;
+	FinalitySignature finalitySignature;
 
-
-	 // Getter Methods 
-
-	 public FinalitySignature getFinalitySignature() {
-	  return FinalitySignatureObject;
-	 }
-
-	 // Setter Methods 
-
-	 public void setFinalitySignature(FinalitySignature FinalitySignatureObject) {
-	  this.FinalitySignatureObject = FinalitySignatureObject;
-	 }
-
-	public FinalitySignatureData(FinalitySignature finalitySignatureObject) {
-		super();
-		FinalitySignatureObject = finalitySignatureObject;
+	@JsonProperty("FinalitySignature")
+	public FinalitySignature getFinalitySignature() {
+		return finalitySignature;
 	}
 
-	 
-	 
-	 
+	public void setFinalitySignature(FinalitySignature finalitySignature) {
+		this.finalitySignature = finalitySignature;
+	}
+
+	public FinalitySignatureData(FinalitySignature finalitySignature) {
+
+		this.finalitySignature = finalitySignature;
+	}
+
 }

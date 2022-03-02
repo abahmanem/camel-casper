@@ -1,7 +1,7 @@
 package org.apache.camel.component.casper;
 
 /**
- * 
+ * Producer operations (RPC calls to casper node)
  * @author mabahma
  *
  */

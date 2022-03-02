@@ -2,20 +2,22 @@ package org.apache.camel.component.casper.consumer.sse.model.block;
 
 import java.util.ArrayList;
 
+/**
+ * SSE Block POJO
+ * 
+ * @author mabahma
+ *
+ */
 public class Block {
-	 private String hash;
-	 BlockHeader HeaderObject;
-	 Body BodyObject;
-	 ArrayList < String > proofs = new ArrayList < String > ();
+	private String hash;
+	private BlockHeader header;
+	private Body body;
+	private ArrayList<String> proofs = new ArrayList<String>();
 
-
-	 // Getter Methods 
-
-	 public Block(String hash, BlockHeader headerObject, Body bodyObject, ArrayList<String> proofs) {
-		super();
+	public Block(String hash, BlockHeader header, Body body, ArrayList<String> proofs) {
 		this.hash = hash;
-		HeaderObject = headerObject;
-		BodyObject = bodyObject;
+		this.header = header;
+		this.body = body;
 		this.proofs = proofs;
 	}
 
@@ -28,28 +30,27 @@ public class Block {
 	}
 
 	public String getHash() {
-	  return hash;
-	 }
-
-	 public BlockHeader getHeader() {
-	  return HeaderObject;
-	 }
-
-	 public Body getBody() {
-	  return BodyObject;
-	 }
-
-	 // Setter Methods 
-
-	 public void setHash(String hash) {
-	  this.hash = hash;
-	 }
-
-	 public void setHeader(BlockHeader headerObject) {
-	  this.HeaderObject = headerObject;
-	 }
-
-	 public void setBody(Body bodyObject) {
-	  this.BodyObject = bodyObject;
-	 }
+		return hash;
 	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public BlockHeader getHeader() {
+		return header;
+	}
+
+	public void setHeader(BlockHeader header) {
+		this.header = header;
+	}
+
+	public Body getBody() {
+		return body;
+	}
+
+	public void setBody(Body body) {
+		this.body = body;
+	}
+
+}

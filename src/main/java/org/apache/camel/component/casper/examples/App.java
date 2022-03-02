@@ -5,7 +5,7 @@ import org.apache.camel.main.Main;
 /**
  * A Camel Application
  */
-public class MainApp {
+public class App {
    
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class MainApp {
    {
       Main main = new Main();
 
-      main.configure().addRoutesBuilder(new MyRouteBuilder());
+      main.configure().addRoutesBuilder(new CasperRouteBuilder());
       main.run(args);
    }
 }

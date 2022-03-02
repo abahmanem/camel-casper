@@ -1,33 +1,35 @@
 package org.apache.camel.component.casper.consumer.sse.model.block;
 
+/**
+ * SSE BlockAdded POJO
+ * 
+ * @author mabahma
+ *
+ */
+
 public class BlockAdded {
-	 private String block_hash;
-	 Block BlockObject;
+	private String hash;
+	private Block block;
 
-
-	 // Getter Methods 
-
-	 public BlockAdded(String block_hash, Block blockObject) {
+	public BlockAdded(String hash, Block block) {
 		super();
-		this.block_hash = block_hash;
-		BlockObject = blockObject;
+		this.hash = hash;
+		this.block = block;
 	}
 
-	public String getBlock_hash() {
-	  return block_hash;
-	 }
-
-	 public Block getBlock() {
-	  return BlockObject;
-	 }
-
-	 // Setter Methods 
-
-	 public void setBlock_hash(String block_hash) {
-	  this.block_hash = block_hash;
-	 }
-
-	 public void setBlock(Block blockObject) {
-	  this.BlockObject = blockObject;
-	 }
+	public String getHash() {
+		return hash;
 	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public Block getBlock() {
+		return block;
+	}
+
+	public void setBlock(Block block) {
+		this.block = block;
+	}
+}
