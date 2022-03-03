@@ -50,10 +50,8 @@ public class CasperProducerWith_STATE_DICTIONNARY_ITEM_OperationTest extends Cas
 		assertTrue(body instanceof DictionaryData);
 		DictionaryData data = (DictionaryData) body;
 		assertTrue(data != null);
-	
 		//it s a String CLValue
 		assertTrue(data.getStoredValue().getValue().getClass().getName().equals("com.syntifi.casper.sdk.model.clvalue.CLValueString"));
-		
 		CLValueString value =   (CLValueString)data.getStoredValue().getValue();
 		assertTrue(value.getParsed().equals("https://caspercommunity.io"));
 	}
