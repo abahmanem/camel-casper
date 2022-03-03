@@ -27,7 +27,7 @@ public class ConsumerTest_STEP_Event_Test extends CasperConsumerTest {
 		return new RouteBuilder() {
 			public void configure() {
 				errorHandler(deadLetterChannel("mock:error"));
-				from("casper:http://localhost:8080/events/sigs?event=step").to(mockResult);
+				from("casper:http://localhost:8080/events/main?event=step").to(mockResult);
 			}
 		};
 	}

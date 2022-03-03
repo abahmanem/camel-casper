@@ -7,9 +7,9 @@ import java.util.concurrent.Executors;
 
 import org.apache.camel.component.casper.consumer.sse.model.block.BlockData;
 import org.apache.camel.component.casper.consumer.sse.model.deploy.accepted.DeployAcceptedData;
-import org.apache.camel.component.casper.consumer.sse.model.deploy.expired.DeployExpired;
 import org.apache.camel.component.casper.consumer.sse.model.deploy.expired.DeployExpiredData;
 import org.apache.camel.component.casper.consumer.sse.model.deploy.processed.DeployProcessedData;
+import org.apache.camel.component.casper.consumer.sse.model.fault.FaultData;
 import org.apache.camel.component.casper.consumer.sse.model.sig.FinalitySignatureData;
 import org.apache.camel.component.casper.consumer.sse.model.step.StepData;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +36,7 @@ public class DataSetController {
 
 	@GetMapping("/events/main")
 	public SseEmitter fetchmain() {
-		SseEmitter emitter = new SseEmitter(5000l);
+		SseEmitter emitter = new SseEmitter(6000l);
 
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(() -> {
@@ -56,6 +56,28 @@ public class DataSetController {
 					emitter.send(objectMapper.writeValueAsString(dat));
 
 				}
+
+				// emit steps events
+				List<StepData> steps = dataSetService.getSteps();
+				for (StepData step : steps) {
+					randomDelay();
+					emitter.send(objectMapper.writeValueAsString(step));
+				}
+
+				// emit fault events
+				List<FaultData> faults = dataSetService.getFaults();
+				for (FaultData fault : faults) {
+					randomDelay();
+					emitter.send(objectMapper.writeValueAsString(fault));
+				}
+
+				List<DeployExpiredData> expireds = dataSetService.getDeploysExpired();
+				// emit expired deploys events
+				for (DeployExpiredData exp : expireds) {
+					randomDelay();
+					emitter.send(objectMapper.writeValueAsString(exp));
+				}
+
 				emitter.complete();
 			} catch (IOException e) {
 				emitter.completeWithError(e);
@@ -68,25 +90,18 @@ public class DataSetController {
 	@GetMapping("/events/deploys")
 	public SseEmitter fetchdeploys() {
 		SseEmitter emitter = new SseEmitter(5000l);
-		
+
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(() -> {
 			List<DeployAcceptedData> dataSets = dataSetService.getAcceptedDeploys();
 			try {
-				
+
 				// emit accepetd deploys events
 				for (DeployAcceptedData dataSet : dataSets) {
 					randomDelay();
 					emitter.send(objectMapper.writeValueAsString(dataSet));
 				}
-				List<DeployExpiredData> datas = dataSetService.getDeploysExpired();
-				// emit expired deploys events
-				for (DeployExpiredData dat : datas) {
-					randomDelay();
-					emitter.send(objectMapper.writeValueAsString(dat));
-				}
-				
-				
+
 				emitter.complete();
 			} catch (IOException e) {
 				emitter.completeWithError(e);
@@ -109,12 +124,7 @@ public class DataSetController {
 					randomDelay();
 					emitter.send(dataSet);
 				}
-				// emit steps events
-				List<StepData> datas = dataSetService.getSteps();
-				for (StepData dat : datas) {
-					randomDelay();
-					emitter.send(objectMapper.writeValueAsString(dat));
-				}
+
 				emitter.complete();
 			} catch (IOException e) {
 				emitter.completeWithError(e);

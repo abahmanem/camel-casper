@@ -4,7 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.casper.ConsumerEvent;
 import org.junit.jupiter.api.Test;
 
-public class ConsumerTest_DEPLOY_EXPIRED_Event_Test2 extends CasperConsumerTest {
+public class ConsumerTest_DEPLOY_EXPIRED_Event_Test extends CasperConsumerTest {
 
 	@Override
 	public boolean isUseAdviceWith() {
@@ -27,7 +27,7 @@ public class ConsumerTest_DEPLOY_EXPIRED_Event_Test2 extends CasperConsumerTest 
 		return new RouteBuilder() {
 			public void configure() {
 				errorHandler(deadLetterChannel("mock:error"));
-				from("casper:http://localhost:8080/events/deploys?event=deploy_expired").to(mockResult);
+				from("casper:http://localhost:8080/events/main?event=deploy_expired").to(mockResult);
 			}
 		};
 	}
