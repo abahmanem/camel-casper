@@ -497,10 +497,8 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 */
 	@InvokeOnHeader(CasperConstants.GLOBAL_STATE)
 	void getGlobalState(Message message) throws Exception {
-
-		// this call will be implemented in 1.4
+		//TODO this call will be implemented in 1.4
 		handleError(new NotImplementedException(), message);
-
 	}
 
 	/**
@@ -511,8 +509,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 */
 	@InvokeOnHeader(CasperConstants.VALIDATOR_CHANGES)
 	void getValidatorChanges(Message message) throws Exception {
-
-		// this call will be implemented in 1.4
+		//TODO this call will be implemented in 1.4
 		handleError(new NotImplementedException(), message);
 	}
 
