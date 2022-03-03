@@ -41,6 +41,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": target.setConfiguration(property(camelContext, org.apache.camel.component.casper.CasperConfiguration.class, value)); return true;
         case "deployhash":
         case "deployHash": getOrCreateConfiguration(target).setDeployHash(property(camelContext, java.lang.String.class, value)); return true;
+        case "dictionnaryitemkey":
+        case "dictionnaryItemKey": getOrCreateConfiguration(target).setDictionnaryItemKey(property(camelContext, java.lang.String.class, value)); return true;
         case "event": getOrCreateConfiguration(target).setEvent(property(camelContext, java.lang.String.class, value)); return true;
         case "key": getOrCreateConfiguration(target).setKey(property(camelContext, java.lang.String.class, value)); return true;
         case "lazystartproducer":
@@ -51,6 +53,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "publicKey": getOrCreateConfiguration(target).setPublicKey(property(camelContext, java.lang.String.class, value)); return true;
         case "purseuref":
         case "purseUref": getOrCreateConfiguration(target).setPurseUref(property(camelContext, java.lang.String.class, value)); return true;
+        case "seeduref":
+        case "seedUref": getOrCreateConfiguration(target).setSeedUref(property(camelContext, java.lang.String.class, value)); return true;
         case "stateroothash":
         case "stateRootHash": getOrCreateConfiguration(target).setStateRootHash(property(camelContext, java.lang.String.class, value)); return true;
         default: return false;
@@ -73,6 +77,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": return org.apache.camel.component.casper.CasperConfiguration.class;
         case "deployhash":
         case "deployHash": return java.lang.String.class;
+        case "dictionnaryitemkey":
+        case "dictionnaryItemKey": return java.lang.String.class;
         case "event": return java.lang.String.class;
         case "key": return java.lang.String.class;
         case "lazystartproducer":
@@ -83,6 +89,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "publicKey": return java.lang.String.class;
         case "purseuref":
         case "purseUref": return java.lang.String.class;
+        case "seeduref":
+        case "seedUref": return java.lang.String.class;
         case "stateroothash":
         case "stateRootHash": return java.lang.String.class;
         default: return null;
@@ -106,6 +114,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": return target.getConfiguration();
         case "deployhash":
         case "deployHash": return getOrCreateConfiguration(target).getDeployHash();
+        case "dictionnaryitemkey":
+        case "dictionnaryItemKey": return getOrCreateConfiguration(target).getDictionnaryItemKey();
         case "event": return getOrCreateConfiguration(target).getEvent();
         case "key": return getOrCreateConfiguration(target).getKey();
         case "lazystartproducer":
@@ -116,6 +126,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "publicKey": return getOrCreateConfiguration(target).getPublicKey();
         case "purseuref":
         case "purseUref": return getOrCreateConfiguration(target).getPurseUref();
+        case "seeduref":
+        case "seedUref": return getOrCreateConfiguration(target).getSeedUref();
         case "stateroothash":
         case "stateRootHash": return getOrCreateConfiguration(target).getStateRootHash();
         default: return null;

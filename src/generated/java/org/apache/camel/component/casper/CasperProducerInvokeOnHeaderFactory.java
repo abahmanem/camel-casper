@@ -28,8 +28,12 @@ public class CasperProducerInvokeOnHeaderFactory implements InvokeOnHeaderStrate
         case "BLOCK_TRANSFERS": target.blockTransfers(exchange.getMessage()); return null;
         case "deploy":
         case "DEPLOY": target.deploy(exchange.getMessage()); return null;
+        case "dictionary_item":
+        case "DICTIONARY_ITEM": target.getDictionayItem(exchange.getMessage()); return null;
         case "era_info":
         case "ERA_INFO": target.eraInfo(exchange.getMessage()); return null;
+        case "global_state":
+        case "GLOBAL_STATE": target.getGlobalState(exchange.getMessage()); return null;
         case "last_block":
         case "LAST_BLOCK": target.lastBlock(exchange.getMessage()); return null;
         case "last_block_transfers":
@@ -44,6 +48,8 @@ public class CasperProducerInvokeOnHeaderFactory implements InvokeOnHeaderStrate
         case "STATE_ITEM": target.storedValue(exchange.getMessage()); return null;
         case "state_root_hash":
         case "STATE_ROOT_HASH": target.stateRootHash(exchange.getMessage()); return null;
+        case "validator_changes":
+        case "VALIDATOR_CHANGES": target.getValidatorChanges(exchange.getMessage()); return null;
         default: return null;
         }
     }

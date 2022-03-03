@@ -88,6 +88,20 @@ public class CasperConfiguration implements Cloneable {
 	@UriParam(label = "producer", description = "purseUref : URef of an  account main purse")
 	private String purseUref;
 
+	/**
+	 * dictionnaryItemKey parameter
+	 */
+	@UriParam(label = "producer", description = "dictionnary_item_Key::dictionary item key formatted as a string")
+	private String dictionnaryItemKey;
+	
+	
+	/**
+	 * dictionnaryItemKey parameter
+	 */
+	@UriParam(label = "producer", description = "seedUref::dictionary's seed URef formatted as string")
+	private String seedUref;
+	
+	
 	public String getPurseUref() {
 		return purseUref;
 	}
@@ -181,6 +195,24 @@ public class CasperConfiguration implements Cloneable {
 		this.event = event;
 	}
 	
+	
+
+	public String getDictionnaryItemKey() {
+		return dictionnaryItemKey;
+	}
+
+	public void setDictionnaryItemKey(String dictionnaryItemKey) {
+		this.dictionnaryItemKey = dictionnaryItemKey;
+	}
+
+	public String getSeedUref() {
+		return seedUref;
+	}
+
+	public void setSeedUref(String seedUref) {
+		this.seedUref = seedUref;
+	}
+
 	public CasperConfiguration clone() {
 		try {
 			return (CasperConfiguration) super.clone();

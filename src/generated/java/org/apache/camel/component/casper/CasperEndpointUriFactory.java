@@ -20,17 +20,19 @@ public class CasperEndpointUriFactory extends org.apache.camel.support.component
     private static final Set<String> PROPERTY_NAMES;
     private static final Set<String> SECRET_PROPERTY_NAMES;
     static {
-        Set<String> props = new HashSet<>(16);
+        Set<String> props = new HashSet<>(18);
         props.add("blockHash");
         props.add("exchangePattern");
         props.add("purseUref");
         props.add("nodeUrl");
         props.add("publicKey");
         props.add("stateRootHash");
+        props.add("seedUref");
         props.add("path");
         props.add("lazyStartProducer");
         props.add("bridgeErrorHandler");
         props.add("blockHeight");
+        props.add("dictionnaryItemKey");
         props.add("casperService");
         props.add("event");
         props.add("deployHash");

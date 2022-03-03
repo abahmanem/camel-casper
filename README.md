@@ -70,6 +70,8 @@ The Casper Blockchain component supports 11 options, which are listed below.
 | `path (producer)` | `Path components starting from the key as base ` |  |  String|
 | `stateRootHash (producer)` | `state_Root_Hash : an identifier of the current network state ` |  |  String|
 | `purseUref (producer)` | `purseUref : URef of an  account main purse` |  |  String|
+| `dictionnaryItemKey (producer)` | `dictionnaryItemKey : dictionary item key formatted as a string` |  |  String|
+| `seedUref (producer)` | `seedUref : dictionary's seed URef formatted as string` |  |  String|
 
 
 ### ENDPOINT OPTIONS
@@ -104,6 +106,8 @@ with the following path and query parameters:
 | `path (producer)` | `Path components starting from the key as base ` |  |  String|
 | `stateRootHash (producer)` | `state_Root_Hash : an identifier of the current network state ` |  |  String|
 | `purseUref (producer)` | `purseUref : URef of an  account main purse` |  |  String|
+| `dictionnaryItemKey (producer)` | `dictionnaryItemKey : dictionary item key formatted as a string` |  |  String|
+| `seedUref (producer)` | `seedUref : dictionary's seed URef formatted as string` |  |  String|
 
 
 

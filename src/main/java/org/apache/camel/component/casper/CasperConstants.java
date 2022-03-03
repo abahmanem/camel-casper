@@ -6,11 +6,13 @@ package org.apache.camel.component.casper;
  */
 public interface CasperConstants {
     String ENDPOINT_SERVICE = "NETWORK_PEERS, NODE_STATUS,DEPLOY,LAST_BLOCK,BLOCK,LAST_BLOCK_TRANSFERS,BLOCK_TRANSFERS,STATE_ROOT_HASH,ACCOUNT_INFO"
-            + ",AUCTION_INFO,ERA_INFO,STATE_ITEM,ACCOUNT_BALANC,ERPC_SCHEMA";
+            + ",AUCTION_INFO,ERA_INFO,STATE_ITEM,ACCOUNT_BALANC,ERPC_SCHEMA,GLOBAL_STATE,VALIDATOR_CHANGES,DICTIONARY_ITEM"
+            + "";
     
     String ENDPOINT_EVENTS = "DEPLOY_PROCESSED,DEPLOY_ACCEPTED,BLOCK_ADDED,FINALITY_SIGNATURE,STEP";
     
     //RPC Calls
+    /*
     String CHAIN_GET_BLOCK = "CHAIN_GET_BLOCK";
     String INFO_GET_PEERS = "INFO_GET_PEERS";
     String INFO_GET_STATUS = "INFO_GET_STATUS";
@@ -22,6 +24,8 @@ public interface CasperConstants {
     String STATE_GET_BALANCE = "STATE_GET_BALANCE";
     String STATE_GET_DICTIONARY_ITEM = "STATE_GET_DICTIONARY_ITEM";
     String ACCOUNT_PUT_DEPLOY = "ACCOUNT_PUT_DEPLOY";
+   
+*/
     //OPERATION
     String OPERATION = "OPERATION";
     //Query peers
@@ -50,14 +54,24 @@ public interface CasperConstants {
     String ERA_INFO = "ERA_INFO";
     //Query stored value :  params===>STATE_ROOT_HASH
     String STATE_ITEM = "STATE_ITEM";
+    //Query stored value :  params===>STATE_ROOT_HASH
+    String DICTIONARY_ITEM = "DICTIONARY_ITEM";
     String PATH = "PATH";
     String ITEM_KEY = "ITEM_KEY";
     //Account Balance
     String ACCOUNT_BALANCE = "ACCOUNT_BALANCE";
     String PURSE_UREF = "PURSE_UREF";
+    //String 	DICTIONNARY KEY parameter
+	String DICTIONNARY_ITEM_KEY = "DICTIONNARY_ITEM_KEY";
+	//String 	SEED_UREF  parameter
+	String SEED_UREF = "SEED_UREF";
+	
     //Put_Depoy
     String PUT_DEPLOY = "PUT_DEPLOY";
-    
+    //validator_changes
+    String VALIDATOR_CHANGES="VALIDATOR_CHANGES";
+    //global_state
+	String GLOBAL_STATE = "GLOBAL_STATE";
     //RPC Schema
     String RPC_SCHEMA = "RPC_SCHEMA";
     //TODO
@@ -69,7 +83,10 @@ public interface CasperConstants {
     String TESTNET_NODE_URL = "http://65.108.1.10:7777";
     String TESTNET_ENDPOINT_TEST = "casper:" + TESTNET_NODE_URL;
     String ERROR_CAUSE = "ERROR_CAUSE";
-    
     String BLOCK_ADDED="BLOCK_ADDED";
+  
+
+
+
     
 }

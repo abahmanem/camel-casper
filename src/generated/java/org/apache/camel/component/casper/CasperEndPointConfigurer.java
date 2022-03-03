@@ -31,6 +31,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "casperService": target.getConfiguration().setCasperService(property(camelContext, com.syntifi.casper.sdk.service.CasperService.class, value)); return true;
         case "deployhash":
         case "deployHash": target.getConfiguration().setDeployHash(property(camelContext, java.lang.String.class, value)); return true;
+        case "dictionnaryitemkey":
+        case "dictionnaryItemKey": target.getConfiguration().setDictionnaryItemKey(property(camelContext, java.lang.String.class, value)); return true;
         case "event": target.getConfiguration().setEvent(property(camelContext, java.lang.String.class, value)); return true;
         case "exceptionhandler":
         case "exceptionHandler": target.setExceptionHandler(property(camelContext, org.apache.camel.spi.ExceptionHandler.class, value)); return true;
@@ -45,6 +47,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "publicKey": target.getConfiguration().setPublicKey(property(camelContext, java.lang.String.class, value)); return true;
         case "purseuref":
         case "purseUref": target.getConfiguration().setPurseUref(property(camelContext, java.lang.String.class, value)); return true;
+        case "seeduref":
+        case "seedUref": target.getConfiguration().setSeedUref(property(camelContext, java.lang.String.class, value)); return true;
         case "stateroothash":
         case "stateRootHash": target.getConfiguration().setStateRootHash(property(camelContext, java.lang.String.class, value)); return true;
         default: return false;
@@ -64,6 +68,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "casperService": return com.syntifi.casper.sdk.service.CasperService.class;
         case "deployhash":
         case "deployHash": return java.lang.String.class;
+        case "dictionnaryitemkey":
+        case "dictionnaryItemKey": return java.lang.String.class;
         case "event": return java.lang.String.class;
         case "exceptionhandler":
         case "exceptionHandler": return org.apache.camel.spi.ExceptionHandler.class;
@@ -78,6 +84,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "publicKey": return java.lang.String.class;
         case "purseuref":
         case "purseUref": return java.lang.String.class;
+        case "seeduref":
+        case "seedUref": return java.lang.String.class;
         case "stateroothash":
         case "stateRootHash": return java.lang.String.class;
         default: return null;
@@ -98,6 +106,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "casperService": return target.getConfiguration().getCasperService();
         case "deployhash":
         case "deployHash": return target.getConfiguration().getDeployHash();
+        case "dictionnaryitemkey":
+        case "dictionnaryItemKey": return target.getConfiguration().getDictionnaryItemKey();
         case "event": return target.getConfiguration().getEvent();
         case "exceptionhandler":
         case "exceptionHandler": return target.getExceptionHandler();
@@ -112,6 +122,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "publicKey": return target.getConfiguration().getPublicKey();
         case "purseuref":
         case "purseUref": return target.getConfiguration().getPurseUref();
+        case "seeduref":
+        case "seedUref": return target.getConfiguration().getSeedUref();
         case "stateroothash":
         case "stateRootHash": return target.getConfiguration().getStateRootHash();
         default: return null;
