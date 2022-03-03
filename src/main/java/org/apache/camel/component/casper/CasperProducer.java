@@ -468,7 +468,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	@InvokeOnHeader(CasperConstants.PUT_DEPLOY)
 	void putDeploy(Message message) throws Exception {
 		DeployResult result = null;
-		// Deploy Object must be in the header
+		// Signed Deploy Object must be in the header
 		Deploy deloy = message.getHeader(CasperConstants.DEPLOY, Deploy.class);
 
 		if (deloy != null) {
