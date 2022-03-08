@@ -1,6 +1,7 @@
 package org.apache.camel.component.casper;
 
 import java.net.URI;
+import java.nio.file.InvalidPathException;
 import java.util.Arrays;
 
 import org.apache.camel.Category;
@@ -14,8 +15,6 @@ import org.apache.camel.spi.UriPath;
 import org.apache.camel.support.DefaultEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.jayway.jsonpath.InvalidPathException;
 import com.syntifi.casper.sdk.service.CasperService;
 
 /**
@@ -76,7 +75,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 		URI uri = new URI(nodeUrl);
 		String event = configuration.getEvent();
 		if (!Arrays.asList(CasperConstants.CONSUMER_PATHS.split(",")).stream().anyMatch(s -> s.equals(uri.getPath())))
-			throw new InvalidPathException(String.format(
+			throw new InvalidPathException(uri.getPath(),String.format(
 					"Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ",
 					uri.getPath()));
 		if (ConsumerEvent.findByName(event) != null) {

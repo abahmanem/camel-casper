@@ -14,6 +14,11 @@ public class CasperConsumerTest extends CasperTestSupport {
 		SpringAsyncTestApplication.main(new String[0]);
 	}
 	
+	
+	
+	
+	
+	
 	@AfterAll
 	public static void stopServer() throws Exception {
 		//shutdown spring boot ctx
