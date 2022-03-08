@@ -23,10 +23,8 @@ public class CasperConsumerComponentTest {
 			@Override
 			public void configure() throws Exception {
 				from("casper:http://xx.yyy.zzz.ww:8080/events/test?event=test").log("${body}");
-
 			}
 		});
-
 		Exception exception = assertThrows(FailedToStartRouteException.class, () -> context.start());
 		assertEquals(exception.getCause().getClass(), InvalidPathException.class);
 	}
@@ -38,7 +36,6 @@ public class CasperConsumerComponentTest {
 			@Override
 			public void configure() throws Exception {
 				from("casper:http://localhost:8080/events/main?event=test").log("${body}");
-
 			}
 		});
 
@@ -53,7 +50,6 @@ public class CasperConsumerComponentTest {
 			@Override
 			public void configure() throws Exception {
 				from("casper:http://localhost:8080/events/test?event=test").log("${body}");
-
 			}
 		});
 
