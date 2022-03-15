@@ -131,7 +131,7 @@ It supports the following operations (as per node version 1.4)
 | [STATE_ITEM](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#STATE_ITEM)  | returns StoredValue object by state root hash, key and path  |
 | [ACCOUNT_BALANCE](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#ACCOUNT_BALANCE)  | returns  the balance (in motes) of an account  |
 | [PUT_DEPLOY](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#PUT_DEPLOY)  | sends a deploy to the network |
-| [DICTIONARY_ITEM] (https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#DICTIONARY_ITEM) | returns an item from a Dictionary (StoredValue object) by a given state root hash, dictionary item key and seed URef |
+| [DICTIONARY_ITEM](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#DICTIONARY_ITEM) | returns an item from a Dictionary (StoredValue object) by a given state root hash, dictionary item key and seed URef |
 | [GLOBAL_STATE](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#GLOBAL_STATE)  | Sends a query to global state using either a Block hash or state root hash, returns a StoredValue object|
 
 
