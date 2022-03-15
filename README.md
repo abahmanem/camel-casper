@@ -117,22 +117,22 @@ It supports the following operations (as per node version 1.4)
 
 | Operation | Description | 
 |---|---|
-| `NETWORK_PEERS` | returns a list of casper network connected pairs |
-| `NODE_STATUS` | returns the status of a given node in  casper network|
+| [NETWORK_PEERS](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns a list of casper network connected pairs |
+| [NODE_STATUS](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns the status of a given node in  casper network|
 | [DEPLOY](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy) | returns a deploy|
-| `LAST_BLOCK` | returns the last minted block from the blockchain|
-| `BLOCK` | returns a block from the blockchain|
-| `LAST_BLOCK_TRANSFERS` | returns the list of transfers within the last minted block from the blockchain|
-| `BLOCK_TRANSFERS` | returns the list of transfers within a given block |
-| `STATE_ROOT_HASH` | returns the current state root hash |
-| `ACCOUNT_INFO` | returns the current state root hash |
-| `AUCTION_INFO` | returns an AuctionState object that contains the bids and validators |
-| `ERA_INFO` | returns  an EraSummary object  |
-| `STATE_ITEM` | returns StoredValue object by state root hash, key and path  |
-| `ACCOUNT_BALANCE` | returns  the balance (in motes) of an account  |
-| `PUT_DEPLOY` | sends a deploy to the network |
-| `DICTIONARY_ITEM` | returns an item from a Dictionary (StoredValue object) by a given state root hash, dictionary item key and seed URef |
-| `GLOBAL_STATE` | Sends a query to global state using either a Block hash or state root hash, returns a StoredValue object|
+| [LAST_BLOCK](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns the last minted block from the blockchain|
+| [BLOCK](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns a block from the blockchain|
+| [LAST_BLOCK_TRANSFERS](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns the list of transfers within the last minted block from the blockchain|
+| ]BLOCK_TRANSFERS](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns the list of transfers within a given block |
+| STATE_ROOT_HASH](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns the current state root hash |
+| [ACCOUNT_INFO](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns the current state root hash |
+| [AUCTION_INFO](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns an AuctionState object that contains the bids and validators |
+| [ERA_INFO](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns  an EraSummary object  |
+| [STATE_ITEM](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns StoredValue object by state root hash, key and path  |
+| [ACCOUNT_BALANCE](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | returns  the balance (in motes) of an account  |
+| [PUT_DEPLOY](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)  | sends a deploy to the network |
+| [DICTIONARY_ITEM] (https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy) | returns an item from a Dictionary (StoredValue object) by a given state root hash, dictionary item key and seed URef |
+| [GLOBAL_STATE](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#GLOBAL_STATE)  | Sends a query to global state using either a Block hash or state root hash, returns a StoredValue object|
 
 
 
