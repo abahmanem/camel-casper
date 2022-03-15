@@ -205,7 +205,7 @@ Sends a query to global state using either a Block hash or state root hash, retu
 
 ### Parameters
 
-Operation needs at least one of the two following parameters to be passed =  stateRootHash or blockHeight
+Operation needs at least one of the two following parameters to be passed =  stateRootHash or blockHash
 
 | Name | Type | Description | Mandatory |
 |---|---|---|---|
