@@ -114,7 +114,7 @@ with the following path and query parameters:
 Camel Producer component performs RPC calls to Casper blockchain.
 It supports the following operations (as per node version 1.4)
 
-````java
+
 | Operation | Description | 
 |---|---|
 | `NETWORK_PEERS` | returns a list of casper network connected pairs |
@@ -134,7 +134,7 @@ It supports the following operations (as per node version 1.4)
 | `DICTIONARY_ITEM` | returns an item from a Dictionary (StoredValue object) by a given state root hash, dictionary item key and seed URef |
 | `GLOBAL_STATE` | Sends a query to global state using either a Block hash or state root hash, returns a StoredValue object|
 
-````
+
 
 ### Consumer
 
