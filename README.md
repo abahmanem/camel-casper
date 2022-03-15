@@ -159,7 +159,7 @@ STEP
 
 Consume BLOCK_ADDED events from Casper SSE and send block hashes to a jms queue :
 
-````java
+````Java
 from("casper://127.0.0.1:9999/events/main?event=BLOCK_ADDED")
 .jsonpath("$blockAdded.block_hash", false, String.class, "block")
 .to("jms:queue:new_blocks");
@@ -168,7 +168,7 @@ from("casper://127.0.0.1:9999/events/main?event=BLOCK_ADDED")
 
 Use the block hashes to retrieve the block transfers:
 
-````java
+````Java
 from("jms:queue:new_blocks")
 .setHeader(BLOCK_HASH, body())
 .to("casper://127.0.0.1:7777?operation=BLOCK_TRANSFERS");
