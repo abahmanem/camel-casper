@@ -31,8 +31,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "casperService": target.getConfiguration().setCasperService(property(camelContext, com.syntifi.casper.sdk.service.CasperService.class, value)); return true;
         case "deployhash":
         case "deployHash": target.getConfiguration().setDeployHash(property(camelContext, java.lang.String.class, value)); return true;
-        case "dictionnaryitemkey":
-        case "dictionnaryItemKey": target.getConfiguration().setDictionnaryItemKey(property(camelContext, java.lang.String.class, value)); return true;
+        case "dictionaryitemkey":
+        case "dictionaryItemKey": target.getConfiguration().setDictionaryItemKey(property(camelContext, java.lang.String.class, value)); return true;
         case "event": target.getConfiguration().setEvent(property(camelContext, java.lang.String.class, value)); return true;
         case "exceptionhandler":
         case "exceptionHandler": target.setExceptionHandler(property(camelContext, org.apache.camel.spi.ExceptionHandler.class, value)); return true;
@@ -68,8 +68,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "casperService": return com.syntifi.casper.sdk.service.CasperService.class;
         case "deployhash":
         case "deployHash": return java.lang.String.class;
-        case "dictionnaryitemkey":
-        case "dictionnaryItemKey": return java.lang.String.class;
+        case "dictionaryitemkey":
+        case "dictionaryItemKey": return java.lang.String.class;
         case "event": return java.lang.String.class;
         case "exceptionhandler":
         case "exceptionHandler": return org.apache.camel.spi.ExceptionHandler.class;
@@ -106,8 +106,8 @@ public class CasperEndPointConfigurer extends PropertyConfigurerSupport implemen
         case "casperService": return target.getConfiguration().getCasperService();
         case "deployhash":
         case "deployHash": return target.getConfiguration().getDeployHash();
-        case "dictionnaryitemkey":
-        case "dictionnaryItemKey": return target.getConfiguration().getDictionnaryItemKey();
+        case "dictionaryitemkey":
+        case "dictionaryItemKey": return target.getConfiguration().getDictionaryItemKey();
         case "event": return target.getConfiguration().getEvent();
         case "exceptionhandler":
         case "exceptionHandler": return target.getExceptionHandler();

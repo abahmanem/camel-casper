@@ -89,10 +89,10 @@ public class CasperConfiguration implements Cloneable {
 	private String purseUref;
 
 	/**
-	 * dictionnaryItemKey parameter
+	 * dictionaryItemKey parameter
 	 */
 	@UriParam(label = "producer", description = "dictionnary_item_Key::dictionary item key formatted as a string")
-	private String dictionnaryItemKey;
+	private String dictionaryItemKey;
 	
 	
 	/**
@@ -197,12 +197,12 @@ public class CasperConfiguration implements Cloneable {
 	
 	
 
-	public String getDictionnaryItemKey() {
-		return dictionnaryItemKey;
+	public String getDictionaryItemKey() {
+		return dictionaryItemKey;
 	}
 
-	public void setDictionnaryItemKey(String dictionnaryItemKey) {
-		this.dictionnaryItemKey = dictionnaryItemKey;
+	public void setDictionaryItemKey(String dictionaryItemKey) {
+		this.dictionaryItemKey = dictionaryItemKey;
 	}
 
 	public String getSeedUref() {

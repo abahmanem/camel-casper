@@ -390,8 +390,8 @@ public class CasperProducer extends HeaderSelectorProducer {
 		DictionaryData data = null;
 		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash,
 				String.class);
-		String dictionnaryItemKey = message.getHeader(CasperConstants.DICTIONNARY_ITEM_KEY,
-				configuration::getDictionnaryItemKey, String.class);
+		String dictionnaryItemKey = message.getHeader(CasperConstants.DICTIONARY_ITEM_KEY,
+				configuration::getDictionaryItemKey, String.class);
 		String seedUref = message.getHeader(CasperConstants.SEED_UREF, configuration::getSeedUref, String.class);
 		if (StringUtils.isEmpty(stateRootHash)) {
 			handleError(new MissingArgumentException(

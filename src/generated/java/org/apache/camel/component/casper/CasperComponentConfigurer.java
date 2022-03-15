@@ -41,8 +41,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": target.setConfiguration(property(camelContext, org.apache.camel.component.casper.CasperConfiguration.class, value)); return true;
         case "deployhash":
         case "deployHash": getOrCreateConfiguration(target).setDeployHash(property(camelContext, java.lang.String.class, value)); return true;
-        case "dictionnaryitemkey":
-        case "dictionnaryItemKey": getOrCreateConfiguration(target).setDictionnaryItemKey(property(camelContext, java.lang.String.class, value)); return true;
+        case "dictionaryitemkey":
+        case "dictionaryItemKey": getOrCreateConfiguration(target).setDictionaryItemKey(property(camelContext, java.lang.String.class, value)); return true;
         case "event": getOrCreateConfiguration(target).setEvent(property(camelContext, java.lang.String.class, value)); return true;
         case "key": getOrCreateConfiguration(target).setKey(property(camelContext, java.lang.String.class, value)); return true;
         case "lazystartproducer":
@@ -77,8 +77,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": return org.apache.camel.component.casper.CasperConfiguration.class;
         case "deployhash":
         case "deployHash": return java.lang.String.class;
-        case "dictionnaryitemkey":
-        case "dictionnaryItemKey": return java.lang.String.class;
+        case "dictionaryitemkey":
+        case "dictionaryItemKey": return java.lang.String.class;
         case "event": return java.lang.String.class;
         case "key": return java.lang.String.class;
         case "lazystartproducer":
@@ -114,8 +114,8 @@ public class CasperComponentConfigurer extends PropertyConfigurerSupport impleme
         case "configuration": return target.getConfiguration();
         case "deployhash":
         case "deployHash": return getOrCreateConfiguration(target).getDeployHash();
-        case "dictionnaryitemkey":
-        case "dictionnaryItemKey": return getOrCreateConfiguration(target).getDictionnaryItemKey();
+        case "dictionaryitemkey":
+        case "dictionaryItemKey": return getOrCreateConfiguration(target).getDictionaryItemKey();
         case "event": return getOrCreateConfiguration(target).getEvent();
         case "key": return getOrCreateConfiguration(target).getKey();
         case "lazystartproducer":

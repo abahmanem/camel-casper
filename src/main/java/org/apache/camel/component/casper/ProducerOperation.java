@@ -20,7 +20,8 @@ public enum ProducerOperation {
 	STATE_ITEM,
 	ACCOUNT_BALANCE,
 	PUT_DEPLOY,
-	RPC_SCHEMA;
+	DICTIONARY_ITEM
+	;
 
 	/**
 	 * findByName

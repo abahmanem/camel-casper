@@ -62,7 +62,7 @@ public interface CasperConstants {
     String ACCOUNT_BALANCE = "ACCOUNT_BALANCE";
     String PURSE_UREF = "PURSE_UREF";
     //String 	DICTIONNARY KEY parameter
-	String DICTIONNARY_ITEM_KEY = "DICTIONNARY_ITEM_KEY";
+	String DICTIONARY_ITEM_KEY = "DICTIONNARY_ITEM_KEY";
 	//String 	SEED_UREF  parameter
 	String SEED_UREF = "SEED_UREF";
 	

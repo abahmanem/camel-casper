@@ -24,7 +24,7 @@ import com.syntifi.casper.sdk.model.storedvalue.StoredValue;
 import com.syntifi.casper.sdk.model.uref.URef;
 import com.syntifi.casper.sdk.service.CasperService;
 @SuppressWarnings("rawtypes")
-public class CasperProducerWith_STATE_DICTIONNARY_ITEM_OperationTest extends CasperTestSupport {
+public class CasperProducerWith_STATE_DICTIONARY_ITEM_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 	
@@ -41,7 +41,7 @@ public class CasperProducerWith_STATE_DICTIONNARY_ITEM_OperationTest extends Cas
 
 		exchange.getIn().setHeader(CasperConstants.STATE_ROOT_HASH,
 				"8180307A39A8583a4a164154C360FB9Ab9B15A5B626295635A62DFc7A82e66a3");
-	    exchange.getIn().setHeader(CasperConstants.DICTIONNARY_ITEM_KEY,
+	    exchange.getIn().setHeader(CasperConstants.DICTIONARY_ITEM_KEY,
 				"a8261377ef9cf8e741dd6858801c71e38c9322e66355586549b75ab24bdd73f2");
 	    exchange.getIn().setHeader(CasperConstants.SEED_UREF,
 				"uref-F5ea525E6493B41DC3c9b196ab372b6F3f00cA6F1EEf8fe0544e7d044E5480Ba-007");
@@ -63,7 +63,7 @@ public class CasperProducerWith_STATE_DICTIONNARY_ITEM_OperationTest extends Cas
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.DICTIONARY_ITEM);
 		exchange.getIn().setHeader(CasperConstants.STATE_ROOT_HASH,
 				"30cE5146268305AeeFdCC05a5f7bE7aa6dAF187937Eed9BB55Af90e1D49B7956");
-		exchange.getIn().setHeader(CasperConstants.DICTIONNARY_ITEM_KEY,"");
+		exchange.getIn().setHeader(CasperConstants.DICTIONARY_ITEM_KEY,"");
 		template.send(exchange);
 		Exception exception = exchange.getException();
 		assertTrue(exception instanceof CamelExchangeException);
@@ -81,7 +81,7 @@ public class CasperProducerWith_STATE_DICTIONNARY_ITEM_OperationTest extends Cas
 	public void testCallWithout_STATE_ROOT_HASH_Parameter() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.DICTIONARY_ITEM);
-		 exchange.getIn().setHeader(CasperConstants.DICTIONNARY_ITEM_KEY,
+		 exchange.getIn().setHeader(CasperConstants.DICTIONARY_ITEM_KEY,
 					"a8261377ef9cf8e741dd6858801c71e38c9322e66355586549b75ab24bdd73f2");
 		  exchange.getIn().setHeader(CasperConstants.SEED_UREF,
 					"a8261377ef9cf8e741dd6858801c71e38c9322e66355586549b75ab24bdd73f2");
@@ -104,7 +104,7 @@ public class CasperProducerWith_STATE_DICTIONNARY_ITEM_OperationTest extends Cas
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.DICTIONARY_ITEM);
 		exchange.getIn().setHeader(CasperConstants.STATE_ROOT_HASH,
 				"30cE5146268305AeeFdCC05a5f7bE7aa6dAF187937Eed9BB55Af90e1D49B7956");
-		  exchange.getIn().setHeader(CasperConstants.DICTIONNARY_ITEM_KEY,
+		  exchange.getIn().setHeader(CasperConstants.DICTIONARY_ITEM_KEY,
 					"a8261377ef9cf8e741dd6858801c71e38c9322e66355586549b75ab24bdd73f2");
 		  exchange.getIn().setHeader(CasperConstants.SEED_UREF,
 					"");

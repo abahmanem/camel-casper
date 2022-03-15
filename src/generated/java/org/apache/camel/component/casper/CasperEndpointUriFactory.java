@@ -28,11 +28,11 @@ public class CasperEndpointUriFactory extends org.apache.camel.support.component
         props.add("publicKey");
         props.add("stateRootHash");
         props.add("seedUref");
+        props.add("dictionaryItemKey");
         props.add("path");
         props.add("lazyStartProducer");
         props.add("bridgeErrorHandler");
         props.add("blockHeight");
-        props.add("dictionnaryItemKey");
         props.add("casperService");
         props.add("event");
         props.add("deployHash");
