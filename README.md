@@ -119,7 +119,7 @@ It supports the following operations (as per node version 1.4)
 |---|---|
 | `NETWORK_PEERS` | returns a list of casper network connected pairs |
 | `NODE_STATUS` | returns the status of a given node in  casper network|
-| `[DEPLOY](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy)` | returns a deploy|
+| [DEPLOY](https://github.com/caspercommunityio/camel-casper/blob/master/src/main/docs/doc.md#deploy) | returns a deploy|
 | `LAST_BLOCK` | returns the last minted block from the blockchain|
 | `BLOCK` | returns a block from the blockchain|
 | `LAST_BLOCK_TRANSFERS` | returns the list of transfers within the last minted block from the blockchain|
