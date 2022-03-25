@@ -1,5 +1,5 @@
 ###  Casper BLOCKCHAIN component
-Since Camel 3.14.1
+Since Camel 3.14.2
 
 Both producer and consumer are supported.
 
@@ -15,7 +15,7 @@ Maven users will need to add the following dependency to their pom.xml for this 
 <dependency>
     <groupId>io.caspercommunity</groupId>
     <artifactId>camel-casper</artifactId>
-    	<version>3.14.1-SNAPSHOT</version>
+    	<version>3.14.2</version>
     <!-- use the same version as your Camel core version -->
 </dependency>
 
