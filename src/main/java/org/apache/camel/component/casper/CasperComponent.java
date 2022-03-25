@@ -24,8 +24,6 @@ public class CasperComponent extends DefaultComponent {
 	@Metadata(description = "Default configuration")
 	private CasperConfiguration configuration;
 	public static final  Logger logger = LoggerFactory.getLogger(CasperComponent.class);
-
-	
 	/**
 	 * Create Casper endpoint
 	 */
@@ -37,11 +35,9 @@ public class CasperComponent extends DefaultComponent {
 		logger.debug("***** CasperComponent create endpoint ");
 		return casper;
 	}
-	
 	public CasperConfiguration getConfiguration() {
 		return configuration;
 	}
-
 	public void setConfiguration(CasperConfiguration configuration) {
 		this.configuration = configuration;
 	}
