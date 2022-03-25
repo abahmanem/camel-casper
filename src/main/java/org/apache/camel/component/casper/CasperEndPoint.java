@@ -51,8 +51,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 	 * @param remaining       : remaining
 	 * @param casperComponent : casperComponent, either producer or consumer
 	 * @param configuration   : casperConfiguration
-	 * @throws CamelException     : CamelException
-	 * @throws URISyntaxException
+	 * @throws URISyntaxException : URISyntaxException
 	 */
 	public CasperEndPoint(String uri, String remaining, CasperComponent casperComponent, CasperConfiguration configuration) throws URISyntaxException {
 		super(uri, casperComponent);
@@ -111,7 +110,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 	 * 
 	 * @param url : Casper Node url
 	 * @throws URISyntaxException : uRISyntaxException
-	 * @throws Exception
 	 */
 	public void validateAndSetURL(String url) throws URISyntaxException {
 		UrlValidator urlValidator = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
