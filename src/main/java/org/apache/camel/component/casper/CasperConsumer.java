@@ -28,7 +28,6 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 	private final CasperConfiguration configuration;
 	private volatile boolean shutdownPending=false;
 	private volatile boolean forceShutdown=false;
-
 	/**
 	 * Create Casper consumer component
 	 * 
@@ -41,7 +40,6 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 		this.configuration = configuration;
 		this.endpoint = endpoint;
 	}
-
 	@Override
 	protected void doStart() throws Exception {
 		super.doStart();
@@ -49,17 +47,14 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 		EventSource builder = new EventSource.Builder(eventHandler, new URI(endpoint.getNodeUrl())).reconnectTime(Duration.ofMillis(3000)).build();
 		builder.start();
 	}
-
 	@Override
 	public boolean deferShutdown(ShutdownRunningTask shutdownRunningTask) {
 		return true;
 	}
-
 	@Override
 	public int getPendingExchangesSize() {
 		return 0;
 	}
-
 	@Override
 	public void prepareShutdown(boolean suspendOnly, boolean forced) {
 		// if we are suspending then we want to keep the thread running but just not
@@ -72,16 +67,12 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 		// signal we want to shutdown
 		shutdownPending = true;
 		forceShutdown = forced;
-
 	}
-
 	@Override
 	public CasperEndPoint getEndpoint() {
 		return endpoint;
 	}
-
 	public CasperConfiguration getConfiguration() {
 		return configuration;
 	}
-
 }

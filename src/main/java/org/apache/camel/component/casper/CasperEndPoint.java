@@ -26,15 +26,13 @@ import com.syntifi.casper.sdk.service.CasperService;
  *
  */
 
-@UriEndpoint(firstVersion = "3.14.1", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper", category = { Category.BITCOIN, Category.BLOCKCHAIN,
+@UriEndpoint(firstVersion = "3.14.2", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper", category = { Category.BITCOIN, Category.BLOCKCHAIN,
 		Category.API })
 public class CasperEndPoint extends DefaultEndpoint {
-
 	/**
 	 * CasperService bean : Casper java SDK
 	 */
 	private CasperService casperService;
-
 	/**
 	 * nodeUrl : node address
 	 */
@@ -46,7 +44,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 	 */
 	@UriParam(description = "Casper component configuration")
 	private CasperConfiguration configuration;
-
 	/**
 	 * CasperEndPoint constructor
 	 *
@@ -85,7 +82,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 		}
 		throw new UnsupportedOperationException(String.format("event '%s' is not supported by casper cosumner", event));
 	}
-
 	/**
 	 * Create a Casper Producer component
 	 * 
@@ -100,7 +96,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 		// Insupported operation
 		throw new UnsupportedOperationException(String.format("Operation '%s' not supported by casper producer", operation));
 	}
-
 	@Override
 	protected void doStart() throws Exception {
 		if (configuration.getCasperService() != null) {
@@ -111,7 +106,6 @@ public class CasperEndPoint extends DefaultEndpoint {
 		}
 		super.doStart();
 	}
-
 	/**
 	 * Validate node Url
 	 * 
@@ -120,35 +114,27 @@ public class CasperEndPoint extends DefaultEndpoint {
 	 * @throws Exception
 	 */
 	public void validateAndSetURL(String url) throws URISyntaxException {
-
 		UrlValidator urlValidator = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
 		if (urlValidator.isValid(url)) {
 			setNodeUrl(new URI(url).toString());
 		} else
 			throw new InvalidPathException(url, "Provide a valid \"URL\" for node URL parameter. ");
-
 	}
-
 	public CasperService getCasperService() {
 		return casperService;
 	}
-
 	public void setCasperService(CasperService casperService) {
 		this.casperService = casperService;
 	}
-
 	public String getNodeUrl() {
 		return nodeUrl;
 	}
-
 	public void setNodeUrl(String nodeUrl) {
 		this.nodeUrl = nodeUrl;
 	}
-
 	public CasperConfiguration getConfiguration() {
 		return configuration;
 	}
-
 	public void setConfiguration(CasperConfiguration configuration) {
 		this.configuration = configuration;
 	}

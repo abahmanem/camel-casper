@@ -5,16 +5,13 @@ package org.apache.camel.component.casper;
  * @author mabahma
  */
 public interface CasperConstants {
-
 	//RPC Calls
 	String ENDPOINT_SERVICE = "NETWORK_PEERS, NODE_STATUS,DEPLOY,LAST_BLOCK,BLOCK,LAST_BLOCK_TRANSFERS,BLOCK_TRANSFERS,STATE_ROOT_HASH,ACCOUNT_INFO"
             + ",AUCTION_INFO,ERA_INFO,STATE_ITEM,ACCOUNT_BALANC,ERPC_SCHEMA,GLOBAL_STATE,VALIDATOR_CHANGES,DICTIONARY_ITEM"
             + "";
-    
    //Consumer events
 	String ENDPOINT_EVENTS = "DEPLOY_PROCESSED,DEPLOY_ACCEPTED,BLOCK_ADDED,FINALITY_SIGNATURE,STEP";
-  
-    //OPERATION
+    //RPC OPERATION
     String OPERATION = "OPERATION";
     //Query peers
     String NETWORK_PEERS = "NETWORK_PEERS";
@@ -73,8 +70,4 @@ public interface CasperConstants {
     String ERROR_CAUSE = "ERROR_CAUSE";
     String BLOCK_ADDED="BLOCK_ADDED";
   
-
-
-
-    
 }
