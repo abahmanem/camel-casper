@@ -2,6 +2,7 @@ package org.apache.camel.component.casper;
 
 import java.net.URI;
 import java.time.Duration;
+import java.util.concurrent.CountDownLatch;
 
 import org.apache.camel.Processor;
 import org.apache.camel.ShutdownRunningTask;
@@ -17,31 +18,25 @@ import com.launchdarkly.eventsource.EventSource;
 /**
  * Camel CasperComsumer Component
  * 
- * @author p35862
+ * @author mabahma
  *
  */
 
 public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Suspendable {
-
-	public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
-
-	public CasperConfiguration getConfiguration() {
-		return configuration;
-	}
-
+	public static final Logger logger = LoggerFactory.getLogger(CasperConsumer.class);
 	private final CasperEndPoint endpoint;
 	private final CasperConfiguration configuration;
+	private volatile boolean shutdownPending=false;
+	private volatile boolean forceShutdown=false;
 
 	/**
-	 * Create consumer
-	 *
+	 * Create Casper consumer component
+	 * 
 	 * @param endpoint      : endpoint
 	 * @param processor     : consumer Processor
 	 * @param configuration : CasperConfiguration
-	 * @throws Exception
 	 */
-	public CasperConsumer(CasperEndPoint endpoint, Processor processor, CasperConfiguration configuration)
-			throws Exception {
+	public CasperConsumer(CasperEndPoint endpoint, Processor processor, CasperConfiguration configuration) {
 		super(endpoint, processor);
 		this.configuration = configuration;
 		this.endpoint = endpoint;
@@ -51,8 +46,7 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 	protected void doStart() throws Exception {
 		super.doStart();
 		EventHandler eventHandler = new CasperEventHandler(this);
-		EventSource builder = new EventSource.Builder(eventHandler, new URI(endpoint.getNodeUrl()))
-				.reconnectTime(Duration.ofMillis(3000)).build();
+		EventSource builder = new EventSource.Builder(eventHandler, new URI(endpoint.getNodeUrl())).reconnectTime(Duration.ofMillis(3000)).build();
 		builder.start();
 	}
 
@@ -68,6 +62,26 @@ public class CasperConsumer extends DefaultConsumer implements ShutdownAware, Su
 
 	@Override
 	public void prepareShutdown(boolean suspendOnly, boolean forced) {
-		// noop
+		// if we are suspending then we want to keep the thread running but just not
+		// route the exchange
+		// this logic is only when we stop or shutdown the consumer
+		if (suspendOnly) {
+			logger.debug("Skip preparing to shutdown as consumer is being suspended");
+			return;
+		}
+		// signal we want to shutdown
+		shutdownPending = true;
+		forceShutdown = forced;
+
 	}
+
+	@Override
+	public CasperEndPoint getEndpoint() {
+		return endpoint;
+	}
+
+	public CasperConfiguration getConfiguration() {
+		return configuration;
+	}
+
 }

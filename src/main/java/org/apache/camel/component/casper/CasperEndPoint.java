@@ -1,9 +1,11 @@
 package org.apache.camel.component.casper;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.InvalidPathException;
 import java.util.Arrays;
 
+import org.apache.camel.CamelException;
 import org.apache.camel.Category;
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
@@ -13,8 +15,8 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.apache.camel.support.DefaultEndpoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.validator.routines.UrlValidator;
+
 import com.syntifi.casper.sdk.service.CasperService;
 
 /**
@@ -24,11 +26,9 @@ import com.syntifi.casper.sdk.service.CasperService;
  *
  */
 
-@UriEndpoint(firstVersion = "3.14.1", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper", category = {
-		Category.BITCOIN, Category.BLOCKCHAIN, Category.API })
+@UriEndpoint(firstVersion = "3.14.1", scheme = "casper", title = "Casper Camel Connector", syntax = "casper:nodeUrl", label = "casper", category = { Category.BITCOIN, Category.BLOCKCHAIN,
+		Category.API })
 public class CasperEndPoint extends DefaultEndpoint {
-
-	public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
 
 	/**
 	 * CasperService bean : Casper java SDK
@@ -50,24 +50,25 @@ public class CasperEndPoint extends DefaultEndpoint {
 	/**
 	 * CasperEndPoint constructor
 	 *
-	 * @param uri             : Uri
+	 * @param uri             : Node Uri
 	 * @param remaining       : remaining
-	 * @param casperComponent : casperComponent
+	 * @param casperComponent : casperComponent, either producer or consumer
 	 * @param configuration   : casperConfiguration
-	 * @throws Exception : Exception
+	 * @throws CamelException     : CamelException
+	 * @throws URISyntaxException
 	 */
-	public CasperEndPoint(String uri, String remaining, CasperComponent casperComponent,
-			CasperConfiguration configuration) throws Exception {
+	public CasperEndPoint(String uri, String remaining, CasperComponent casperComponent, CasperConfiguration configuration) throws URISyntaxException {
 		super(uri, casperComponent);
 		this.configuration = configuration;
-		this.nodeUrl = remaining;
+		validateAndSetURL(remaining);
+		// this.nodeUrl = remaining;
 	}
 
 	/**
-	 * Create a consumer component
+	 * Create a Casper Consumer component
 	 *
-	 * @param processor : Camel Processor
-	 * @return CasperConsumer : consumer component
+	 * @param processor : Apache Camel Processor
+	 * @return CasperConsumer : Casper Consumer component
 	 * @throws Exception : exception
 	 */
 	@Override
@@ -75,9 +76,8 @@ public class CasperEndPoint extends DefaultEndpoint {
 		URI uri = new URI(nodeUrl);
 		String event = configuration.getEvent();
 		if (!Arrays.asList(CasperConstants.CONSUMER_PATHS.split(",")).stream().anyMatch(s -> s.equals(uri.getPath())))
-			throw new InvalidPathException(uri.getPath(),String.format(
-					"Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ",
-					uri.getPath()));
+			throw new InvalidPathException(uri.getPath(),
+					String.format("Invalid path '%s' for Casper Stream event server: expected '/events/main', '/events/deploys' or '/events/sigs ", uri.getPath()));
 		if (ConsumerEvent.findByName(event) != null) {
 			CasperConsumer consumer = new CasperConsumer(this, processor, configuration);
 			configureConsumer(consumer);
@@ -87,10 +87,10 @@ public class CasperEndPoint extends DefaultEndpoint {
 	}
 
 	/**
-	 * Create Producer
-	 *
-	 * @return CasperProducer 
-	 * @throws Exception
+	 * Create a Casper Producer component
+	 * 
+	 * @return CasperProducer : Casper Producer component
+	 * @throws Exception : exception
 	 */
 	@Override
 	public Producer createProducer() throws Exception {
@@ -98,13 +98,7 @@ public class CasperEndPoint extends DefaultEndpoint {
 		if (ProducerOperation.findByName(operation) != null)
 			return new CasperProducer(this, configuration);
 		// Insupported operation
-		throw new UnsupportedOperationException(
-				String.format("Operation '%s' not supported by casper producer", operation));
-	}
-
-	@Override
-	protected void doStop() throws Exception {
-		super.doStop();
+		throw new UnsupportedOperationException(String.format("Operation '%s' not supported by casper producer", operation));
 	}
 
 	@Override
@@ -118,20 +112,23 @@ public class CasperEndPoint extends DefaultEndpoint {
 		super.doStart();
 	}
 
-	@Override
-	protected void doShutdown() throws Exception {
-		super.doShutdown();
+	/**
+	 * Validate node Url
+	 * 
+	 * @param url : Casper Node url
+	 * @throws URISyntaxException : uRISyntaxException
+	 * @throws Exception
+	 */
+	public void validateAndSetURL(String url) throws URISyntaxException {
+
+		UrlValidator urlValidator = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
+		if (urlValidator.isValid(url)) {
+			setNodeUrl(new URI(url).toString());
+		} else
+			throw new InvalidPathException(url, "Provide a valid \"URL\" for node URL parameter. ");
+
 	}
 
-	
-	/*
-	 * public void validateAndSetURL(String url) throws Exception {
-	 * 
-	 * 
-	 * UrlValidator validator = new UrlValidator(); if (!validator.isValid(url)) {
-	 * throw new CamelException("Please provide a valid \"URL\" parameter. Get : " +
-	 * url); } setNodeUrl(new URL(url).toString()); }
-	 */
 	public CasperService getCasperService() {
 		return casperService;
 	}

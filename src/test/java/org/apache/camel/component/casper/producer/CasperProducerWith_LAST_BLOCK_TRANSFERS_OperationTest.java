@@ -12,7 +12,7 @@ import org.apache.camel.component.casper.CasperConstants;
 import org.apache.camel.component.casper.CasperTestSupport;
 import org.junit.jupiter.api.Test;
 
-public class CasperProducerWith_LAST_BLOCK_TRANSFERS_OperationTest extends CasperTestSupport {
+class CasperProducerWith_LAST_BLOCK_TRANSFERS_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -22,10 +22,8 @@ public class CasperProducerWith_LAST_BLOCK_TRANSFERS_OperationTest extends Caspe
 	}
 
 	@Test
-	public void testCall() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.LAST_BLOCK_TRANSFERS);
+	void testCall() throws Exception {
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.LAST_BLOCK_TRANSFERS);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
@@ -41,5 +39,4 @@ public class CasperProducerWith_LAST_BLOCK_TRANSFERS_OperationTest extends Caspe
 			}
 		};
 	}
-
 }

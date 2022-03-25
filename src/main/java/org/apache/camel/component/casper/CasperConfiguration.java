@@ -3,22 +3,17 @@ package org.apache.camel.component.casper;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.syntifi.casper.sdk.service.CasperService;
 
 /**
  * Camel Casper endpoint configuration
- * @author p35862
+ * 
+ * @author mabahma
  *
  */
 @UriParams
 public class CasperConfiguration implements Cloneable {
-	/**
-	 * Logger
-	 */
-	public static Logger logger = LoggerFactory.getLogger(CasperConfiguration.class);
 
 	/**
 	 * casperService : Casper RPC SDK
@@ -32,14 +27,12 @@ public class CasperConfiguration implements Cloneable {
 	@UriParam(label = "producer", defaultValue = CasperConstants.NODE_STATUS, description = "The endpoint operation.", enums = CasperConstants.ENDPOINT_SERVICE)
 	private String operation;
 
-	
 	/**
 	 * sse event parameter
 	 */
 	@UriParam(label = "consumer", defaultValue = CasperConstants.BLOCK_ADDED, description = "The endpoint event.", enums = CasperConstants.ENDPOINT_EVENTS)
 	private String event;
 
-	
 	/**
 	 * deployHash parameter
 	 */
@@ -93,15 +86,13 @@ public class CasperConfiguration implements Cloneable {
 	 */
 	@UriParam(label = "producer", description = "dictionnary_item_Key::dictionary item key formatted as a string")
 	private String dictionaryItemKey;
-	
-	
+
 	/**
 	 * dictionnaryItemKey parameter
 	 */
 	@UriParam(label = "producer", description = "seedUref::dictionary's seed URef formatted as string")
 	private String seedUref;
-	
-	
+
 	public String getPurseUref() {
 		return purseUref;
 	}
@@ -186,7 +177,6 @@ public class CasperConfiguration implements Cloneable {
 		return this.operation != null ? operation : CasperConstants.NODE_STATUS;
 	}
 
-
 	public String getEvent() {
 		return event;
 	}
@@ -194,8 +184,6 @@ public class CasperConfiguration implements Cloneable {
 	public void setEvent(String event) {
 		this.event = event;
 	}
-	
-	
 
 	public String getDictionaryItemKey() {
 		return dictionaryItemKey;
@@ -213,7 +201,7 @@ public class CasperConfiguration implements Cloneable {
 		this.seedUref = seedUref;
 	}
 
-	public CasperConfiguration clone() {
+	public CasperConfiguration copy() {
 		try {
 			return (CasperConfiguration) super.clone();
 		} catch (CloneNotSupportedException e) {

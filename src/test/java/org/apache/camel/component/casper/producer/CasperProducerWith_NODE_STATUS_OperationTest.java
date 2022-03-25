@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import com.syntifi.casper.sdk.model.key.PublicKey;
 import com.syntifi.casper.sdk.model.status.StatusData;
 
-public class CasperProducerWith_NODE_STATUS_OperationTest extends CasperTestSupport {
+class CasperProducerWith_NODE_STATUS_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -25,17 +25,14 @@ public class CasperProducerWith_NODE_STATUS_OperationTest extends CasperTestSupp
 	}
 
 	@Test
-	public void testCall() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.NODE_STATUS);
+	void testCall() throws Exception {
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.NODE_STATUS);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a StatusData
 		assertTrue(body instanceof StatusData);
 		StatusData status = (StatusData) body;
-		PublicKey key = PublicKey
-				.fromTaggedHexString("017d9aa0b86413d7ff9a9169182c53f0bacaa80d34c211adab007ed4876af17077");
+		PublicKey key = PublicKey.fromTaggedHexString("017d9aa0b86413d7ff9a9169182c53f0bacaa80d34c211adab007ed4876af17077");
 		assertTrue(Arrays.equals(status.getPublicKey().getKey(), key.getKey()));
 	}
 

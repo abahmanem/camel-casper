@@ -1,8 +1,9 @@
 package org.apache.camel.component.casper.producer;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 
 import org.apache.camel.Exchange;
@@ -14,16 +15,13 @@ import org.apache.camel.component.casper.CasperTestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.syntifi.casper.sdk.identifier.block.BlockIdentifier;
-import com.syntifi.casper.sdk.identifier.block.HashBlockIdentifier;
 import com.syntifi.casper.sdk.model.block.JsonBlock;
 import com.syntifi.casper.sdk.service.CasperService;
 
-public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
+class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 	private CasperService casperService;
-
 
 	@Override
 	public boolean isUseAdviceWith() {
@@ -31,51 +29,41 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 	}
 
 	@Test
-	public void testCallWith_BLOCK_HASH_Parameter() throws Exception {
-
+	void testCallWith_BLOCK_HASH_Parameter() throws Exception {
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK);
-
-		exchange.getIn().setHeader(CasperConstants.BLOCK_HASH,
-				"30c1263cbcc95066f5c20e96cb8ba11356295515f414961b646e831c17992d26");
-
+		exchange.getIn().setHeader(CasperConstants.BLOCK_HASH, "30c1263cbcc95066f5c20e96cb8ba11356295515f414961b646e831c17992d26");
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a JsonBlock
 		assertTrue(body instanceof JsonBlock);
 		JsonBlock block = (JsonBlock) body;
-		assertTrue(block != null);
-		assertTrue(block.getHash().toLowerCase().equals("30c1263cbcc95066f5c20e96cb8ba11356295515f414961b646e831c17992d26"));
+		assertNotNull(block);
+		assertEquals("30c1263cbcc95066f5c20e96cb8ba11356295515f414961b646e831c17992d26", block.getHash().toLowerCase());
 	}
 
-
 	@Test
-	public void testCallWith_BLOCK_HEIGHT_Parameter() throws Exception {
-
+	void testCallWith_BLOCK_HEIGHT_Parameter() throws Exception {
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK);
-		exchange.getIn().setHeader(CasperConstants.BLOCK_HEIGHT,534910);
+		exchange.getIn().setHeader(CasperConstants.BLOCK_HEIGHT, 534910);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a JsonBlock
 		assertTrue(body instanceof JsonBlock);
 		JsonBlock block = (JsonBlock) body;
-		assertTrue(block != null);
-		assertTrue(block.getHash().toLowerCase().equals("f990a7079e3ebb1972d1388c0efd97cd7d7e2be9e442bd80f0ddb8134625a8f2"));
+		assertNotNull(block);
+		assertEquals("f990a7079e3ebb1972d1388c0efd97cd7d7e2be9e442bd80f0ddb8134625a8f2", block.getHash().toLowerCase());
 	}
 
 	@Test
-	public void testCallWithout_Parameters() throws Exception {
-
+	void testCallWithout_Parameters() throws Exception {
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK);
-
 		template.send(exchange);
-
 		Object body = exchange.getIn().getBody();
 		// assert Object is a JsonBlock
 		assertTrue(body instanceof JsonBlock);
 		// Assert the call returns the last block
-		assertTrue(casperService.getBlock().getBlock().getHash().toLowerCase().equals(((JsonBlock) body).getHash()));
+		assertEquals(((JsonBlock) body).getHash(), casperService.getBlock().getBlock().getHash().toLowerCase());
 	}
-
 
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
@@ -87,7 +75,6 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 		};
 	}
 
-
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -95,7 +82,4 @@ public class CasperProducerWith_BLOCK_OperationTest extends CasperTestSupport {
 		casperService = CasperService.usingPeer(uri.getHost(), uri.getPort());
 		super.setUp();
 	}
-	
-
-	
 }

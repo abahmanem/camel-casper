@@ -15,37 +15,34 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Camel CasperComponent
- * @author p35862
+ * 
+ * @author mabahma
  *
  */
 @Component("casper")
 public class CasperComponent extends DefaultComponent {
-    @Metadata(description = "Default configuration")
-    private CasperConfiguration configuration;
-    public static Logger logger = LoggerFactory.getLogger(CasperComponent.class);
+	@Metadata(description = "Default configuration")
+	private CasperConfiguration configuration;
+	public static final  Logger logger = LoggerFactory.getLogger(CasperComponent.class);
 
-   
-    /**
-     * 
-     */
-    @Override
-    protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-        CasperConfiguration conf = configuration != null ? configuration.clone() : new CasperConfiguration();
-        CasperEndPoint casper = new CasperEndPoint(uri, remaining, this, conf);
-        setProperties(casper, parameters);
-        logger.debug("***** CasperComponent create endpoint ");
-        return casper;
-    }
+	
+	/**
+	 * Create Casper endpoint
+	 */
+	@Override
+	protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
+		CasperConfiguration conf = configuration != null ? configuration.copy() : new CasperConfiguration();
+		CasperEndPoint casper = new CasperEndPoint(uri, remaining, this, conf);
+		setProperties(casper, parameters);
+		logger.debug("***** CasperComponent create endpoint ");
+		return casper;
+	}
+	
+	public CasperConfiguration getConfiguration() {
+		return configuration;
+	}
 
-    @Override
-    protected void doInit() throws Exception {
-        super.doInit();
-    }
-
-    public CasperConfiguration getConfiguration() {
-        return configuration;
-    }
-    public void setConfiguration(CasperConfiguration configuration) {
-        this.configuration = configuration;
-    }
+	public void setConfiguration(CasperConfiguration configuration) {
+		this.configuration = configuration;
+	}
 }

@@ -1,5 +1,7 @@
 package org.apache.camel.component.casper.producer;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigInteger;
@@ -16,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import com.syntifi.casper.sdk.model.balance.BalanceData;
 
-public class CasperProducerWith_ACCOUNT_BALANCE_OperationTest extends CasperTestSupport {
+class CasperProducerWith_ACCOUNT_BALANCE_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -27,32 +29,28 @@ public class CasperProducerWith_ACCOUNT_BALANCE_OperationTest extends CasperTest
 
 
 	@Test
-	public void testCallWith_STATE_ROOT_HASH_KEY_Parameters() throws Exception {
+	void testCallWith_STATE_ROOT_HASH_KEY_Parameters() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.ACCOUNT_BALANCE);
-
 		exchange.getIn().setHeader(CasperConstants.STATE_ROOT_HASH,
 				"30cE5146268305AeeFdCC05a5f7bE7aa6dAF187937Eed9BB55Af90e1D49B7956");
 		exchange.getIn().setHeader(CasperConstants.PURSE_UREF,
 				"uref-9cC68775d07c211e44068D5dCc2cC28A67Cb582C3e239E83Bb0c3d067C4D0363-007");
-
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a BalanceData
 		assertTrue(body instanceof BalanceData);
 		BalanceData balance = (BalanceData) body;
-		assertTrue(balance != null);
-
+		assertNotNull(balance);
 		//assert balance value
-		assertTrue(balance.getValue().compareTo(new BigInteger("869077209920"))==0);
+		assertEquals(new BigInteger("869077209920") , balance.getValue());
 	}
 
 
 	@Test
-	public void testCallWithout_UREF_PURSE_KEY_Parameter() throws Exception {
+	 void testCallWithout_UREF_PURSE_KEY_Parameter() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.ACCOUNT_BALANCE);
-
 		exchange.getIn().setHeader(CasperConstants.STATE_ROOT_HASH,
 				"30cE5146268305AeeFdCC05a5f7bE7aa6dAF187937Eed9BB55Af90e1D49B7956");
 		template.send(exchange);
@@ -63,20 +61,16 @@ public class CasperProducerWith_ACCOUNT_BALANCE_OperationTest extends CasperTest
 
 		// assert Exception message
 		assertTrue(actualMessage.contains(expectedMessage));
-
 		// Cause
-
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
 	}
 
 
 	@Test
-	public void testCallWithout_STATE_ROOT_HASH_Parameter() throws Exception {
-
+	 void testCallWithout_STATE_ROOT_HASH_Parameter() throws Exception {
 
 		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.ACCOUNT_BALANCE);
-
 		exchange.getIn().setHeader(CasperConstants.PURSE_UREF,
 				"uref-9cC68775d07c211e44068D5dCc2cC28A67Cb582C3e239E83Bb0c3d067C4D0363-007");
 
@@ -89,15 +83,10 @@ public class CasperProducerWith_ACCOUNT_BALANCE_OperationTest extends CasperTest
 		// assert Exception message
 		System.err.println(actualMessage+  "  "+expectedMessage.toLowerCase());
 		assertTrue(actualMessage.contains(expectedMessage));
-
 		// Cause
-
 		Object cause = exchange.getMessage().getHeader(CasperConstants.ERROR_CAUSE);
 		assertTrue(cause instanceof MissingArgumentException);
 	}
-
-
-
 
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {

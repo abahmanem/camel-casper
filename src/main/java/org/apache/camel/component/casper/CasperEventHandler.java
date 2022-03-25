@@ -16,22 +16,24 @@ import com.launchdarkly.eventsource.MessageEvent;
  */
 public class CasperEventHandler implements EventHandler {
 
-	public static Logger logger = LoggerFactory.getLogger(CasperEventHandler.class);
+	public static final Logger logger = LoggerFactory.getLogger(CasperEventHandler.class);
 	private final CasperConsumer consumer;
 	private final CasperEndPoint endpoint;
 
 	public CasperEventHandler(CasperConsumer consumer) {
 		super();
 		this.consumer = consumer;
-		this.endpoint = (CasperEndPoint) this.consumer.getEndpoint();
+		this.endpoint = this.consumer.getEndpoint();
 	}
 
 	@Override
 	public void onOpen() throws Exception {
+		logger.info("The event stream has been opened");
 	}
 
 	@Override
 	public void onClosed() throws Exception {
+		logger.info("The event stream has been closed");
 	}
 
 	/**
@@ -44,9 +46,7 @@ public class CasperEventHandler implements EventHandler {
 
 		if (json.keys().hasNext())
 			firstJsonPropertyKey = json.keys().next();
-
 		String event = endpoint.getConfiguration().getEvent().toUpperCase();
-
 		switch (ConsumerEvent.valueOf(event)) {
 		case BLOCK_ADDED:
 			if (firstJsonPropertyKey.equals("BlockAdded")) {
@@ -54,7 +54,6 @@ public class CasperEventHandler implements EventHandler {
 				processMessage(ConsumerEvent.BLOCK_ADDED, json.getJSONObject(firstJsonPropertyKey));
 			}
 			break;
-
 		case DEPLOY_PROCESSED:
 			if (firstJsonPropertyKey.equals("DeployProcessed")) {
 				logger.debug("received event of type :  DeployProcessed");
@@ -98,15 +97,16 @@ public class CasperEventHandler implements EventHandler {
 			break;
 
 		}
-
 	}
 
 	@Override
 	public void onComment(String comment) throws Exception {
+		logger.info("Received a comment line from the stream");
 	}
 
 	@Override
 	public void onError(Throwable t) {
+		logger.error("an error occured when connecting to the event stream", t);
 	}
 
 	/**

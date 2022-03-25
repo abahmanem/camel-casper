@@ -10,8 +10,6 @@ import org.apache.camel.support.HeaderSelectorProducer;
 import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.syntifi.casper.sdk.identifier.block.HashBlockIdentifier;
 import com.syntifi.casper.sdk.identifier.block.HeightBlockIdentifier;
@@ -37,35 +35,33 @@ import com.syntifi.casper.sdk.service.CasperService;
 /**
  * Camel CasperProducer component
  * 
- * @author p35862
+ * @author mabahma
  *
  */
 @SuppressWarnings("unused")
 public class CasperProducer extends HeaderSelectorProducer {
 
-	
+	/**
+	 * Camel Casper endpoint
+	 */
 	private final CasperEndPoint endpoint;
 	/**
-	 * casperService
+	 * Casper Java Node API
 	 */
 	private final CasperService casperService;
 
-	public CasperService getCasperService() {
-		return casperService;
-	}
-
-	private CasperConfiguration configuration;
-
-	public static Logger logger = LoggerFactory.getLogger(CasperEndPoint.class);
+	/**
+	 * Casper Camel configuration
+	 */
+	private final CasperConfiguration configuration;
 
 	/**
 	 * CasperProducer constructor
-	 *
+	 * 
 	 * @param endpoint      : Casper endpoint
 	 * @param configuration : CasperConfiguration
-	 * @throws Exception
 	 */
-	public CasperProducer(CasperEndPoint endpoint, final CasperConfiguration configuration) throws Exception {
+	public CasperProducer(CasperEndPoint endpoint, final CasperConfiguration configuration) {
 		super(endpoint, CasperConstants.OPERATION, () -> configuration.getOperationOrDefault(), false);
 		this.endpoint = endpoint;
 		this.configuration = configuration;
@@ -84,7 +80,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws IOException
 	 */
 	@InvokeOnHeader(CasperConstants.NETWORK_PEERS)
-	void listPeers(Message message) throws Exception {
+	void listPeers(Message message) {
 		PeerData peerData = null;
 		try {
 			peerData = casperService.getPeerData();
@@ -102,7 +98,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.NODE_STATUS)
-	void nodeStatus(Message message) throws Exception {
+	void nodeStatus(Message message) {
 		StatusData statusData = null;
 		try {
 			statusData = casperService.getStatus();
@@ -120,14 +116,11 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.DEPLOY)
-	void deploy(Message message) throws Exception {
+	void deploy(Message message) {
 		DeployData deploy = null;
 		String deployHash = message.getHeader(CasperConstants.DEPLOY_HASH, configuration::getDeployHash, String.class);
 		if (StringUtils.isEmpty(deployHash)) {
-			handleError(
-					new MissingArgumentException(
-							"deployHash parameter is required with endpoint operation " + CasperConstants.DEPLOY),
-					message);
+			handleError(new MissingArgumentException("deployHash parameter is required with endpoint operation " + CasperConstants.DEPLOY), message);
 			return;
 		}
 		try {
@@ -146,7 +139,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.LAST_BLOCK)
-	void lastBlock(Message message) throws Exception {
+	void lastBlock(Message message) {
 		JsonBlock block = null;
 		try {
 			block = casperService.getBlock().getBlock();
@@ -164,7 +157,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.BLOCK)
-	void block(Message message) throws Exception {
+	void block(Message message) {
 		JsonBlock block = null;
 		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
 		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
@@ -190,7 +183,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.STATE_ROOT_HASH)
-	void stateRootHash(Message message) throws Exception {
+	void stateRootHash(Message message) {
 		StateRootHashData stateRootHashData = null;
 		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
 		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
@@ -215,16 +208,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.ACCOUNT_INFO)
-	void accountInfo(Message message) throws Exception {
+	void accountInfo(Message message) {
 		AccountData accountData = null;
 		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
 		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
 		String publicKey = message.getHeader(CasperConstants.PUBLIC_KEY, configuration::getPublicKey, String.class);
 		if (StringUtils.isEmpty(publicKey)) {
-			handleError(
-					new MissingArgumentException(
-							"publicKey parameter is required  with endpoint operation " + CasperConstants.ACCOUNT_INFO),
-					message);
+			handleError(new MissingArgumentException("publicKey parameter is required  with endpoint operation " + CasperConstants.ACCOUNT_INFO), message);
 			return;
 		}
 		try {
@@ -233,10 +223,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else if (blockHeight != null)
 				accountData = casperService.getStateAccountInfo(publicKey, new HeightBlockIdentifier(blockHeight));
 			else
-				handleError(new MissingArgumentException(
-						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
-								+ CasperConstants.ACCOUNT_INFO),
-						message);
+				handleError(new MissingArgumentException("Either blockHeight or BlockHash parameter is required  with endpoint operation " + CasperConstants.ACCOUNT_INFO), message);
 		} catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
@@ -251,7 +238,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.LAST_BLOCK_TRANSFERS)
-	void lastBlockTransfers(Message message) throws Exception {
+	void lastBlockTransfers(Message message) {
 		TransferData transferData = null;
 		try {
 			transferData = casperService.getBlockTransfers();
@@ -269,7 +256,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.BLOCK_TRANSFERS)
-	void blockTransfers(Message message) throws Exception {
+	void blockTransfers(Message message) {
 		TransferData transferData = null;
 		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
 		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
@@ -295,7 +282,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.AUCTION_INFO)
-	void auctionInfo(Message message) throws Exception {
+	void auctionInfo(Message message) {
 		AuctionData auction = null;
 		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
 		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
@@ -322,7 +309,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.ERA_INFO)
-	void eraInfo(Message message) throws Exception {
+	void eraInfo(Message message) {
 		EraInfoData eraInfoData = null;
 		String blockHash = message.getHeader(CasperConstants.BLOCK_HASH, configuration::getBlockHash, String.class);
 		Long blockHeight = message.getHeader(CasperConstants.BLOCK_HEIGHT, configuration::getBlockHeight, Long.class);
@@ -332,10 +319,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 			else if (blockHeight != null && blockHeight >= 0)
 				eraInfoData = casperService.getEraInfoBySwitchBlock(new HeightBlockIdentifier(blockHeight));
 			else
-				handleError(new MissingArgumentException(
-						"Either blockHeight or BlockHash parameter is required  with endpoint operation "
-								+ CasperConstants.ACCOUNT_INFO),
-						message);
+				handleError(new MissingArgumentException("Either blockHeight or BlockHash parameter is required  with endpoint operation " + CasperConstants.ACCOUNT_INFO), message);
 		} catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
@@ -350,28 +334,21 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.STATE_ITEM)
-	void storedValue(Message message) throws Exception {
+	void storedValue(Message message) {
 		StoredValueData value = null;
-		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash,
-				String.class);
+		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash, String.class);
 		String path = message.getHeader(CasperConstants.PATH, configuration::getPath, String.class);
 		String key = message.getHeader(CasperConstants.ITEM_KEY, configuration::getKey, String.class);
 		if (StringUtils.isEmpty(stateRootHash)) {
-			handleError(new MissingArgumentException(
-					"stateRootHash parameter is required  with endpoint operation " + CasperConstants.STATE_ITEM),
-					message);
+			handleError(new MissingArgumentException("stateRootHash parameter is required  with endpoint operation " + CasperConstants.STATE_ITEM), message);
 			return;
 		}
 		if (StringUtils.isEmpty(key)) {
-			handleError(
-					new MissingArgumentException(
-							"key parameter is required   with endpoint operation " + CasperConstants.STATE_ITEM),
-					message);
+			handleError(new MissingArgumentException("key parameter is required   with endpoint operation " + CasperConstants.STATE_ITEM), message);
 			return;
 		}
 		try {
-			value = casperService.getStateItem(stateRootHash, key,
-					StringUtils.isEmpty(path) ? Arrays.asList() : Arrays.asList(path.split(",")));
+			value = casperService.getStateItem(stateRootHash, key, StringUtils.isEmpty(path) ? Arrays.asList() : Arrays.asList(path.split(",")));
 		} catch (Exception e) {
 			handleError(e.getCause(), message);
 		}
@@ -386,29 +363,22 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.DICTIONARY_ITEM)
-	void getDictionayItem(Message message) throws Exception {
+	void getDictionayItem(Message message) {
 		DictionaryData data = null;
-		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash,
-				String.class);
-		String dictionnaryItemKey = message.getHeader(CasperConstants.DICTIONARY_ITEM_KEY,
-				configuration::getDictionaryItemKey, String.class);
+		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash, String.class);
+		String dictionnaryItemKey = message.getHeader(CasperConstants.DICTIONARY_ITEM_KEY, configuration::getDictionaryItemKey, String.class);
 		String seedUref = message.getHeader(CasperConstants.SEED_UREF, configuration::getSeedUref, String.class);
 		if (StringUtils.isEmpty(stateRootHash)) {
-			handleError(new MissingArgumentException(
-					"stateRootHash parameter is required  with endpoint operation " + CasperConstants.DICTIONARY_ITEM),
-					message);
+			handleError(new MissingArgumentException("stateRootHash parameter is required  with endpoint operation " + CasperConstants.DICTIONARY_ITEM), message);
 			return;
 		}
 		if (StringUtils.isEmpty(dictionnaryItemKey)) {
-			handleError(new MissingArgumentException("dictionnary key parameter is required   with endpoint operation "
-					+ CasperConstants.DICTIONARY_ITEM), message);
+			handleError(new MissingArgumentException("dictionnary key parameter is required   with endpoint operation " + CasperConstants.DICTIONARY_ITEM), message);
 			return;
 		}
 
 		if (StringUtils.isEmpty(seedUref)) {
-			handleError(new MissingArgumentException(
-					"seedUref parameter is required   with endpoint operation " + CasperConstants.DICTIONARY_ITEM),
-					message);
+			handleError(new MissingArgumentException("seedUref parameter is required   with endpoint operation " + CasperConstants.DICTIONARY_ITEM), message);
 			return;
 		}
 
@@ -432,21 +402,16 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.ACCOUNT_BALANCE)
-	void accountBalance(Message message) throws Exception {
+	void accountBalance(Message message) {
 		BalanceData balance = null;
-		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash,
-				String.class);
+		String stateRootHash = message.getHeader(CasperConstants.STATE_ROOT_HASH, configuration::getStateRootHash, String.class);
 		String purseUref = message.getHeader(CasperConstants.PURSE_UREF, configuration::getPurseUref, String.class);
 		if (StringUtils.isEmpty(stateRootHash)) {
-			handleError(new MissingArgumentException(
-					"stateRootHash parameter is required   with endpoint operation " + CasperConstants.ACCOUNT_BALANCE),
-					message);
+			handleError(new MissingArgumentException("stateRootHash parameter is required   with endpoint operation " + CasperConstants.ACCOUNT_BALANCE), message);
 			return;
 		}
 		if (StringUtils.isEmpty(purseUref)) {
-			handleError(new MissingArgumentException(
-					"purseUref parameter is required   with endpoint operation " + CasperConstants.ACCOUNT_BALANCE),
-					message);
+			handleError(new MissingArgumentException("purseUref parameter is required   with endpoint operation " + CasperConstants.ACCOUNT_BALANCE), message);
 			return;
 		}
 		try {
@@ -466,16 +431,13 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.PUT_DEPLOY)
-	void putDeploy(Message message) throws Exception {
+	void putDeploy(Message message) {
 		DeployResult result = null;
 		// Signed Deploy Object must be in the header
 		Deploy deloy = message.getHeader(CasperConstants.DEPLOY, Deploy.class);
 
 		if (deloy != null) {
-			handleError(
-					new MissingArgumentException(
-							"deloy parameter is required   with endpoint operation " + CasperConstants.PUT_DEPLOY),
-					message);
+			handleError(new MissingArgumentException("deloy parameter is required   with endpoint operation " + CasperConstants.PUT_DEPLOY), message);
 			return;
 		}
 
@@ -496,8 +458,8 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 * @throws Exception
 	 */
 	@InvokeOnHeader(CasperConstants.GLOBAL_STATE)
-	void getGlobalState(Message message) throws Exception {
-		//TODO this call will be implemented in 1.4
+	void getGlobalState(Message message) {
+		// TODO this call will be implemented in 1.4
 		handleError(new NotImplementedException(), message);
 	}
 
@@ -509,7 +471,7 @@ public class CasperProducer extends HeaderSelectorProducer {
 	 */
 	@InvokeOnHeader(CasperConstants.VALIDATOR_CHANGES)
 	void getValidatorChanges(Message message) throws Exception {
-		//TODO this call will be implemented in 1.4
+		// TODO this call will be implemented in 1.4
 		handleError(new NotImplementedException(), message);
 	}
 
@@ -524,11 +486,12 @@ public class CasperProducer extends HeaderSelectorProducer {
 		message.getExchange().setException(new CamelExchangeException(e.getMessage(), message.getExchange()));
 	}
 
+	public CasperService getCasperService() {
+		return casperService;
+	}
+
 	public CasperConfiguration getConfiguration() {
 		return configuration;
 	}
 
-	public void setConfiguration(CasperConfiguration configuration) {
-		this.configuration = configuration;
-	}
 }

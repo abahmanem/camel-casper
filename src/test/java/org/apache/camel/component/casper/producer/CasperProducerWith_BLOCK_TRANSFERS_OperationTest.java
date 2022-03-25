@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import com.syntifi.casper.sdk.model.deploy.executabledeploy.Transfer;
 
 @SuppressWarnings("unchecked")
-public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTestSupport {
+class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -25,24 +25,18 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 	}
 
 	@Test
-	public void testCallWithout_parameters() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.BLOCK_TRANSFERS);
+	void testCallWithout_parameters() throws Exception {
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK_TRANSFERS);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
 		assertTrue(body instanceof List);
-		}
+	}
 
 	@Test
-	public void testCallWith_BLOCK_HASH_Parameter() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.BLOCK_TRANSFERS);
-
-		exchange.getIn().setHeader(CasperConstants.BLOCK_HASH,
-				"d162d54f93364bb9cafd923cfde35a195e6a76d2f67515ddb2dce12443dc8aa5");
+	void testCallWith_BLOCK_HASH_Parameter() throws Exception {
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK_TRANSFERS);
+		exchange.getIn().setHeader(CasperConstants.BLOCK_HASH, "d162d54f93364bb9cafd923cfde35a195e6a76d2f67515ddb2dce12443dc8aa5");
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a List
@@ -52,11 +46,8 @@ public class CasperProducerWith_BLOCK_TRANSFERS_OperationTest extends CasperTest
 	}
 
 	@Test
-	public void testCallWith_BLOCK_HEIGHT_Parameter() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.BLOCK_TRANSFERS);
-
+	void testCallWith_BLOCK_HEIGHT_Parameter() throws Exception {
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.BLOCK_TRANSFERS);
 		exchange.getIn().setHeader(CasperConstants.BLOCK_HEIGHT, 534838);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();

@@ -26,9 +26,9 @@ public class DemoApp {
 
 	/**
 	 * loads route 1
-	 * @param cntxt
-	 * @param temp
-	 * @throws Exception
+	 * @param cntxt : Camel context
+	 * @param temp : producerTemplate
+	 * @throws Exception : exception
 	 */
 	private static void loadroute1(CamelContext cntxt, ProducerTemplate temp) throws Exception {
 		cntxt.addRoutes(new RouteBuilder() {
@@ -53,10 +53,10 @@ public class DemoApp {
 	}
 
 	/**
-	 * load route 2
-	 * @param cntxt
-	 * @param temp
-	 * @throws Exception
+	 * loads route 2
+	 * @param cntxt : Camel context
+	 * @param temp : producerTemplate
+	 * @throws Exception : exception
 	 */
 	private static void loadroute2(CamelContext cntxt, ProducerTemplate temp) throws Exception {
 		cntxt.addRoutes(new RouteBuilder() {
@@ -91,9 +91,9 @@ public class DemoApp {
 
 	/**
 	 * loads route 3
-	 * @param cntxt
-	 * @param temp
-	 * @throws Exception
+	 * @param cntxt : Camel context
+	 * @param temp : producerTemplate
+	 * @throws Exception : exception
 	 */
 	private static void loadroute3(CamelContext cntxt, ProducerTemplate temp) throws Exception {
 		cntxt.addRoutes(new RouteBuilder() {
@@ -130,9 +130,9 @@ public class DemoApp {
 	
 	/**
 	 * loads route 4
-	 * @param cntxt
-	 * @param temp
-	 * @throws Exception
+	 * @param cntxt : Camel context
+	 * @param temp : producerTemplate
+	 * @throws Exception : exception
 	 */
 	private static void loadroute4(CamelContext cntxt, ProducerTemplate temp) throws Exception {
 		cntxt.addRoutes(new RouteBuilder() {
@@ -173,8 +173,8 @@ public class DemoApp {
 
 	/**
 	 * Main method
-	 * @param args
-	 * @throws Exception
+	 * @param args : args 
+	 * @throws Exception : exception
 	 */
 	public static void main(String[] args) throws Exception {
 

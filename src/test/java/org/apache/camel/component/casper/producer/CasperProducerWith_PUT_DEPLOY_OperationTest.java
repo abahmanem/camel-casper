@@ -1,7 +1,5 @@
 package org.apache.camel.component.casper.producer;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.net.URI;
 
 import org.apache.camel.Exchange;
@@ -14,10 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.syntifi.casper.sdk.model.deploy.Deploy;
-import com.syntifi.casper.sdk.model.stateroothash.StateRootHashData;
 import com.syntifi.casper.sdk.service.CasperService;
 
-public class CasperProducerWith_PUT_DEPLOY_OperationTest extends CasperTestSupport {
+class CasperProducerWith_PUT_DEPLOY_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 	private CasperService casperService;
@@ -28,29 +25,20 @@ public class CasperProducerWith_PUT_DEPLOY_OperationTest extends CasperTestSuppo
 	}
 
 	@Test
-	public void testCallWith_DEPLOY_Parameter() throws Exception {
-
-		
-		Deploy deploy= new Deploy();
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.PUT_DEPLOY);
-		exchange.getIn().setHeader(CasperConstants.DEPLOY,
-				deploy);
+	void testCallWith_DEPLOY_Parameter() throws Exception {
+		Deploy deploy = new Deploy();
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.PUT_DEPLOY);
+		exchange.getIn().setHeader(CasperConstants.DEPLOY, deploy);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a DeployResult
-		
 	}
 
-
 	@Test
-	public void testCallWithout_DEPLOY_Parameter() throws Exception {
-
-		Deploy deploy= new Deploy();
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.PUT_DEPLOY);
-		exchange.getIn().setHeader(CasperConstants.DEPLOY,
-				deploy);
+	void testCallWithout_DEPLOY_Parameter() throws Exception {
+		Deploy deploy = new Deploy();
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.PUT_DEPLOY);
+		exchange.getIn().setHeader(CasperConstants.DEPLOY, deploy);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a DeployResult

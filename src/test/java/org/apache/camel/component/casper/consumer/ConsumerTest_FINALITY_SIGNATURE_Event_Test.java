@@ -4,7 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.casper.ConsumerEvent;
 import org.junit.jupiter.api.Test;
 
-public class ConsumerTest_FINALITY_SIGNATURE_Event_Test extends CasperConsumerTest {
+class ConsumerTest_FINALITY_SIGNATURE_Event_Test extends CasperConsumerTest {
 
 	@Override
 	public boolean isUseAdviceWith() {
@@ -12,14 +12,11 @@ public class ConsumerTest_FINALITY_SIGNATURE_Event_Test extends CasperConsumerTe
 	}
 
 	@Test
-	public void testEvent() throws Exception {
-
+	void testEvent() throws Exception {
 		mockResult.expectedMessageCount(1);
 		mockResult.expectedHeaderReceived("status", "done");
 		mockResult.expectedHeaderReceived("event", ConsumerEvent.FINALITY_SIGNATURE);
-
 		mockError.expectedMinimumMessageCount(0);
-
 		mockResult.assertIsSatisfied();
 		mockError.assertIsSatisfied();
 	}
@@ -33,5 +30,4 @@ public class ConsumerTest_FINALITY_SIGNATURE_Event_Test extends CasperConsumerTe
 			}
 		};
 	}
-
 }

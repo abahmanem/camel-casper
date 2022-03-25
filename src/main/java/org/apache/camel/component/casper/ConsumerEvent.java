@@ -6,8 +6,6 @@ package org.apache.camel.component.casper;
  *
  */
 public enum ConsumerEvent {
-	
-	
 	DEPLOY_PROCESSED,
 	DEPLOY_ACCEPTED,
 	DEPLOY_EXPIRED,

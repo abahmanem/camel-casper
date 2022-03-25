@@ -1,5 +1,7 @@
 package org.apache.camel.component.casper.producer;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.camel.Exchange;
@@ -12,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import com.syntifi.casper.sdk.model.block.JsonBlock;
 
-public class CasperProducerWith_LAST_BLOCK_OperationTest extends CasperTestSupport {
+class CasperProducerWith_LAST_BLOCK_OperationTest extends CasperTestSupport {
 	@Produce("direct:start")
 	protected ProducerTemplate template;
 
@@ -22,17 +24,15 @@ public class CasperProducerWith_LAST_BLOCK_OperationTest extends CasperTestSuppo
 	}
 
 	@Test
-	public void testCallWith_DEPLOY_HASH_Parameter() throws Exception {
-
-		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION,
-				CasperConstants.LAST_BLOCK);
+	void testCallWith_DEPLOY_HASH_Parameter() throws Exception {
+		Exchange exchange = createExchangeWithBodyAndHeader(null, CasperConstants.OPERATION, CasperConstants.LAST_BLOCK);
 		template.send(exchange);
 		Object body = exchange.getIn().getBody();
 		// assert Object is a JsonBlock
 		assertTrue(body instanceof JsonBlock);
 		JsonBlock block = (JsonBlock) body;
-		assertTrue(block != null);
-		assertTrue(block.getHash().length() == 64);
+		assertNotNull(block);
+		assertEquals(64, block.getHash().length());
 	}
 
 	@Override
