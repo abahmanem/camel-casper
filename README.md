@@ -140,19 +140,19 @@ It supports the following operations (as per node version 1.4)
 
 Consumer polls Casper Event Stream Server for the following events :
 ````java
-DEPLOY_PROCESSED
+DEPLOY_PROCESSED : Deploy was executed
 
-DEPLOY_ACCEPTED
+DEPLOY_ACCEPTED : Deploy was received by the node
 
-DEPLOY_EXPIRED
+DEPLOY_EXPIRED : deploy expired 
 
-BLOCK_ADDED
+BLOCK_ADDED : block added 
 
-FINALITY_SIGNATURE
+FINALITY_SIGNATURE : validator approving a block
 
-FAULT
+FAULT  : network error like equivocation
 
-STEP
+STEP  : the auction where validators are selected
 ````
 
 ### SAMPLES
