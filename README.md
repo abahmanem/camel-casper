@@ -188,7 +188,7 @@ In your maven pom file add :
 <dependency>
     <groupId>io.caspercommunity</groupId>
     <artifactId>camel-casper</artifactId>
-   	<version>3.14.1-SNAPSHOT</version>
+   	<version>3.14.2</version>
 </dependency>
 ```
 
@@ -231,7 +231,7 @@ import org.apache.camel.component.casper.CasperConstants;
 /**
  * A Camel Java DSL Router
  */
-public class ARouteBuilder extends RouteBuilder {
+public class CasperRouteBuilder extends RouteBuilder {
 /**
  * Let's configure the Camel routing rules using Java code...
  */
@@ -268,7 +268,7 @@ import org.apache.camel.main.Main;
       public static void main(String...args) throws Exception
       {
         Main main = new Main();
-        main.configure().addRoutesBuilder(new ARouteBuilder());
+        main.configure().addRoutesBuilder(new CasperRouteBuilder());
          main.run(args);
       }
   }
